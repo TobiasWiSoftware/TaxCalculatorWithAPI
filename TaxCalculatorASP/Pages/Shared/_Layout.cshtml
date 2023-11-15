@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApp</title>
+    @*This is for the development Debugger via WebApp*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script src="~/js/site.js" asp-append-version="true" />
+
+        @*This is for the start via Web.exe, important to set the property of the sites in wwwroot to copy to output directory*@
+    <link rel="stylesheet" href="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="wwwroot/css/site.css" />
+    <script src="wwwroot/js/site.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-xl navbar-toggleable-xl navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" id="central" asp-area="" asp-page="/"><img width="50" height="50" src="~/Pictures/logo.png" />&nbsp;Finanzrechner.pro</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-xl-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="red-text" asp-area="" asp-page="/Gehaltsrechner">Gehaltsrechner</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="purpel-text" asp-area="" asp-page="/Kreditrechner">Kreditrechner</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="darkgreen-text" asp-area="" asp-page="/Haushaltsrechner">Haushaltsrechner</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="darkyellow-text" asp-area="" asp-page="/Spartipps">Spartipps</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="custom pb-3" id="globalstylemain">
+            <br />
+            @RenderBody()
+        </main>
+    </div>
+    <br />
+    <br />
+
+    <footer class="border-top footer text-muted">
+        <div class="container" style="font-size:1.5em">
+            &copy; 2023 - Hofer's Shop - <a asp-area="" asp-page="/Impressum">Impressum</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

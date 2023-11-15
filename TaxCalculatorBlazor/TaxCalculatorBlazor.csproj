@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Pictures\gehalt.jpg" />
+    <Content Remove="wwwroot\Pictures\haushalt.jpg" />
+    <Content Remove="wwwroot\Pictures\logo.png" />
+    <Content Remove="wwwroot\Pictures\spartipps.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\Pictures\gehalt.jpg" />
+    <None Remove="wwwroot\Pictures\haushalt.jpg" />
+    <None Remove="wwwroot\Pictures\kredit.jpg" />
+    <None Remove="wwwroot\Pictures\logo.png" />
+    <None Remove="wwwroot\Pictures\spartipps.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.5" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="wwwroot\Pictures\gehalt.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="wwwroot\Pictures\haushalt.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="wwwroot\Pictures\kredit.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="wwwroot\Pictures\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="wwwroot\Pictures\spartipps.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

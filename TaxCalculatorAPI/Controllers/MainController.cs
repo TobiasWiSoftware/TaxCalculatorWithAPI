@@ -1,0 +1,25 @@
+﻿using TaxCalculatorASP;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using TaxCalculatorAPI.Services;
+using TaxCalculatorASP;
+
+namespace TaxCalculatorAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MainController : ControllerBase
+    {
+        private readonly IMainService _mainService;
+        public MainController(IMainService mainService)
+        {
+            _mainService = mainService;
+        }
+
+        [HttpPost]
+        public ActionResult<BillingOutput> TransferAmount(BillingInput billingInput)
+        {
+            return Ok(_mainService.Calculation(billingInput));
+        }
+    }
+}

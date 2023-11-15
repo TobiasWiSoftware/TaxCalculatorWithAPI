@@ -1,0 +1,65 @@
+﻿@page
+@{
+    ViewData["Title"] = "Startseite";
+}
+
+<!-- Bootstrap CSS für das Layout -->
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<div class="container mt-4">
+    <!-- Erste Reihe mit zwei Bildern und Titeln -->
+    <div class="row">
+        <!-- Gehaltsrechner Bild und Titel -->
+        <div class="col-md-6 mb-4 text-center ">
+            <a asp-page="/Gehaltsrechner">
+                <img src="~/Pictures/gehalt.jpg" class="img-fluid" alt="Gehaltsrechner">
+                <h3 class="mt-2" id="red-text">Gehaltsrechner</h3>
+            </a>
+        </div>
+
+        <!-- Kreditrechner Bild und Titel -->
+        <div class="col-md-6 mb-4 text-center ">
+            <a asp-page="/Kreditrechner">
+                <img src="~/Pictures/kredit.jpg" class="img-fluid" alt="Kreditrechner">
+                <h3 class="mt-2" id="purpel-text">Kreditrechner</h3>
+            </a>
+        </div>
+    </div>
+
+    <!-- Zweite Reihe mit zwei Bildern und Titeln -->
+    <div class="row">
+        <!-- Haushaltsrechner Bild und Titel -->
+        <div class="col-md-6 mb-4 text-center">
+            <a asp-page="/Haushaltsrechner">
+                <img src="~/Pictures/haushalt.jpg" class="img-fluid" alt="Haushaltsrechner">
+                <h3 class="mt-2" id="darkgreen-text">Haushaltsrechner</h3>
+            </a>
+        </div>
+
+        <!-- Spartipps Bild und Titel -->
+        <div class="col-md-6 mb-4 text-center">
+            <a asp-page="/Spartipps">
+                <img src="~/Pictures/spartipps.jpg" class="img-fluid" alt="Spartipps">
+                <h3 class="mt-2" id="darkyellow-text">Spartipps</h3>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+    a {
+        text-decoration: none;
+    }
+
+    h3 {
+        text-decoration: none !important;
+        font-weight: bold;
+    }
+
+</style>
+
+<!-- Optional: jQuery und Bootstrap JS -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
