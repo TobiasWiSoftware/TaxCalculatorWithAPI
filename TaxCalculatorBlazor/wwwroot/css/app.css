@@ -99,3 +99,402 @@ a, .btn-link {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+
+
+main {
+    font-size: 2em;
+}
+
+h1 {
+    text-transform: uppercase;
+    line-height: 2;
+    font-weight: 500;
+}
+
+nav {
+    text-transform: uppercase;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+li {
+    margin-right: 0.5em;
+}
+
+button {
+    font-size: 1.5rem;
+}
+
+
+
+
+ul {
+    display: flex;
+}
+
+div.product-card {
+    background-color: beige;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+div.basket-card {
+    background-color: white;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+div.container {
+    min-width: 83% !important;
+}
+
+label.left {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+form.max {
+    width: 100%;
+}
+
+h1.boldandleft {
+    text-transform: none;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 3%;
+    line-height: unset;
+    font-size: 1em;
+}
+
+button.btn btn-primary btn-block mb-4 {
+    margin-bottom: 5%;
+}
+
+input.margin {
+    margin-bottom: 5%;
+}
+
+input.displayNone {
+    display: none;
+}
+
+p.false {
+    color: red;
+    font-size: 1em;
+}
+
+p.true {
+    color: green;
+}
+
+h2.green {
+    color: green;
+}
+
+h4.green {
+    color: green;
+}
+
+table.marketplace {
+    text-align: left;
+    width: 100%;
+}
+
+tr.marketplacetableedge {
+    height: 3em;
+}
+
+td.marketplacename {
+    Font-weight: bold;
+    padding-left: 10px;
+}
+
+td.imagebox {
+    width: 16%;
+}
+
+td.marketplaceprice {
+    text-align: right;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+td.marketplacecount {
+    vertical-align: bottom;
+    padding-left: 10px;
+}
+
+td.marketplacedesc {
+    padding-left: 10px;
+}
+
+
+.code {
+    margin-left: 5%;
+}
+
+#central {
+    font-family: 'Ink Free';
+    font-size: 1.4em;
+    min-width: 10em;
+}
+
+#marketplacetobasketbtn {
+    float: right;
+    max-width: 80%;
+    min-width: 8em;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+#basketbtnCashier {
+    margin-top: 5%;
+    margin-left: 0%;
+    margin-right: 0;
+    margin-bottom: 0;
+    float: right;
+    max-width: 10em;
+    background-color: #1B6EC2;
+}
+
+#basketbtnOrder {
+    margin-top: 5%;
+    margin-left: 0%;
+    margin-right: 0;
+    margin-bottom: 0;
+    float: right;
+    max-width: 14em;
+    background-color: green;
+}
+
+button.basketbtnred {
+    margin-top: 5%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    float: left;
+    max-width: 10em;
+    align-items: center;
+    background-color: red !important;
+}
+
+button.marginleft {
+    margin-left: 20px;
+}
+
+#nonCusBtnRegister {
+    margin-top: 5%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    display: flex;
+    float: left;
+    max-width: 18em;
+    align-items: center;
+    background-color: #1B6EC2;
+}
+
+#nonCusBtnLogin {
+    margin-top: 5%;
+    margin-left: 0%;
+    margin-right: 0;
+    margin-bottom: 0;
+    display: flex;
+    float: right;
+    align-items: center;
+    max-width: 18em;
+    background-color: green;
+}
+
+#red-text {
+    color: #F4023F !important;
+}
+
+#purpel-text {
+    color: #F4780F !important;
+}
+
+#darkgreen-text {
+    color: #26D727 !important;
+}
+
+#lightgreen-text {
+    color: aquamarine !important;
+}
+
+#darkyellow-text {
+    color: gold !important;
+}
+
+#lightblue-text {
+    color: #04B0FA !important;
+}
+
+#lightred-text {
+    color: #F930F5 !important;
+}
+
+#loginli {
+    margin-right: 5%;
+}
+
+button .custom {
+    font-size: 1rem;
+}
+
+main.custom {
+    font-size: 1em;
+}
+
+table.basket {
+    min-width: 100%;
+}
+
+div.center {
+    display: flex;
+    padding-top: 5%;
+    padding-left: 20%;
+    padding-right: 20%;
+    justify-content: space-between;
+}
+
+#marketplacesearchbtn {
+    vertical-align: bottom;
+    background-color: green;
+    width: 8em;
+    display: initial;
+    line-height: 1.8;
+    margin-left: 0.3em;
+    padding-top: unset;
+    padding-bottom: 0.05em;
+}
+
+@media(min-width: 600) {
+}
+
+
+
+@media (min-width: 1200px) {
+
+
+    img.article {
+        padding-top: 3%;
+        padding-bottom: 3%;
+        padding-right: 5%;
+        padding-left: 5%;
+        width: 6em;
+        height: 8em;
+    }
+
+        img.article:hover {
+            transform: scale(1.7);
+        }
+
+    input.check {
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+        height: 1em !important;
+        width: 1em !important;
+    }
+
+
+    table.basket {
+        min-width: 100%;
+    }
+
+    table.decision {
+        min-width: 65%;
+    }
+
+    main.custom {
+        font-size: 2em;
+    }
+
+
+
+
+    button.marketplace {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1em;
+    }
+
+
+
+
+    button.green {
+        background-image: linear-gradient(to right, #6EDB75, #2C7A2D);
+        color: white; /* Weißer Text passt gut zu dunklen Hintergrundfarben */
+        border: none; /* Entfernt möglicherweise vorhandene Standardbordüren */
+        border: none;
+        padding: 12px 40px;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+        button.green:hover {
+            background-image: linear-gradient(to right, #2C7A2D, #6EDB75);
+        }
+
+    button.blue:hover {
+        background: linear-gradient(to right, #5B86E5, #36D1DC);
+    }
+
+    div.center {
+        display: flex;
+        padding-top: 0%;
+        padding-left: 26%;
+        padding-right: 26%;
+        justify-content: space-between;
+    }
+
+    .outersearchdiv {
+        width: 100%;
+        height: 3em;
+        display: ruby;
+        align-items: center; /* Zentriert die Elemente vertikal */
+        /* Verteilt die Elemente mit einem Abstand dazwischen */
+    }
+
+    div.innersearchdiv {
+        margin-bottom: 0.1em;
+    }
+
+
+    tr.myrow {
+        vertical-align: central;
+        width: 100%;
+    }
+
+    
+
+    #marketplacesearchbtn {
+        font-size: 1.1em;
+        align-content: flex-start;
+        vertical-align: bottom;
+        background-color: green;
+        width: 7em;
+        margin-left: 0.3em;
+        display: initial;
+        line-height: 1.5;
+        padding-top: unset;
+        padding-bottom: -0.1em;
+    }
+}

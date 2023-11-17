@@ -1,36 +1,38 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">TaxCalculatorBlazor</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿@inherits LayoutComponentBase
+<header>
+    <nav class="navbar navbar-expand-xl navbar-toggleable-xl navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <NavLink class="navbar-brand" id="central" href="/">
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+                <img width="50" height="50" src="Pictures/logo.png" /> Finanzrechner.pro
             </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
+            <button class="navbar-toggler" @onclick="ToggleNavMenu" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="@NavMenuCssClass d-xl-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <NavLink class="nav-link text-dark" id="red-text" href="/EmployeeCalculator">Gehaltsrechner</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link text-dark" id="purpel-text" href="/Kreditrechner">Kreditrechner</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link text-dark" id="darkgreen-text" href="/Haushaltsrechner">Haushaltsrechner</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link text-dark" id="darkyellow-text" href="/Spartipps">Spartipps</NavLink>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
-</div>
+</header>
 
 @code {
     private bool collapseNavMenu = true;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string NavMenuCssClass => collapseNavMenu ? "navbar-collapse collapse" : "navbar-collapse";
 
     private void ToggleNavMenu()
     {

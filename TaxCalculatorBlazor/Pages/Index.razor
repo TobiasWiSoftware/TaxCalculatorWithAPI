@@ -6,19 +6,27 @@
     <!-- Erste Reihe mit zwei Bildern und Titeln -->
     <div class="row">
         <!-- Gehaltsrechner Bild und Titel -->
-        <div class="col-md-6 mb-4 text-center ">
-            <a asp-page="/Gehaltsrechner">
-                <img src="~/Pictures/gehalt.jpg" class="img-fluid" alt="Gehaltsrechner">
-                <h3 class="mt-2" id="red-text">Gehaltsrechner</h3>
-            </a>
+        <div class="col-md-6 mb-4 text-center">
+            <div class="card">
+                <NavLink href="/EmployeeCalculator">
+                    <img src="Pictures/gehalt.jpg" class="img-fluid" alt="Gehaltsrechner">
+                    <div class="card-content">
+                        <h3 class="mt-2 text-white" >Gehaltsrechner</h3>
+                    </div>
+                </NavLink>
+            </div>
         </div>
 
         <!-- Kreditrechner Bild und Titel -->
-        <div class="col-md-6 mb-4 text-center ">
-            <a asp-page="/Kreditrechner">
-                <img src="~/Pictures/kredit.jpg" class="img-fluid" alt="Kreditrechner">
-                <h3 class="mt-2" id="purpel-text">Kreditrechner</h3>
-            </a>
+        <div class="col-md-6 mb-4 text-center">
+            <div class="card">
+                <a asp-page="/Kreditrechner">
+                    <img src="Pictures/kredit.jpg" class="img-fluid" alt="Kreditrechner">
+                    <div class="card-content">
+                        <h3 class="mt-2 text-white" >Kreditrechner</h3>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -26,36 +34,42 @@
     <div class="row">
         <!-- Haushaltsrechner Bild und Titel -->
         <div class="col-md-6 mb-4 text-center">
-            <a asp-page="/Haushaltsrechner">
-                <img src="../wwwroot/Pictures/haushalt.jpg" class="img-fluid" alt="Haushaltsrechner">
-                <h3 class="mt-2" id="darkgreen-text">Haushaltsrechner</h3>
-            </a>
+            <div class="card">
+                <a asp-page="/Haushaltsrechner">
+                    <img src="Pictures/haushalt.jpg" class="img-fluid" alt="Haushaltsrechner">
+                    <div class="card-content">
+                        <h3 class="mt-2 text-white" >Haushaltsrechner</h3>
+                    </div>
+                </a>
+            </div>
         </div>
 
         <!-- Spartipps Bild und Titel -->
         <div class="col-md-6 mb-4 text-center">
-            <a asp-page="/Spartipps">
-                <img src="~/Pictures/spartipps.jpg" class="img-fluid" alt="Spartipps">
-                <h3 class="mt-2" id="darkyellow-text">Spartipps</h3>
-            </a>
+            <div class="card">
+                <a asp-page="/Spartipps">
+                    <img src="Pictures/spartipps.jpg" class="img-fluid" alt="Spartipps">
+                    <div class="card-content">
+                        <h3 class="mt-2 text-white" >Spartipps</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Spaces -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4 text-center ad-space">
+            <!-- Ad Space 1 -->
+            <div class="card">
+                <!-- Ad Content -->
+            </div>
+        </div>
+        <div class="col-md-6 mb-4 text-center ad-space">
+            <!-- Ad Space 2 -->
+            <div class="card">
+                <!-- Ad Content -->
+            </div>
         </div>
     </div>
 </div>
-
-
-<style>
-
-    a {
-        text-decoration: none;
-    }
-
-    h3 {
-        text-decoration: none !important;
-        font-weight: bold;
-    }
-
-</style>
-
-<!-- Optional: jQuery und Bootstrap JS -->
-@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
