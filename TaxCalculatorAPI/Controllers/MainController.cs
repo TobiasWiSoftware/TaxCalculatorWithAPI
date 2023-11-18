@@ -1,8 +1,7 @@
-﻿using TaxCalculatorASP;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaxCalculatorAPI.Services;
-using TaxCalculatorASP;
+using TaxCalculatorLibary.Models;
 
 namespace TaxCalculatorAPI.Controllers
 {

@@ -1,9 +1,9 @@
-using TaxCalculatorASP;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using TaxCalculatorAPI.Services;
+using TaxCalculatorLibary.Models;
 
 internal class Program
 {
@@ -15,30 +15,12 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        string _pathSocialSecurityRatesJson = null;
-        string _pathTaxInformationJson = null;
-
         string dataDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location.Substring(0, Assembly.GetEntryAssembly().Location.IndexOf("bin\\")));
 
+        SocialSecurityRates.LoadDataFromJson(dataDirectory);
 
+        TaxInformation.LoadDataFromJson(dataDirectory);
 
-        _pathSocialSecurityRatesJson = Path.Combine(dataDirectory, "Data", "SocialSecurityRates.json");
-        _pathTaxInformationJson = Path.Combine(dataDirectory, "Data", "TaxInformation.json");
-
-
-
-
-        using (StreamReader r = new(_pathSocialSecurityRatesJson))
-        {
-            string s = r.ReadToEnd();
-            SocialSecurityRates.SetList(JsonConvert.DeserializeObject<List<SocialSecurityRates>>(s));
-        }
-
-        using (StreamReader r = new(_pathTaxInformationJson))
-        {
-            string s = r.ReadToEnd();
-            TaxInformation.SetList(JsonConvert.DeserializeObject<List<TaxInformation>>(s));
-        }
         // Add services to the container.
 
         builder.Services.AddControllers();

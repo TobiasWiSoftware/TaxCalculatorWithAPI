@@ -1,4 +1,4 @@
-﻿using TaxCalculatorASP;
+﻿using TaxCalculatorLibary.Models;
 
 namespace TaxCalculatorAPI.Services
 {

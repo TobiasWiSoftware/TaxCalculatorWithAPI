@@ -1,4 +1,7 @@
-﻿namespace TaxCalculatorLibary.Models
+﻿using Newtonsoft.Json;
+using System.Reflection;
+
+namespace TaxCalculatorLibary.Models
 {
     public class SocialSecurityRates
     {
@@ -26,7 +29,7 @@
         {
 
         }
-     
+
 
         public SocialSecurityRates(int year, decimal employeeInsuranceRate, decimal employerInsuranceRate,
                                    decimal employeeInsuranceBonusRate, decimal employerInsuranceBonusRate,
@@ -55,19 +58,30 @@
             EmployerUnemploymentRate = employerUnemploymentRate;
             InsuranceMaxGross = insuranceMaxGross;
             PensionAndUnimploymentMaxGross = pensionAndUnimploymentMaxGross;
-           
+
         }
 
-        public static void SetList(List<SocialSecurityRates>? list)
+
+        public static void LoadDataFromJson(string dataDirectory)
         {
-            if (list != null)
-                LSocialSecurityRates ??= list;
+            using (StreamReader r = new(Path.Combine(dataDirectory, "Data", "SocialSecurityRates.json")))
+            {
+                string s = r.ReadToEnd();
+                List<SocialSecurityRates>? list = JsonConvert.DeserializeObject<List<SocialSecurityRates>>(s);
+
+                if (list != null)
+                {
+                    LSocialSecurityRates ??= list;
+                }
+            }
         }
 
-        public static List<SocialSecurityRates>? GetList()
+        public static SocialSecurityRates? GetDataFromYear(int year)
         {
-            return LSocialSecurityRates;
+            return LSocialSecurityRates != null ? LSocialSecurityRates.Find(x => x.Year == year) : null;
         }
+
+
     }
 
 }

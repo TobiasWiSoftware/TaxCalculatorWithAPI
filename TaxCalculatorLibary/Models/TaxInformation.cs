@@ -1,17 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Reflection;
+
 namespace TaxCalculatorLibary.Models
 {
 
     public class TaxInformation
     {
-        private static List<TaxInformation>? _taxInformation = null;
+        private static List<TaxInformation>? LTaxInformation = null;
         public int Year { get; set; }
         public int TaxFreeBasicFlat { get; set; } // Class 1 - 4
         public int TaxFreeEmployeeFlat { get; set; } // For class 1 - 5
         public int SpecialCostFlat { get; set; } // For class 1 - 5
         public int TaxFreeChildGrowingFlat { get; set; } // Class 2
         public int TaxFreeChildFlat { get; set; } // 1 - 4 in 4 * 0.5
-        public List<Tuple<decimal, decimal, decimal>> TaxLevels { get; set; }
+        public List<Tuple<decimal, decimal, decimal>>? TaxLevels { get; set; }
 
         public TaxInformation()
         {
@@ -30,15 +33,24 @@ namespace TaxCalculatorLibary.Models
             TaxFreeChildFlat = taxFreeChildFlat;
         }
 
-        public static void SetList(List<TaxInformation>? ti)
+        public static void LoadDataFromJson(string dataDirectory)
         {
-            if (_taxInformation == null)
-                _taxInformation ??= ti;
+            using (StreamReader r = new(Path.Combine(dataDirectory, "Data", "TaxInformation.json")))
+            {
+                string s = r.ReadToEnd();
+                List<TaxInformation>? list = JsonConvert.DeserializeObject<List<TaxInformation>>(s);
+
+                if (list != null)
+                {
+                    LTaxInformation = list;
+                }
+            }
         }
 
-        public static List<TaxInformation>? GetList()
+
+        public static TaxInformation? GetDataFromYear(int year)
         {
-            return _taxInformation;
+            return LTaxInformation != null ? LTaxInformation.Find(x => x.Year == year) : null;
         }
         public Tuple<decimal, decimal, decimal>? GetTaxValue(decimal value)
         {

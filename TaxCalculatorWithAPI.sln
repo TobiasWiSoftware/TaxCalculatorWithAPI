@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorASP", "TaxCalculatorASP\TaxCalculatorASP.csproj", "{594AC987-51AE-49CE-A457-26C1CD5563FB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorAPI", "TaxCalculatorAPI\TaxCalculatorAPI.csproj", "{80B94573-73AD-4FEB-AED6-DDD281B95FBB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorBlazor", "TaxCalculatorBlazor\TaxCalculatorBlazor.csproj", "{F109770F-245D-46BA-AA13-05CD99364C92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalculatorLibary", "TaxCalculatorLibary\TaxCalculatorLibary.csproj", "{21C34FA7-B553-42FA-9E0D-57AA0EEA8BE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorLibary", "TaxCalculatorLibary\TaxCalculatorLibary.csproj", "{21C34FA7-B553-42FA-9E0D-57AA0EEA8BE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{594AC987-51AE-49CE-A457-26C1CD5563FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{594AC987-51AE-49CE-A457-26C1CD5563FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{594AC987-51AE-49CE-A457-26C1CD5563FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{594AC987-51AE-49CE-A457-26C1CD5563FB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{80B94573-73AD-4FEB-AED6-DDD281B95FBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{80B94573-73AD-4FEB-AED6-DDD281B95FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80B94573-73AD-4FEB-AED6-DDD281B95FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU

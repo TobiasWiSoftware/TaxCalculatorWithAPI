@@ -1,16 +1,18 @@
 ﻿@page "/EmployeeCalculator"
 
+@{
+    DateTime d = DateTime.Now;
+}
 
 <div class="center">
-    <form class="max" method="post">
-
+    <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="max" >
         <div class="left">
             <div class="form-check">
-                <input onclick="radioCheck();" class="form-check-input" type="radio" name="Year" id="year2023" value="2023" @(Model.Year= =2023 ? "checked" : "" ) />
+                <Input class="form-check-input" type="radio" name="Year" id="year2023" value=2023 checked="@IsChecked2023" />
                 <label class="form-check-label" for="year2023">2023</label>
             </div>
             <div class="form-check">
-                <input onclick="radioCheck();" class="form-check-input" type="radio" name="Year" id="year2024" value="2024" @(Model.Year= =2024 ? "checked" : "" ) />
+                <input class="form-check-input" type="radio" name="Year" id="year2024" value=2024 checked="@IsChecked2024" />
                 <label class="form-check-label" for="year2024">2024</label>
             </div>
         </div>
@@ -18,7 +20,7 @@
 
         <!-- Firstname input -->
         <label class="form-label">Bruttoeinkommen</label>
-        <input asp-for="GrossIncome" type="text" id="registerFirstname" class="form-control" value="3000" />
+        <input @bind="Input.GrossIncome" type="text" id="registerFirstname" class="form-control" />
 
 
         <div class="left">
@@ -157,13 +159,14 @@
             <option value="PKV">keine Versicherung</option>
         </select>
 
-        <button type="submit" asp-page-handler="Register" class="blue custom">Berechnen</button>
+        <button type="submit" @onclick="@CreateRole" class="blue custom">Berechnen</button>
 
 
         <!-- Submit button -->
 
 
-    </form>
+    </EditForm>
+
     <style>
         .form-control {
             width: 100%; /* Setzen Sie die gewünschte Breite */
