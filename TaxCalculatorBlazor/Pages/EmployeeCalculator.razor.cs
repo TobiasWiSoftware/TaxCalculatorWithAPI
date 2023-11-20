@@ -12,12 +12,14 @@ namespace TaxCalculatorBlazor.Pages
         public BillingInput Input { get; set; }
         public BillingOutput Output { get; set; }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
+           
 
+            Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(2023);
 
-            SocialSecurityRates? sr = MainService.FetchSocialAndTaxData(DateTime.Now.Year).Result.Item1;
-            TaxInformation? tr = MainService.FetchSocialAndTaxData(DateTime.Now.Year).Result.Item2;
+            SocialSecurityRates? sr = tuple.Item1;
+            TaxInformation? tr = tuple.Item2;
 
             if (sr != null)
             {

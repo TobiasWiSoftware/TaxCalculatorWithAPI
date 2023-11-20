@@ -21,8 +21,9 @@ namespace TaxCalculatorAPI.Controllers
             return Ok(_mainService.Calculation(billingInput));
         }
         [HttpPost("TransferInput")]
-        public ActionResult<Tuple<SocialSecurityRates, TaxInformation>> TransferInput(int year)
+        public ActionResult<Tuple<SocialSecurityRates, TaxInformation>> TransferInput([FromBody]int year)
         {
+            
             return Ok(_mainService.FetchSocialAndTaxData(year));
         }
     }

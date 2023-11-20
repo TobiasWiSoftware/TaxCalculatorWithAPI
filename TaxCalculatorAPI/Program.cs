@@ -29,7 +29,16 @@ internal class Program
         builder.Services.AddSwaggerGen();
         builder.Services.AddScoped<IMainService, MainService>();
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowSpecificOrigin",
+                builder => builder.WithOrigins("https://localhost:44319")
+                                  .AllowAnyHeader()
+                                  .AllowAnyMethod());
+        });
+
         var app = builder.Build();
+        app.UseCors("AllowSpecificOrigin");
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

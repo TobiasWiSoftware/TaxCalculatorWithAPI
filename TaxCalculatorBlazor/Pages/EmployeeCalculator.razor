@@ -5,38 +5,36 @@
 }
 
 <div class="center">
-    <EditForm 
-        @* Model="@Input" *@ 
-        OnValidSubmit="@CalculateTax" class="max">
-@*         <div class="left">
+    <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="max">
+        <div class="left">
             <div class="form-check">
-                <input class="form-check-input" type="radio" @bind-value="Input.Year" @value="2023" name="Year" id="year2023" />
+                <input class="form-check-input" type="radio"  @bind="Input.Year" checked="@Input.Year == 2023" @onclick="()=>Input.Year = 2023" name="Year" id="year2023" />
                 <label class="form-check-label" for="year2023">2023</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" @bind-value="Input.Year" @value="2024" name="Year" id="year2024" />
+                <input class="form-check-input" type="radio"  @bind="Input.Year" checked="@Input.Year == 2024" @onclick="()=>Input.Year = 2024" name="Year" id="year2024" />
                 <label class="form-check-label" for="year2024">2024</label>
             </div>
-        </div> *@
+        </div>
 
 
 
 
-        @* <!-- Firstname input -->
+        <!-- Firstname input -->
         <label class="form-label">Bruttoeinkommen</label>
-        <input @bind="Input.GrossIncome" type="text" id="registerFirstname" class="form-control" /> *@
+        <input @bind="Input.GrossIncome" type="text" id="registerFirstname" class="form-control" />
 
 
-      @*   <div class="left">
+        <div class="left">
             <div class="form-check">
-                <input onclick="radioCheck();" class="form-check-input" @bind-value="Input.BillingPeriod" type="radio" @value="true" name="BillingPeriod" id="month" />
+                <input onclick="radioCheck();" class="form-check-input" type="radio" @bind="Input.BillingPeriod" checked name="BillingPeriod" id="month" />
                 <label class="form-check-label" for="registerRadio1">
                     <!-- korrigiert for-Attribut -->
                     Monat
                 </label>
             </div>
             <div class="form-check">
-                <input onclick="radioCheck();" class="form-check-input" @bind-value="Input.BillingPeriod" type="radio" name="BillingPeriod" id="month" @value="false" />
+                <input onclick="radioCheck();" class="form-check-input" type="radio" @bind="Input.BillingPeriod"  name="BillingPeriod" id="month" />
                 <label class="form-check-label" for="registerRadio2">
                     <!-- korrigiert for-Attribut -->
                     Jahr
@@ -51,25 +49,25 @@
 
         <label class="form-label">Steuerklasse</label>
         <select @bind="Input.TaxClass" id="bundesland" name="TaxClass" class="form-control">
-            <option @value="1">I</option>
-            <option @value="2">II</option>
-            <option @value="3">III</option>
-            <option @value="4">IV</option>
-            <option @value="5">V</option>
-            <option @value="6">VI</option>
+            <option value="1">I</option>
+            <option value="2">II</option>
+            <option value="3">III</option>
+            <option value="4">IV</option>
+            <option value="5">V</option>
+            <option value="6">VI</option>
         </select>
 
 
         <input type="hidden" id="ChurchInput" />
         <div class="left">
             <div class="form-check">
-                <input onclick="radioCheck();" class="form-check-input" type="radio" @bind-value="Input.InChurch" name="InChruch" id="withchurch" @value="true" />
+                <input onclick="radioCheck();" class="form-check-input" type="radio"  name="InChruch" id="withchurch" value="true" />
                 <label class="form-check-label" for="exampleRadios1">
                     Mit Kirchensteuer
                 </label>
             </div>
             <div class="form-check">
-                <input onclick="radioCheck();" class="form-check-input" type="radio" name="InChurch" @bind-value="Input.InChurch" id="withoutchurch" @value="false" checked />
+                <input onclick="radioCheck();" class="form-check-input" type="radio" name="InChurch"  id="withoutchurch" value="false" checked />
                 <label class="form-check-label" for="exampleRadios2">
                     Ohne Kirchensteuer
                 </label>
@@ -78,22 +76,22 @@
 
         <label for="bundesland">Bundesland:</label>
         <select id="bundesland" name="FederalState" @bind="Input.FederalState" class="form-control">
-            <option @value="BY">Bayern</option>
-            <option @value="BW">Baden-Württemberg</option>
-            <option @value="BE">Berlin</option>
-            <option @value="BB">Brandenburg</option>
-            <option @value="HB">Bremen</option>
-            <option @value="HH">Hamburg</option>
-            <option @value="HE">Hessen</option>
-            <option @value="MV">Mecklenburg-Vorpommern</option>
-            <option @value="NI">Niedersachsen</option>
-            <option @value="NW">Nordrhein-Westfalen</option>
-            <option @value="RP">Rheinland-Pfalz</option>
-            <option @value="SL">Saarland</option>
-            <option @value="SN">Sachsen</option>
-            <option @value="ST">Sachsen-Anhalt</option>
-            <option @value="SH">Schleswig-Holstein</option>
-            <option @value="TH">Thüringen</option>
+            <option value="BY">Bayern</option>
+            <option value="BW">Baden-Württemberg</option>
+            <option value="BE">Berlin</option>
+            <option value="BB">Brandenburg</option>
+            <option value="HB">Bremen</option>
+            <option value="HH">Hamburg</option>
+            <option value="HE">Hessen</option>
+            <option value="MV">Mecklenburg-Vorpommern</option>
+            <option value="NI">Niedersachsen</option>
+            <option value="NW">Nordrhein-Westfalen</option>
+            <option value="RP">Rheinland-Pfalz</option>
+            <option value="SL">Saarland</option>
+            <option value="SN">Sachsen</option>
+            <option value="ST">Sachsen-Anhalt</option>
+            <option value="SH">Schleswig-Holstein</option>
+            <option value="TH">Thüringen</option>
         </select>
 
 
@@ -104,13 +102,13 @@
         <label class="form-label">Kinder</label>
         <div class="left">
             <div class="form-check">
-                <input onclick="radioCheck();" class="form-check-input" @bind-value="Input.HasChildren" type="radio" name="HasChildren" id="registerRadio1" @value="true" />
+                <input onclick="radioCheck();" class="form-check-input"  type="radio" name="HasChildren" id="registerRadio1" value="true" />
                 <label class="form-check-label" for="exampleRadios1">
                     Ja
                 </label>
             </div>
             <div class="form-check">
-                <input onclick="radioCheck();" class="form-check-input" type="radio" @bind-value="Input.HasChildren" name="HasChildren" id="registerRadio2" @value="false" checked />
+                <input onclick="radioCheck();" class="form-check-input" type="radio"  name="HasChildren" id="registerRadio2" value="false" checked />
                 <label class="form-check-label" for="exampleRadios2">
                     Nein
                 </label>
@@ -120,32 +118,32 @@
 
         <label class="form-label">Kinderfreibeträge</label>
         <select id="bundesland" name="ChildTaxCredit" @bind="Input.ChildTaxCredit" class="form-control">
-            <option @value="0">0</option>
-            <option @value="0.5">0.5</option>
-            <option @value="1">1</option>
-            <option @value="1.5">1.5</option>
-            <option @value="2">2</option>
-            <option @value="2.5">2.5</option>
-            <option @value="3">3</option>
-            <option @value="3.5">3.5</option>
-            <option @value="4">4</option>
-            <option @value="4.5">4.5</option>
-            <option @value="5">5</option>
-            <option @value="5.5">5.5</option>
-            <option @value="6">6</option>
-            <option @value="6.5">6.5</option>
-            <option @value="7">7</option>
-            <option @value="7.5">7.5</option>
-            <option @value="8">8</option>
-            <option @value="8.5">8.5</option>
-            <option @value="9">9</option>
-            <option @value="9.5">9.5</option>
+            <option value="0">0</option>
+            <option value="0.5">0.5</option>
+            <option value="1">1</option>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+            <option value="2.5">2.5</option>
+            <option value="3">3</option>
+            <option value="3.5">3.5</option>
+            <option value="4">4</option>
+            <option value="4.5">4.5</option>
+            <option value="5">5</option>
+            <option value="5.5">5.5</option>
+            <option value="6">6</option>
+            <option value="6.5">6.5</option>
+            <option value="7">7</option>
+            <option value="7.5">7.5</option>
+            <option value="8">8</option>
+            <option value="8.5">8.5</option>
+            <option value="9">9</option>
+            <option value="9.5">9.5</option>
         </select>
 
         <label for="bundesland">Krankenversicherung:</label>
-        <select id="bundesland" @bind="Input.HasFederalInsurance" name="Insurance" class="form-control">
-            <option @value="true">gesetzlich</option>
-            <option @value="false">privat</option>
+        <select id="bundesland" name="HasFederalInsurance" @bind="Input.HasFederalInsurance" class="form-control">
+            <option value="1">gesetzlich</option>
+            <option value="0">privat</option>
         </select>
 
         <label class="form-label">Krankenkassenzusatzbeitrag in %</label>
@@ -153,10 +151,10 @@
 
         <label for="bundesland">Rentenversicherung:</label>
         <select id="bundesland" @bind="Input.HasFederalPension" name="Pension" class="form-control">
-            <option @value="true">gesetzlich</option>
-            <option @value="false">keine Versicherung</option>
+            <option value="true">gesetzlich</option>
+            <option value="false">keine Versicherung</option>
         </select>
- *@
+
         <button type="submit" @onclick="@CalculateTax" class="blue custom">Berechnen</button>
 
 

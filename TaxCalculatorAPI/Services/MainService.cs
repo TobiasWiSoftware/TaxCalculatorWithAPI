@@ -20,7 +20,8 @@ namespace TaxCalculatorAPI.Services
 
         public Tuple<SocialSecurityRates, TaxInformation> FetchSocialAndTaxData(int year)
         {
-            return new Tuple<SocialSecurityRates, TaxInformation>(SocialSecurityRates.GetDataFromYear(year), TaxInformation.GetDataFromYear(year));
+            Tuple<SocialSecurityRates, TaxInformation> tu = new Tuple<SocialSecurityRates, TaxInformation>(SocialSecurityRates.GetDataFromYear(year), TaxInformation.GetDataFromYear(year));
+            return tu;
         }
     }
 }
