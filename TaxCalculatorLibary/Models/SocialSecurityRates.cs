@@ -1,10 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System.Reflection;
+using Microsoft.Extensions.Configuration;
 
 namespace TaxCalculatorLibary.Models
 {
     public class SocialSecurityRates
     {
+        private readonly IConfiguration _configuration;
+
         private static List<SocialSecurityRates>? LSocialSecurityRates = null;
         public int Year { get; set; }
         public decimal EmployeeInsuranceRate { get; set; }
@@ -64,6 +67,7 @@ namespace TaxCalculatorLibary.Models
 
         public static void LoadDataFromJson(string dataDirectory)
         {
+
             using (StreamReader r = new(Path.Combine(dataDirectory, "Data", "SocialSecurityRates.json")))
             {
                 string s = r.ReadToEnd();

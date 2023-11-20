@@ -15,8 +15,22 @@ namespace TaxCalculatorBlazor.Services
 
         public async Task<BillingOutput> Calculation(BillingInput billingInput)
         {
-            var response = await _httpClient.PostAsJsonAsync<BillingInput>("api/Main", billingInput);
-            return await response.Content.ReadFromJsonAsync<BillingOutput>();
+            var response = await _httpClient.PostAsJsonAsync<BillingInput>("api/Main/TransferAmount", billingInput);
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<BillingOutput>();
+            }
+            throw new Exception("Fehler bei der API-Anfrage für Calculation");
+        }
+
+        public async Task<Tuple<SocialSecurityRates, TaxInformation>> FetchSocialAndTaxData(int year)
+        {
+            var response = await _httpClient.PostAsJsonAsync<int>("api/Main/TransferInput", year);
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<Tuple<SocialSecurityRates, TaxInformation>>();
+            }
+            throw new Exception("Fehler bei der API-Anfrage für FetchSocialAndTaxData");
         }
 
     }

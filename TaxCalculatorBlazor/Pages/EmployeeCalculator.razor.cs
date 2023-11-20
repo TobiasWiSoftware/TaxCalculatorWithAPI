@@ -9,11 +9,24 @@ namespace TaxCalculatorBlazor.Pages
         [Inject]
         public IMainService MainService { get; set; }
 
-        public BillingInput Input { get; set; } = new BillingInput();
+        public BillingInput Input { get; set; }
         public BillingOutput Output { get; set; }
 
-        public bool IsChecked2023 { get; set; } = DateTime.Now.Year == 2023;
-        public bool IsChecked2024 { get; set; } = DateTime.Now.Year == 2024;
+        protected override void OnInitialized()
+        {
+
+
+            SocialSecurityRates? sr = MainService.FetchSocialAndTaxData(DateTime.Now.Year).Result.Item1;
+            TaxInformation? tr = MainService.FetchSocialAndTaxData(DateTime.Now.Year).Result.Item2;
+
+            if (sr != null)
+            {
+                decimal socialAddition = sr.EmployeeInsuranceBonusRate + sr.EmployerInsuranceBonusRate;
+                Input = new(DateTime.Now.Year, 3000m, true, 3, "BY", 30, false, 0, true, socialAddition, true, true);
+            }
+
+
+        }
 
         public async Task CalculateTax()
         {

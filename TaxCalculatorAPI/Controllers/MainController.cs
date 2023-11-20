@@ -15,10 +15,15 @@ namespace TaxCalculatorAPI.Controllers
             _mainService = mainService;
         }
 
-        [HttpPost]
+        [HttpPost("TransferAmount")]
         public ActionResult<BillingOutput> TransferAmount(BillingInput billingInput)
         {
             return Ok(_mainService.Calculation(billingInput));
+        }
+        [HttpPost("TransferInput")]
+        public ActionResult<Tuple<SocialSecurityRates, TaxInformation>> TransferInput(int year)
+        {
+            return Ok(_mainService.FetchSocialAndTaxData(year));
         }
     }
 }
