@@ -1,40 +1,61 @@
-﻿namespace TaxCalculatorLibary.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TaxCalculatorLibary.Models
 {
     public class BillingInput
     {
+        [Required(ErrorMessage = "Eingabe ist falsch")]
+        [Range(2010, 2030, ErrorMessage = "Jahr zwischen 2010 und 2030 zulässig")]
         public int Year { get; set; }
+
+        [Required(ErrorMessage = "Eingabe ist falsch")]
+        [Range(0, 10000000, ErrorMessage = "Jahr zwischen 0 und 10000000 zulässig")]
         public decimal GrossIncome { get; set; }
+
+        [Required(ErrorMessage = "Eingabe ist falsch")]
         public bool BillingPeriod { get; set; }
+
+        [Required(ErrorMessage = "Eingabe ist falsch")]
         public int TaxClass { get; set; }
-        public decimal TaxFree { get; set; } = 0;
+
+        [Required(ErrorMessage = "Eingabe ist falsch")]
         public bool InChurch { get; set; }
-        public string FederalState { get; set; }
+
+        [Required(ErrorMessage = "Eingabe ist falsch")]
         public int Age { get; set; }
+
+        [Required(ErrorMessage = "Eingabe ist falsch")]
         public bool HasChildren { get; set; } = false;
+
+        [Required(ErrorMessage = "Eingabe ist falsch")]
         public decimal ChildTaxCredit { get; set; }
-        public bool HasFederalInsurance { get; set; }
+        [Required(ErrorMessage = "Eingabe ist falsch")]
+        public string HasFederalInsurance { get; set; }
+        [Required(ErrorMessage = "Eingabe ist falsch")]
         public decimal? PrivateInsurance { get; set; }
+        [Required(ErrorMessage = "Eingabe ist falsch")]
         public decimal? InsuranceAdditionTotal { get; set; }
-        public bool HasFederalPension { get; set; }
-        public bool HasFederalUnimployment { get; set; }
+        [Required(ErrorMessage = "Eingabe ist falsch")]
+        public string HasFederalPension { get; set; }
+        [Required(ErrorMessage = "Eingabe ist falsch")]
+        public string HasFederalUnimployment { get; set; }
 
         public BillingInput()
         {
 
         }
 
-        public BillingInput(int year, decimal gross, bool isMonthly, int taxclass, string federalState, int age, bool hasChildren, decimal childTaxCredit, bool hasFederalInsurance, decimal? insuranceAdditionTotal, bool hasFederalPension, bool hasFederalUnimployment)
+        public BillingInput(int year, decimal gross, bool isMonthly, int taxclass, int age, bool hasChildren, decimal childTaxCredit, string hasFederalInsurance, decimal? insuranceAdditionTotal, string hasFederalPension, string hasFederalUnimployment)
         {
             Year = year;
             GrossIncome = gross;
             BillingPeriod = isMonthly;
             TaxClass = taxclass;
-            FederalState = federalState;
             Age = age;
             HasChildren = hasChildren;
             ChildTaxCredit = childTaxCredit;
             HasFederalInsurance = hasFederalInsurance;
-            if (hasFederalInsurance && insuranceAdditionTotal != null)
+            if (hasFederalInsurance == "true" && insuranceAdditionTotal != null)
             {
                 InsuranceAdditionTotal = insuranceAdditionTotal;
             }

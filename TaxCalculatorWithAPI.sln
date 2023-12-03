@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorBlazor", "TaxC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorLibary", "TaxCalculatorLibary\TaxCalculatorLibary.csproj", "{21C34FA7-B553-42FA-9E0D-57AA0EEA8BE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCrawlerForTestData", "WebCrawlerForTestData\WebCrawlerForTestData.csproj", "{8D69FCD5-1277-4100-B3FB-E3A159F1DA5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCrawlerForTestData", "WebCrawlerForTestData\WebCrawlerForTestData.csproj", "{8D69FCD5-1277-4100-B3FB-E3A159F1DA5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -8,13 +8,34 @@ namespace TaxCalculatorBlazor.Pages
     {
         [Inject]
         public IMainService MainService { get; set; }
-
         public BillingInput Input { get; set; }
         public BillingOutput Output { get; set; }
+        public bool ChildrenTaxCreditDisplayed { get; set; } = false;
 
+        private bool IsCurrentYear(int year)
+        {
+            return DateTime.Now.Year == year;
+        }
+        private void HandleYearChange(int year)
+        {
+            Input.Year = year;
+        }
+
+        private void CheckComma(ChangeEventArgs e)
+        {
+            Input.InsuranceAdditionTotal = e.Value.ToString().Contains(",") ? decimal.Parse(e.Value.ToString().Replace(",", ".")) : decimal.Parse(e.Value.ToString());
+        }
+        private void HandleBillingPeroidChange() => Input.BillingPeriod = Input.BillingPeriod == true ? false : true;
+        private void HandleChurchTaxChange() => Input.InChurch = Input.InChurch == true ? false : true;
+        private void HandleChildrenChange()
+        {
+            Input.HasChildren = Input.HasChildren == true ? false : true;
+
+            ChildrenTaxCreditDisplayed = Input.HasChildren ? true : false;
+        }
         protected override async Task OnInitializedAsync()
         {
-           
+
 
             Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(2023);
 
@@ -24,7 +45,7 @@ namespace TaxCalculatorBlazor.Pages
             if (sr != null)
             {
                 decimal socialAddition = sr.EmployeeInsuranceBonusRate + sr.EmployerInsuranceBonusRate;
-                Input = new(DateTime.Now.Year, 3000m, true, 3, "BY", 30, false, 0, true, socialAddition, true, true);
+                Input = new(DateTime.Now.Year, 3000m, true, 3, 30, false, 0, "true", socialAddition, "true", "true");
             }
 
 

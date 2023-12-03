@@ -46,15 +46,9 @@ namespace TaxCalculatorLibary.Models
                 }
             }
         }
-
-
-        public static TaxInformation? GetDataFromYear(int year)
-        {
-            return LTaxInformation != null ? LTaxInformation.Find(x => x.Year == year) : null;
-        }
         public Tuple<decimal, decimal, decimal>? GetTaxValue(decimal value)
         {
-            
+
 
             Tuple<decimal, decimal, decimal>? taxSet = TaxLevels.FindAll(x => x.Item2 <= value).Max();
 
@@ -75,6 +69,20 @@ namespace TaxCalculatorLibary.Models
 
             return taxSet;
         }
+        public static TaxInformation? GetDataFromYear(int year)
+        {
+            return LTaxInformation != null ? LTaxInformation.Find(x => x.Year == year) : null;
+        }
+        public static Tuple<int, int> YearRange()
+        {
+            if (LTaxInformation != null)
+                return new Tuple<int, int>(LTaxInformation.Min(x => x.Year), LTaxInformation.Max(x => x.Year));
+            else
+                return new Tuple<int, int>(DateTime.Now.Year, DateTime.Now.Year);
+
+        }
+
+
     }
 
 }
