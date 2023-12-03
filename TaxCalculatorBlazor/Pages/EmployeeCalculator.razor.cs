@@ -45,7 +45,7 @@ namespace TaxCalculatorBlazor.Pages
             if (sr != null)
             {
                 decimal socialAddition = sr.EmployeeInsuranceBonusRate + sr.EmployerInsuranceBonusRate;
-                Input = new(DateTime.Now.Year, 3000m, true, 3, 30, false, 0, "true", socialAddition, "true", "true");
+                Input = new(DateTime.Now.Year, 3000m, true, 3, 30, false, 0, "true",0, socialAddition, "true", "true");
             }
 
 

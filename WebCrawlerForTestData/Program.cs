@@ -32,7 +32,7 @@ try
         // Use Selenium in C# to check if an HTML element exists using XPath. 
         // The XPath to check is: //*[@id="consentDialog"]/div[2]/div[2]/div/div[2]/div/div[1]/div/div
         // Initialize the WebDriver, navigate to the URL, and check for the element's existence.
-        
+
         IWebElement cookies = driver.FindElement(By.XPath("/html/body/div[10]//div/div/div[2]/div[2]/div/div[2]/div/div[1]/div/div"));
 
         if (cookies != null)

@@ -29,6 +29,7 @@ namespace TaxCalculatorLibary.Models
 
         [Required(ErrorMessage = "Eingabe ist falsch")]
         public decimal ChildTaxCredit { get; set; }
+
         [Required(ErrorMessage = "Eingabe ist falsch")]
         public string HasFederalInsurance { get; set; }
         [Required(ErrorMessage = "Eingabe ist falsch")]
@@ -37,6 +38,7 @@ namespace TaxCalculatorLibary.Models
         public decimal? InsuranceAdditionTotal { get; set; }
         [Required(ErrorMessage = "Eingabe ist falsch")]
         public string HasFederalPension { get; set; }
+
         [Required(ErrorMessage = "Eingabe ist falsch")]
         public string HasFederalUnimployment { get; set; }
 
@@ -45,7 +47,7 @@ namespace TaxCalculatorLibary.Models
 
         }
 
-        public BillingInput(int year, decimal gross, bool isMonthly, int taxclass, int age, bool hasChildren, decimal childTaxCredit, string hasFederalInsurance, decimal? insuranceAdditionTotal, string hasFederalPension, string hasFederalUnimployment)
+        public BillingInput(int year, decimal gross, bool isMonthly, int taxclass, int age, bool hasChildren, decimal childTaxCredit, string hasFederalInsurance, decimal privateInsuarance, decimal? insuranceAdditionTotal, string hasFederalPension, string hasFederalUnimployment)
         {
             Year = year;
             GrossIncome = gross;
@@ -55,6 +57,7 @@ namespace TaxCalculatorLibary.Models
             HasChildren = hasChildren;
             ChildTaxCredit = childTaxCredit;
             HasFederalInsurance = hasFederalInsurance;
+            PrivateInsurance = privateInsuarance;
             if (hasFederalInsurance == "true" && insuranceAdditionTotal != null)
             {
                 InsuranceAdditionTotal = insuranceAdditionTotal;
