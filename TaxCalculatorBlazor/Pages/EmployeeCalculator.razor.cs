@@ -7,9 +7,9 @@ namespace TaxCalculatorBlazor.Pages
     public partial class EmployeeCalculator : ComponentBase
     {
         [Inject]
-        public IMainService MainService { get; set; }
-        public BillingInput Input { get; set; }
-        public BillingOutput Output { get; set; }
+        public IMainService? MainService { get; set; }
+        public BillingInput? Input { get; set; }
+        public BillingOutput? Output { get; set; }
         public bool ChildrenTaxCreditDisplayed { get; set; } = false;
 
         private bool IsCurrentYear(int year)
@@ -36,25 +36,29 @@ namespace TaxCalculatorBlazor.Pages
         protected override async Task OnInitializedAsync()
         {
 
-
-            Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(2023);
-
-            SocialSecurityRates? sr = tuple.Item1;
-            TaxInformation? tr = tuple.Item2;
-
-            if (sr != null)
+            if (MainService != null)
             {
-                decimal socialAddition = sr.EmployeeInsuranceBonusRate + sr.EmployerInsuranceBonusRate;
-                Input = new(DateTime.Now.Year, 3000m, true, 3, 30, false, 0, "true",0, socialAddition, "true", "true");
+                Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(2023);
+
+                SocialSecurityRates? sr = tuple.Item1;
+                TaxInformation? tr = tuple.Item2;
+
+                if (sr != null)
+                {
+                    decimal socialAddition = sr.EmployeeInsuranceBonusRate + sr.EmployerInsuranceBonusRate;
+                    Input = new(DateTime.Now.Year, 3000m, true, 1, 30, false, 0, "true", 0, socialAddition, "true", "true");
+                }
+
             }
-
-
         }
 
         public async Task CalculateTax()
         {
-            Output = await MainService.Calculation(Input);
-            StateHasChanged();
+            if (MainService != null && Input != null)
+            {
+                Output = await MainService.Calculation(Input);
+                StateHasChanged();
+            }
         }
 
         private void CreateRole() { }
