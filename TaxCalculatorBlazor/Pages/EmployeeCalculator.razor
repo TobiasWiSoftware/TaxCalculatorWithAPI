@@ -172,13 +172,13 @@ else
                 </div>
                 <div class="row">
                     <div class="column left">Solidariätszuschlag</div>
-                    <div class="column">0</div>
-                    <div class="column">0</div>
+                    <div class="column">@Math.Round(Output.SolidaryTaxSum,2).ToString("N2").Replace('.',',')</div>
+                    <div class="column">@Math.Round(Output.SolidaryTaxSum * 12, 2).ToString("N2").Replace('.',',')</div>
                 </div>
                 <div class="row">
                     <div class="column left">Steuern</div>
-                    <div class="column">@Math.Round(Output.TaxSum * 12, 2).ToString("N2").Replace('.', ',')</div>
-                    <div class="column">@Math.Round(Output.TaxSum * 12, 2).ToString("N2").Replace('.', ',')</div>
+                    <div class="column">@Math.Round(Output.TotalTaxSum, 2).ToString("N2").Replace('.', ',')</div>
+                    <div class="column">@Math.Round(Output.TotalTaxSum * 12, 2).ToString("N2").Replace('.', ',')</div>
                 </div>
                 <div class="row">
                     <div class="column left">Krankenversicherung</div>

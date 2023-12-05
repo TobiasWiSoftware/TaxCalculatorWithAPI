@@ -10,9 +10,12 @@
         public decimal InsurancesTotal { get => InsuranceSum + InsuranceCareSum + PensionSum + UnimploymentSum; }
         public decimal TaxedIncome { get; set; }
         public decimal TaxSum { get; set; }
+        public decimal SolidaryTaxSum { get; set; }
+        public decimal ChurchTaxSum { get; set; }
+        public decimal TotalTaxSum { get => TaxSum + SolidaryTaxSum + ChurchTaxSum; }
         public decimal BorderTaxSet { get; set; }
         public decimal AvgTaxSet { get; set; }
-        public decimal Transferamount { get => GrossIncome - InsurancesTotal - TaxSum; }
+        public decimal Transferamount { get => GrossIncome - InsurancesTotal - TotalTaxSum; }
 
 
         public BillingOutput()
@@ -52,13 +55,13 @@
                 InsuranceCareSum = Math.Round(InsuranceCareSum, 2);
 
                 contributionrate = socialSecurityRatesOfYear.EmployeePensionRate;
-                maxGross = billingInput.GrossIncome < socialSecurityRatesOfYear.PensionAndUnimploymentMaxGross ? billingInput.GrossIncome : socialSecurityRatesOfYear.PensionAndUnimploymentMaxGross;
+                maxGross = billingInput.GrossIncome * 12 < socialSecurityRatesOfYear.PensionAndUnimploymentMaxGross ? billingInput.GrossIncome : socialSecurityRatesOfYear.PensionAndUnimploymentMaxGross / 12;
 
-                PensionSum = Math.Round(billingInput.GrossIncome * contributionrate / 100, 2);
+                PensionSum = Math.Round(maxGross * contributionrate / 100, 2);
 
                 contributionrate = socialSecurityRatesOfYear.EmployeeUnemploymentRate;
 
-                UnimploymentSum = Math.Round(billingInput.GrossIncome * contributionrate / 100, 2);
+                UnimploymentSum = Math.Round(maxGross * contributionrate / 100, 2);
                 decimal freeFromClass = 0.00m;
 
                 if (billingInput.TaxClass == 1 || billingInput.TaxClass == 6 || billingInput.TaxClass == 4)
@@ -91,12 +94,14 @@
 
                 //Getting the Tuples to calculate tax
 
-                Tuple<decimal, decimal, decimal>? taxSet = taxInformationOfYear.GetTaxValue(forTax);
+                Tuple<decimal, decimal, decimal, decimal, decimal> taxSet = taxInformationOfYear.GetTaxValue(forTax, billingInput.InChurch);
 
                 if (taxSet != null)
                 {
                     TaxedIncome = forTax + taxInformationOfYear.TaxFreeBasicFlat;
-                    TaxSum = taxSet.Item3 / 12;
+                    TaxSum = taxSet.Item2 / 12;
+                    SolidaryTaxSum = taxSet.Item3 / 12;
+                    ChurchTaxSum = taxSet.Item4 / 12;
                     BorderTaxSet = taxSet.Item1;
                     AvgTaxSet = TaxSum * 12 / TaxedIncome;
                 }
