@@ -13,7 +13,7 @@ else
 
     <div class="center">
         <div>
-            <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="max">
+            <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="form-group">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
                 <div class="left">
@@ -143,7 +143,7 @@ else
                     <option value="false">keine Versicherung</option>
                 </select>
 
-                <button type="submit" class="blue custom">Berechnen</button>
+                <button type="submit" class="btn btn-primary btn-sm blue">Berechnen</button>
 
 
                 <!-- Submit button -->
@@ -154,6 +154,35 @@ else
 
         @if (Output != null)
         {
+              <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Unverb. Berechnung</th>
+                        <th scope="col">Monat</th>
+                        <th scope="col">Jahr</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Bruttogehalt</th>
+                        <td>@Output.GrossIncome.ToString("N2")</td>
+                        <td>@(Output.GrossIncome * 12).ToString("N2")</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Lohnsteuer</th>
+                        <td>@Output.TaxSum.ToString("N2")</td>
+                        <td>@(Output.TaxSum * 12).ToString("N2")</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Solidaritätszuschalg</th>
+                        <td>@Output.tax</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+
+
             <div class="output-container">
                 <div class="row">
                     <div class="column left bold">Unverbindliche Berechnung</div>
@@ -213,7 +242,7 @@ else
             </div>
 
 
-            <button type="submit" class="red custom">Drucken</button>
+            <button type="submit" class="btn btn-primary btn-sm red">Drucken</button>
         }
 
     </div>
@@ -223,23 +252,34 @@ else
 
 <style>
 
-    @@media (min-width: 1100px) {
+    @@media (min-width: 760px) {
         div.center {
-            font-size: 1em !important;
+            font-size: 1.5em !important;
+        }
+
+        button {
+            padding: 0.5rem 1rem !important;
+            font-size: inherit !important;
+            border-radius: 0.7rem !important;
+        }
+
+        div.center {
+            display: block;
+            padding-top: 3%;
+            padding-left: 15%;
+            padding-right: 15%;
+            justify-content: space-between;
         }
     }
 
-
-
-    div.center {
-        display: block;
-        font-size: 0.4em;
-        padding-top: 3%;
-        padding-bottom: 3%;
-        padding-left: 15%;
-        padding-right: 15%;
-        justify-content: space-between;
+    button {
+        margin-top: 1em;
+        margin-bottom: 1em;
     }
+
+
+
+
 
     .form-control {
         width: 100%; /* Setzen Sie die gewünschte Breite */
@@ -267,43 +307,21 @@ else
         color: #333; /* Adjust the color as needed */
     }
 
-    button.custom {
-        font-size: 1em;
-        margin-top: 1.2em;
-        margin-bottom: 1em;
-    }
-
     button.blue {
         background: linear-gradient(to right, #36D1DC, #5B86E5);
-        border: none;
-        padding: 3px 25px;
-        align-content: center;
-        vertical-align: central;
-        border-radius: 5px;
-        color: white;
-        cursor: pointer;
-        transition: background 0.3s;
-        width: 10em;
-        height: 2em;
     }
 
     button.red {
         background: linear-gradient(to right, #e62e6a, #ff6b2b); /* Red gradient */
-        border: none;
-        padding: 3px 25px;
-        align-content: center;
-        vertical-align: middle; /* 'central' is not valid, changed to 'middle' */
-        border-radius: 5px;
-        color: white;
-        cursor: pointer;
-        transition: background 0.3s;
-        width: 10em;
-        height: 2em;
     }
 
-        button.red:hover {
-            background: linear-gradient(to right, #ff6b2b, #e62e6a); /* Slightly darker red gradient for hover effect */
-        }
+    button.red:hover {
+        background: linear-gradient(to right, #ff6b2b, #e62e6a); /* Slightly darker red gradient for hover effect */
+    }
+
+    button.blue:hover {
+        background: linear-gradient(to right, #5B86E5, #36D1DC); /* Slightly darker red gradient for hover effect */
+    }
 
     .left {
         display: flex;
@@ -316,17 +334,12 @@ else
         color: #333; /* Adjust the color as needed */
     }
 
-
-
-
-
-
     .output-container {
         display: grid;
         grid-template-rows: repeat(10, auto); /* 10 rows */
         grid-template-columns: 1.3fr 1fr 1fr;
-        gap: 15px;
-        padding: 20px;
+        gap: 0.2em;
+        padding: 0.5em;
         background-color: #fff; /* Optional: sets the background of the entire container */
         border-radius: 8px; /* Rounded corners for the container */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
@@ -335,12 +348,11 @@ else
 
     .row {
         display: contents;
+        flex-direction: row;
     }
 
     .column {
         background-color: #e7f3f9;
-        padding: 10px;
-        padding-right: 1em;
         border: 1px solid #b8dcef;
         text-align: right;
     }

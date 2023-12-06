@@ -99,3 +99,43 @@ a, .btn-link {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+
+
+#central {
+    font-family: 'Ink Free';
+}
+
+nav {
+    text-transform: uppercase;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+
+#red-text {
+    color: #F4023F !important;
+}
+
+#purpel-text {
+    color: #F4780F !important;
+}
+
+#darkgreen-text {
+    color: #26D727 !important;
+}
+
+#lightgreen-text {
+    color: aquamarine !important;
+}
+
+#darkyellow-text {
+    color: gold !important;
+}
+
+#lightblue-text {
+    color: #04B0FA !important;
+}
+
+#lightred-text {
+    color: #F930F5 !important;
+}
