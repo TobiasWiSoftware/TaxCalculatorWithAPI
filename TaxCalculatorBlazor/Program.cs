@@ -4,6 +4,7 @@ using System.Reflection;
 using TaxCalculatorBlazor;
 using TaxCalculatorBlazor.Services;
 using TaxCalculatorLibary.Models;
+using System.Globalization;
 
 Thread.Sleep(1000);
 
@@ -16,4 +17,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https:/
 builder.Services.AddScoped<IMainService, MainService>();
 
 await builder.Build().RunAsync();
+
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("de-DE");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("de-DE");
 
