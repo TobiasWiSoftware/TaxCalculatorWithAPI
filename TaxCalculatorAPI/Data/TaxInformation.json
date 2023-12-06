@@ -7,167 +7,141 @@
     "SpecialCostFlat": 36,
     "TaxFreeChildGrowingFlat": 4260,
     "TaxFreeChildFlat": 8952,
+    "MaxTaxLevel": 45.00,
+    "MinLevelForSolidaryTax": 17543,
+    "SolidaryTaxRate": 5.50,
+    "ChurchTaxRate":  9.00,
 
     "TaxLevels": [
       {
         "Item1": 0,
-        "Item2": 0,
-        "Item3": 0
+        "Item2": 0
       },
       {
-        "Item1": 13,
-        "Item2": 100,
-        "Item3": 13
+        "Item1": 100,
+        "Item2": 13
       },
       {
-        "Item1": 14,
-        "Item2": 200,
-        "Item3": 27
+        "Item1": 200,
+        "Item2": 28
       },
       {
-        "Item1": 15,
-        "Item2": 300,
-        "Item3": 42
+        "Item1": 400,
+        "Item2": 57
       },
       {
-        "Item1": 16,
-        "Item2": 800,
-        "Item3": 117
+        "Item1": 800,
+        "Item2": 118
       },
       {
-        "Item1": 17,
-        "Item2": 1400,
-        "Item3": 213
+        "Item1": 1500,
+        "Item2": 232
       },
       {
-        "Item1": 18,
-        "Item2": 1800,
-        "Item3": 281
+        "Item1": 2000,
+        "Item2": 319
       },
       {
-        "Item1": 19,
-        "Item2": 2300,
-        "Item3": 370
+        "Item1": 2500,
+        "Item2": 411
       },
       {
-        "Item1": 20,
-        "Item2": 3000,
-        "Item3": 502
+        "Item1": 3000,
+        "Item2": 508
       },
       {
-        "Item1": 21,
-        "Item2": 3500,
-        "Item3": 602
+        "Item1": 3500,
+        "Item2": 609
       },
       {
-        "Item1": 22,
-        "Item2": 4100,
-        "Item3": 728
+        "Item1": 4000,
+        "Item2": 716
       },
       {
-        "Item1": 23,
-        "Item2": 4500,
-        "Item3": 816
+        "Item1": 4500,
+        "Item2": 828
       },
       {
-        "Item1": 24,
-        "Item2": 5100,
-        "Item3": 953
+        "Item1": 5000,
+        "Item2": 944
       },
       {
-        "Item1": 25,
-        "Item2": 6200,
-        "Item3": 1217
+        "Item1": 6000,
+        "Item2": 1186
       },
       {
-        "Item1": 26,
-        "Item2": 8800,
-        "Item3": 1860
+        "Item1": 7000,
+        "Item2": 1431
       },
       {
-        "Item1": 27,
-        "Item2": 11700,
-        "Item3": 2606
+        "Item1": 8000,
+        "Item2": 1680
       },
       {
-        "Item1": 28,
-        "Item2": 14400,
-        "Item3": 3328
+        "Item1": 9000,
+        "Item2": 1932
       },
       {
-        "Item1": 29,
-        "Item2": 16800,
-        "Item3": 3992
+        "Item1": 10000,
+        "Item2": 2189
       },
       {
-        "Item1": 30,
-        "Item2": 19600,
-        "Item3": 4793
+        "Item1": 12000,
+        "Item2": 2714
       },
       {
-        "Item1": 31,
-        "Item2": 22800,
-        "Item3": 5743
+        "Item1": 14000,
+        "Item2": 3254
       },
       {
-        "Item1": 32,
-        "Item2": 25000,
-        "Item3": 6418
+        "Item1": 16000,
+        "Item2": 3810
       },
       {
-        "Item1": 33,
-        "Item2": 28300,
-        "Item3": 7463
+        "Item1": 16000,
+        "Item2": 3810
+      },{
+        "Item1": 18000,
+        "Item2": 4381
+      },{
+        "Item1": 20000,
+        "Item2": 4968
       },
       {
-        "Item1": 34,
-        "Item2": 30800,
-        "Item3": 8281
+        "Item1": 25000,
+        "Item2": 6502
       },
       {
-        "Item1": 35,
-        "Item2": 33600,
-        "Item3": 9224
+        "Item1": 30000,
+        "Item2": 8132
       },
       {
-        "Item1": 36,
-        "Item2": 36000,
-        "Item3": 10055
+        "Item1": 35000,
+        "Item2": 9858
       },
       {
-        "Item1": 37,
-        "Item2": 39000,
-        "Item3": 11123
+        "Item1": 40000,
+        "Item2": 11681
       },
       {
-        "Item1": 38,
-        "Item2": 41600,
-        "Item3": 12075
+        "Item1": 45000,
+        "Item2": 13600
       },
       {
-        "Item1": 39,
-        "Item2": 44700,
-        "Item3": 13242
+        "Item1": 50000,
+        "Item2": 15615
       },
       {
-        "Item1": 40,
-        "Item2": 47400,
-        "Item3": 14287
+        "Item1": 60000,
+        "Item2": 19808
       },
       {
-        "Item1": 41,
-        "Item2": 49900,
-        "Item3": 15278
+        "Item1": 70000,
+        "Item2": 24774
       },
       {
-        "Item1": 42,
-        "Item2": 52800,
-        "Item3": 16456
-      },
-      {
-        "Item1": 45,
-        "Item2": 277826,
-        "Item3": 94511
+        "Item1": 266918,
+        "Item2": 106713
       }
     ]
   },
@@ -179,167 +153,143 @@
     "SpecialCostFlat": 36,
     "TaxFreeChildGrowingFlat": 4260,
     "TaxFreeChildFlat": 9312,
+    "MaxTaxLevel": 45.00,
+    "MinLevelForSolidaryTax": 18130,
+    "SolidaryTaxRate": 5.50,
+    "ChurchTaxRate": 9.00,
 
     "TaxLevels": [
       {
         "Item1": 0,
-        "Item2": 0,
-        "Item3": 0
+        "Item2": 0
       },
       {
-        "Item1": 13,
-        "Item2": 100,
-        "Item3": 13
+        "Item1": 100,
+        "Item2": 13
       },
       {
-        "Item1": 14,
-        "Item2": 200,
-        "Item3": 27
+        "Item1": 200,
+        "Item2": 28
       },
       {
-        "Item1": 15,
-        "Item2": 300,
-        "Item3": 42
+        "Item1": 400,
+        "Item2": 57
       },
       {
-        "Item1": 16,
-        "Item2": 800,
-        "Item3": 117
+        "Item1": 800,
+        "Item2": 118
       },
       {
-        "Item1": 17,
-        "Item2": 1400,
-        "Item3": 213
+        "Item1": 1500,
+        "Item2": 232
       },
       {
-        "Item1": 18,
-        "Item2": 1800,
-        "Item3": 281
+        "Item1": 2000,
+        "Item2": 319
       },
       {
-        "Item1": 19,
-        "Item2": 2300,
-        "Item3": 370
+        "Item1": 2500,
+        "Item2": 411
       },
       {
-        "Item1": 20,
-        "Item2": 3000,
-        "Item3": 502
+        "Item1": 3000,
+        "Item2": 508
       },
       {
-        "Item1": 21,
-        "Item2": 3500,
-        "Item3": 602
+        "Item1": 3500,
+        "Item2": 609
       },
       {
-        "Item1": 22,
-        "Item2": 4100,
-        "Item3": 728
+        "Item1": 4000,
+        "Item2": 716
       },
       {
-        "Item1": 23,
-        "Item2": 4500,
-        "Item3": 816
+        "Item1": 4500,
+        "Item2": 828
       },
       {
-        "Item1": 24,
-        "Item2": 5100,
-        "Item3": 953
+        "Item1": 5000,
+        "Item2": 944
       },
       {
-        "Item1": 25,
-        "Item2": 6200,
-        "Item3": 1217
+        "Item1": 6000,
+        "Item2": 1186
       },
       {
-        "Item1": 26,
-        "Item2": 8800,
-        "Item3": 1860
+        "Item1": 7000,
+        "Item2": 1431
       },
       {
-        "Item1": 27,
-        "Item2": 11700,
-        "Item3": 2606
+        "Item1": 8000,
+        "Item2": 1680
       },
       {
-        "Item1": 28,
-        "Item2": 14400,
-        "Item3": 3328
+        "Item1": 9000,
+        "Item2": 1932
       },
       {
-        "Item1": 29,
-        "Item2": 16800,
-        "Item3": 3992
+        "Item1": 10000,
+        "Item2": 2189
       },
       {
-        "Item1": 30,
-        "Item2": 19600,
-        "Item3": 4793
+        "Item1": 12000,
+        "Item2": 2714
       },
       {
-        "Item1": 31,
-        "Item2": 22800,
-        "Item3": 5743
+        "Item1": 14000,
+        "Item2": 3254
       },
       {
-        "Item1": 32,
-        "Item2": 25000,
-        "Item3": 6418
+        "Item1": 16000,
+        "Item2": 3810
       },
       {
-        "Item1": 33,
-        "Item2": 28300,
-        "Item3": 7463
+        "Item1": 16000,
+        "Item2": 3810
       },
       {
-        "Item1": 34,
-        "Item2": 30800,
-        "Item3": 8281
+        "Item1": 18000,
+        "Item2": 4381
       },
       {
-        "Item1": 35,
-        "Item2": 33600,
-        "Item3": 9224
+        "Item1": 20000,
+        "Item2": 4968
       },
       {
-        "Item1": 36,
-        "Item2": 36000,
-        "Item3": 10055
+        "Item1": 25000,
+        "Item2": 6502
       },
       {
-        "Item1": 37,
-        "Item2": 39000,
-        "Item3": 11123
+        "Item1": 30000,
+        "Item2": 8132
       },
       {
-        "Item1": 38,
-        "Item2": 41600,
-        "Item3": 12075
+        "Item1": 35000,
+        "Item2": 9858
       },
       {
-        "Item1": 39,
-        "Item2": 44700,
-        "Item3": 13242
+        "Item1": 40000,
+        "Item2": 11681
       },
       {
-        "Item1": 40,
-        "Item2": 47400,
-        "Item3": 14287
+        "Item1": 45000,
+        "Item2": 13600
       },
       {
-        "Item1": 41,
-        "Item2": 49900,
-        "Item3": 15278
+        "Item1": 50000,
+        "Item2": 15615
       },
       {
-        "Item1": 42,
-        "Item2": 52800,
-        "Item3": 16456
+        "Item1": 60000,
+        "Item2": 15242
       },
       {
-        "Item1": 45,
-        "Item2": 277826,
-        "Item3": 94511
+        "Item1": 70000,
+        "Item2": 19651
+      },
+      {
+        "Item1": 266222,
+        "Item2": 112583
       }
     ]
   }

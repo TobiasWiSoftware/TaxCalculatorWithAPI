@@ -14,14 +14,18 @@ namespace TaxCalculatorLibary.Models
         public int SpecialCostFlat { get; set; } // For class 1 - 5
         public int TaxFreeChildGrowingFlat { get; set; } // Class 2
         public int TaxFreeChildFlat { get; set; } // 1 - 4 in 4 * 0.5
-        public List<Tuple<decimal, decimal, decimal>>? TaxLevels { get; set; }
+        public decimal MaxTaxLevel { get; set; }
+        public decimal MinLevelForSoladarityTax { get; set; }
+        public decimal SolidaryTaxRate { get; set; }
+        public decimal ChruchTaxRate { get; set; }
+        public List<Tuple<decimal, decimal>>? TaxLevels { get; set; }
 
         public TaxInformation()
         {
 
         }
 
-        public TaxInformation(int year, int taxFreeBasic, List<Tuple<decimal, decimal, decimal>> taxLevels, int taxFreeBasicFlat, int taxFreeEmployeeFlat, int specialCostFlat,
+        public TaxInformation(int year, int taxFreeBasic, List<Tuple<decimal, decimal>> taxLevels, int taxFreeBasicFlat, int taxFreeEmployeeFlat, int specialCostFlat,
                                    int taxFreeChildGrowingFlat, int taxFreeChildFlat)
         {
             Year = year;
@@ -46,25 +50,48 @@ namespace TaxCalculatorLibary.Models
                 }
             }
         }
-        public Tuple<decimal, decimal, decimal>? GetTaxValue(decimal value)
+        public Tuple<decimal, decimal, decimal, decimal, decimal> GetTaxValue(decimal value, bool inChurch)
         {
+            // Return a tuple with taxed value, taxsum, solidary tax, church tax, borderTaxSum
 
+            Tuple<decimal, decimal, decimal, decimal, decimal>? taxSet = new Tuple<decimal, decimal, decimal, decimal, decimal>(0, 0,0,0,0);
 
-            Tuple<decimal, decimal, decimal>? taxSet = TaxLevels.FindAll(x => x.Item2 <= value).Max();
+            // Find the last tax rates
+            Tuple<decimal, decimal>? taxSetBase = TaxLevels.FindAll(x => x.Item1 <= value).Max();
 
-            if (value < TaxLevels.Max(x => x.Item2))
+            //Find the next tax rates 
+            Tuple<decimal, decimal>? taxSetNext = TaxLevels.FindAll(x => x.Item1 > value).Min();
+
+            if (taxSetBase != null && taxSetNext != null) // case when beetween tax table
             {
-                taxSet = new Tuple<decimal, decimal, decimal>(taxSet.Item1, value, taxSet.Item3 + (value - taxSet.Item2) * taxSet.Item1 / 100);
+                // Calculation for the last known border tax zone in sum + rest of the value in the folowing tax zone
+                decimal taxSetBaseSum = taxSetBase.Item2;
+                decimal taxsetRestSum = (value - taxSetBase.Item1) * (taxSetNext.Item2 - taxSetBase.Item2) / (taxSetNext.Item1 - taxSetBase.Item1);
+                decimal borderTax = taxsetRestSum / (value - taxSetBase.Item1);
+
+                taxSet = new Tuple<decimal, decimal, decimal, decimal, decimal>(value, taxSetBaseSum + taxsetRestSum,0,0, borderTax );
             }
-            else
+            else if(taxSetBase != null && taxSetNext == null) // when value over the max in table
             {
-                Tuple<decimal, decimal, decimal> maxTable = TaxLevels.Find(x => x.Item2 == TaxLevels.Max(y => x.Item2));
+                Tuple<decimal, decimal> maxTable = taxSetBase;
 
-                decimal borderTax = maxTable.Item1;
+                decimal borderTax = MaxTaxLevel;
                 decimal sum = value;
-                decimal totalTax = (int)Math.Round(maxTable.Item3 + (value - maxTable.Item2) * borderTax / 100, 0);
+                decimal totalTax = Math.Round(maxTable.Item2 + (value - maxTable.Item1) * borderTax / 100, 0);
 
-                taxSet = new Tuple<decimal, decimal, decimal>(borderTax, (int)Math.Round(sum), totalTax);
+                taxSet = new Tuple<decimal, decimal, decimal, decimal, decimal>(Math.Round(sum), totalTax,0,0, borderTax);
+            }
+
+            // Check for solidary and church
+
+            if (taxSet.Item2 > this.MinLevelForSoladarityTax)
+            {
+                taxSet = new(taxSet.Item1, taxSet.Item2, taxSet.Item2 * this.SolidaryTaxRate / 100, 0, taxSet.Item5);
+            }
+
+            if (inChurch)
+            {
+                taxSet = new(taxSet.Item1, taxSet.Item2, taxSet.Item3, taxSet.Item2 * this.ChruchTaxRate / 100, taxSet.Item5);
             }
 
             return taxSet;
@@ -73,16 +100,6 @@ namespace TaxCalculatorLibary.Models
         {
             return LTaxInformation != null ? LTaxInformation.Find(x => x.Year == year) : null;
         }
-        public static Tuple<int, int> YearRange()
-        {
-            if (LTaxInformation != null)
-                return new Tuple<int, int>(LTaxInformation.Min(x => x.Year), LTaxInformation.Max(x => x.Year));
-            else
-                return new Tuple<int, int>(DateTime.Now.Year, DateTime.Now.Year);
-
-        }
-
-
     }
 
 }
