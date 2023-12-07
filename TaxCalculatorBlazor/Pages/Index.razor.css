@@ -15,7 +15,7 @@
 
     .card img {
         width: 100%;
-        height: auto;
+        max-height: 365px;
         border-radius: 12px 12px 0 0; /* Adjusted border-radius for consistency */
     }
 

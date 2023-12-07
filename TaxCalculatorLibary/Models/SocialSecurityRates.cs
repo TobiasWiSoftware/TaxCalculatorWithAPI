@@ -79,6 +79,21 @@ namespace TaxCalculatorLibary.Models
                 }
             }
         }
+        public static void LoadDataFromJsonForTesting()
+        {
+            string path = Path.Combine("../../../../", "TaxCalculatorAPI", "Data", "SocialSecurityRates.json");
+
+            using (StreamReader r = new(path))
+            {
+                string s = r.ReadToEnd();
+                List<SocialSecurityRates>? list = JsonConvert.DeserializeObject<List<SocialSecurityRates>>(s);
+
+                if (list != null)
+                {
+                    LSocialSecurityRates ??= list;
+                }
+            }
+        }
 
         public static SocialSecurityRates? GetDataFromYear(int year)
         {

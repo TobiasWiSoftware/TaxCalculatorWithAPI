@@ -1,75 +1,77 @@
 ﻿@page "/"
 
 
+    <div class="mycontainer">
+        <!-- Erste Reihe mit zwei Bildern und Titeln -->
+        <div class="row">
+            <!-- Gehaltsrechner Bild und Titel -->
+            <div class="col-md-6 mb-0 text-center myspace">
+                <div class="card">
+                    <NavLink href="/EmployeeCalculator">
+                        <img src="Pictures/gehalt.jpg" class="img-fluid">
+                        <div class="card-content">
+                            <h3 class="mt-2 text-white">Angestellte</h3>
+                        </div>
+                    </NavLink>
+                </div>
+            </div>
 
-<div class="container mt-4">
-    <!-- Erste Reihe mit zwei Bildern und Titeln -->
-    <div class="row">
-        <!-- Gehaltsrechner Bild und Titel -->
-        <div class="col-md-6 mb-4 text-center">
-            <div class="card">
-                <NavLink href="/EmployeeCalculator">
-                    <img src="Pictures/gehalt.jpg" class="img-fluid">
-                    <div class="card-content">
-                        <h3 class="mt-2 text-white" >Angestellte</h3>
-                    </div>
-                </NavLink>
+            <!-- Kreditrechner Bild und Titel -->
+            <div class="col-md-6 mb-0 text-center myspace">
+                <div class="card">
+                    <NavLink href="/FederalCalculator">
+                        <img src="Pictures/kredit.jpg" class="img-fluid" alt="Beamte">
+                        <div class="card-content">
+                            <h3 class="mt-2 text-white">Beamte</h3>
+                        </div>
+                    </NavLink>
+                </div>
             </div>
         </div>
 
-        <!-- Kreditrechner Bild und Titel -->
-        <div class="col-md-6 mb-4 text-center">
-            <div class="card">
-                <NavLink href="/FederalCalculator">
-                    <img src="Pictures/kredit.jpg" class="img-fluid" alt="Beamte">
-                    <div class="card-content">
-                        <h3 class="mt-2 text-white">Beamte</h3>
-                    </div>
-                </NavLink>
+        <!-- Zweite Reihe mit zwei Bildern und Titeln -->
+        <div class="row">
+            <!-- Haushaltsrechner Bild und Titel -->
+            <div class="col-md-6 mb-0 text-center myspace">
+                <div class="card">
+                    <NavLink href="/SelfemployeeCalculator">
+                        <img src="Pictures/haushalt.jpg" class="img-fluid">
+                        <div class="card-content">
+                            <h3 class="mt-2 text-white">Selbständige</h3>
+                        </div>
+                    </NavLink>
+                </div>
+            </div>
+
+            <!-- Spartipps Bild und Titel -->
+            <div class="col-md-6 mb-0 text-center myspace">
+                <div class="card">
+                    <NavLink href="/CompensationCalculator">
+                        <img src="Pictures/spartipps.jpg" class="img-fluid" alt="Spartipps">
+                        <div class="card-content">
+                            <h3 class="mt-2 text-white">Angestellte (Abfindung)</h3>
+                        </div>
+                    </NavLink>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Zweite Reihe mit zwei Bildern und Titeln -->
-    <div class="row">
-        <!-- Haushaltsrechner Bild und Titel -->
-        <div class="col-md-6 mb-4 text-center">
-            <div class="card">
-                <NavLink href="/SelfemployeeCalculator">
-                    <img src="Pictures/haushalt.jpg" class="img-fluid">
-                    <div class="card-content">
-                        <h3 class="mt-2 text-white">Selbständige</h3>
-                    </div>
-                </NavLink>
-            </div>
-        </div>
+<style>
+    .mycontainer{
+        width: 90%;
+        height: 100%;
+    }
 
-        <!-- Spartipps Bild und Titel -->
-        <div class="col-md-6 mb-4 text-center">
-            <div class="card">
-                <NavLink href="/CompensationCalculator">
-                    <img src="Pictures/spartipps.jpg" class="img-fluid" alt="Spartipps">
-                    <div class="card-content">
-                        <h3 class="mt-2 text-white">Angestellte (Abfindung)</h3>
-                    </div>
-                </NavLink>
-            </div>
-        </div>
-    </div>
 
-    <!-- Ad Spaces -->
-    <div class="row mt-4">
-        <div class="col-md-6 mb-4 text-center ad-space">
-            <!-- Ad Space 1 -->
-            <div class="card">
-                <!-- Ad Content -->
-            </div>
-        </div>
-        <div class="col-md-6 mb-4 text-center ad-space">
-            <!-- Ad Space 2 -->
-            <div class="card">
-                <!-- Ad Content -->
-            </div>
-        </div>
-    </div>
-</div>
+    .row {
+        margin-top: 0% !important;
+        margin-bottom: 0% !important;
+    }
+
+    .myspace {
+        margin-top: -3em !important;
+        margin-left: 1.2em !important;
+        margin-right: -4em !important;
+    }
+</style>

@@ -8,7 +8,7 @@
     "TaxFreeChildGrowingFlat": 4260,
     "TaxFreeChildFlat": 8952,
     "MaxTaxLevel": 45.00,
-    "MinLevelForSolidaryTax": 17543,
+    "MinLevelForSolidarityTax": 17543,
     "SolidaryTaxRate": 5.50,
     "ChurchTaxRate":  9.00,
 

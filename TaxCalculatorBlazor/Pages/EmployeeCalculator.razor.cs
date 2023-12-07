@@ -21,11 +21,14 @@ namespace TaxCalculatorBlazor.Pages
             Input.Year = year;
         }
 
-        private void CheckComma(ChangeEventArgs e)
+        private void CheckCommaInsuranceAddition(ChangeEventArgs e)
         {
             Input.InsuranceAdditionTotal = e.Value.ToString().Contains(",") ? decimal.Parse(e.Value.ToString().Replace(",", ".")) : decimal.Parse(e.Value.ToString());
         }
-        private void HandleBillingPeroidChange() => Input.BillingPeriod = Input.BillingPeriod == true ? false : true;
+        private void CheckCommaGrossIncome(ChangeEventArgs e)
+        {
+            Input.GrossIncome = e.Value.ToString().Contains(",") ? decimal.Parse(e.Value.ToString().Replace(",", ".")) : decimal.Parse(e.Value.ToString());
+        }
         private void HandleChurchTaxChange() => Input.InChurch = Input.InChurch == true ? false : true;
         private void HandleChildrenChange()
         {
@@ -56,11 +59,28 @@ namespace TaxCalculatorBlazor.Pages
         {
             if (MainService != null && Input != null)
             {
-                Output = await MainService.Calculation(Input);
-                StateHasChanged();
+                try
+                {
+                    if (!Input.BillingPeriodMonthly)
+                    {
+                        Input.GrossIncome = Input.GrossIncome / 12;
+                    }
+                    Output = await MainService.Calculation(Input);
+                    StateHasChanged();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    if (!Input.BillingPeriodMonthly)
+                    {
+                        Input.GrossIncome = Input.GrossIncome * 12;
+                    }
+                }
             }
         }
-
-        private void CreateRole() { }
     }
 }

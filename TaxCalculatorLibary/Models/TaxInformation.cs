@@ -15,7 +15,7 @@ namespace TaxCalculatorLibary.Models
         public int TaxFreeChildGrowingFlat { get; set; } // Class 2
         public int TaxFreeChildFlat { get; set; } // 1 - 4 in 4 * 0.5
         public decimal MaxTaxLevel { get; set; }
-        public decimal MinLevelForSoladarityTax { get; set; }
+        public decimal MinLevelForSolidarityTax { get; set; }
         public decimal SolidaryTaxRate { get; set; }
         public decimal ChruchTaxRate { get; set; }
         public List<Tuple<decimal, decimal>>? TaxLevels { get; set; }
@@ -49,7 +49,24 @@ namespace TaxCalculatorLibary.Models
                     LTaxInformation = list;
                 }
             }
+        } 
+        
+        public static void LoadDataFromJsonForTesting()
+        {
+            string path = Path.Combine("../../../../", "TaxCalculatorAPI", "Data", "TaxInformation.json");
+            using (StreamReader r = new(path))
+            {
+                string s = r.ReadToEnd();
+                List<TaxInformation>? list = JsonConvert.DeserializeObject<List<TaxInformation>>(s);
+
+                if (list != null)
+                {
+                    LTaxInformation = list;
+                }
+            }
         }
+
+
         public Tuple<decimal, decimal, decimal, decimal, decimal> GetTaxValue(decimal value, bool inChurch)
         {
             // Return a tuple with taxed value, taxsum, solidary tax, church tax, borderTaxSum
@@ -84,7 +101,7 @@ namespace TaxCalculatorLibary.Models
 
             // Check for solidary and church
 
-            if (taxSet.Item2 > this.MinLevelForSoladarityTax)
+            if (taxSet.Item2 > this.MinLevelForSolidarityTax)
             {
                 taxSet = new(taxSet.Item1, taxSet.Item2, taxSet.Item2 * this.SolidaryTaxRate / 100, 0, taxSet.Item5);
             }

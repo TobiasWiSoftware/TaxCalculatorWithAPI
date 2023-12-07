@@ -1,8 +1,143 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+
+@media(min-width: 1000px) {
+    div.center {
+        font-size: 2.5rem !important;
+    }
+
+    nav{
+        font-size: 1.3rem !important;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1000px) {
+
+    div.center {
+        font-size: 2rem !important;
+    }
+
+    
+
+}
+
+@media(min-width: 768px) {
+    div.center {
+        display: block;
+        padding-top: 3%;
+        padding-left: 17%;
+        padding-right: 17%;
+        justify-content: space-between;
+    }
+
+    .mycontainer {
+        margin-left: 5% !important;
+    }
+
+    button {
+        padding: 0.5rem 1rem !important;
+        font-size: inherit !important;
+        border-radius: 0.7rem !important;
+        min-width: 3em;
+    }
+
+    nav {
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    img.custom {
+        height: 50px !important;
+        width: 50px !important;
+    }
+}
+
+table {
+    margin-bottom: 0px !important;
+}
+
+button {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+
+.right {
+    text-align: right !important;
+}
+
+
+.form-control {
+    width: 100%; /* Setzen Sie die gewünschte Breite */
+    border: 1px solid #ccc; /* Einen Rand hinzufügen */
+    border-radius: 4px; /* Ecken abrunden für modernes Aussehen */
+    font-size: inherit;
+    margin-bottom: 0.8em;
+}
+
+/* Anpassungen für das Fokusverhalten */
+form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+.form-check {
+    margin-right: 20px;
+}
+
+select.form-control option {
+    color: #333; /* Adjust the color as needed */
+}
+
+select.form-control {
+    color: #333; /* Adjust the color as needed */
+}
+
+button.blue {
+    background: linear-gradient(to right, #36D1DC, #5B86E5);
+}
+
+button.red {
+    background: linear-gradient(to right, #e62e6a, #ff6b2b); /* Red gradient */
+}
+
+    button.red:hover {
+        background: linear-gradient(to right, #ff6b2b, #e62e6a); /* Slightly darker red gradient for hover effect */
+    }
+
+button.blue:hover {
+    background: linear-gradient(to right, #5B86E5, #36D1DC); /* Slightly darker red gradient for hover effect */
+}
+
+.left {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px; /* Add margin between radio button groups */
+}
+
+input {
+    color: #333; /* Adjust the color as needed */
+}
+
+.output-container {
+    display: grid;
+    padding: 0.5em;
+    background-color: #fff; /* Optional: sets the background of the entire container */
+    border-radius: 8px; /* Rounded corners for the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+
+
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 0.9em !important;
+    font-size: 0.9em;
 }
 
 h1:focus {
@@ -104,6 +239,7 @@ a, .btn-link {
 
 #central {
     font-family: 'Ink Free';
+    font-size: 1.5rem;
 }
 
 nav {

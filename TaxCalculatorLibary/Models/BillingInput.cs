@@ -13,7 +13,7 @@ namespace TaxCalculatorLibary.Models
         public decimal GrossIncome { get; set; }
 
         [Required(ErrorMessage = "Eingabe ist falsch")]
-        public bool BillingPeriod { get; set; }
+        public bool BillingPeriodMonthly { get; set; }
 
         [Required(ErrorMessage = "Eingabe ist falsch")]
         public int TaxClass { get; set; }
@@ -51,7 +51,7 @@ namespace TaxCalculatorLibary.Models
         {
             Year = year;
             GrossIncome = gross;
-            BillingPeriod = isMonthly;
+            BillingPeriodMonthly = isMonthly;
             TaxClass = taxclass;
             Age = age;
             HasChildren = hasChildren;
