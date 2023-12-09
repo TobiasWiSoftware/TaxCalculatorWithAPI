@@ -131,7 +131,9 @@ input {
 }
 
 
-
+.justify {
+    text-align: justify;
+}
 
 
 

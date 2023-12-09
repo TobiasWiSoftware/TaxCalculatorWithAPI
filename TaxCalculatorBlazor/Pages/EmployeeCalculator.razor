@@ -33,20 +33,20 @@ else
 
                 <!-- Firstname input -->
                 <label class="form-label">Bruttoeinkommen</label>
-                <input @onchange="CheckCommaGrossIncome" placeholder="@Input.GrossIncome" type="decimal" class="form-control" />
+                <input @bind="Input.GrossIncome" type="decimal" class="form-control" />
 
                 <ValidationMessage For="@(() => Input.Year)" />
 
                 <div class="left">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" @bind="Input.BillingPeriodMonthly" checked name="BillingPeriod" />
+                        <input class="form-check-input" type="radio" checked @onchange="@(() => Input.BillingPeriodMonthly = true)" name="BillingPeriod" />
                         <label class="form-check-label">
                             <!-- korrigiert for-Attribut -->
                             Monat
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" @bind="Input.BillingPeriodMonthly" name="BillingPeriod"  />
+                        <input class="form-check-input" type="radio" @onchange="@(() => Input.BillingPeriodMonthly = false)" name="BillingPeriod" />
                         <label class="form-check-label">
                             <!-- korrigiert for-Attribut -->
                             Jahr
@@ -102,28 +102,32 @@ else
                 @if (ChildrenTaxCreditDisplayed)
                 {
                     <label class="form-label">Kinderfreibeträge</label>
-                    <select name="ChildTaxCredit" @bind="Input.ChildTaxCredit" class="form-control">
+                    <select name="ChildTaxCredit" @bind="ChildTaxCreditString" class="form-control">
                         <option value="0">0</option>
-                        <option value="0.5">0.5</option>
+                        <option value="0,5">0,5</option>
                         <option value="1">1</option>
-                        <option value="1.5">1.5</option>
+                        <option value="1,5">1,5</option>
                         <option value="2">2</option>
-                        <option value="2.5">2.5</option>
+                        <option value="2,5">2,5</option>
                         <option value="3">3</option>
-                        <option value="3.5">3.5</option>
+                        <option value="3,5">3,5</option>
                         <option value="4">4</option>
-                        <option value="4.5">4.5</option>
+                        <option value="4,5">4,5</option>
                         <option value="5">5</option>
-                        <option value="5.5">5.5</option>
+                        <option value="5,5">5,5</option>
                         <option value="6">6</option>
-                        <option value="6.5">6.5</option>
+                        <option value="6,5">6,5</option>
                         <option value="7">7</option>
-                        <option value="7.5">7.5</option>
+                        <option value="7,5">7,5</option>
                         <option value="8">8</option>
-                        <option value="8.5">8.5</option>
+                        <option value="8,5">8,5</option>
                         <option value="9">9</option>
-                        <option value="9.5">9.5</option>
+                        <option value="9,5">9,5</option>
                     </select>
+                }
+                else
+                {
+                    ChildTaxCreditString = "0";
                 }
 
                 <label>Krankenversicherung:</label>
@@ -132,8 +136,25 @@ else
                     <option value="false">privat</option>
                 </select>
 
+                @if (Input.HasFederalInsurance == "false")
+                {
+                    if (Input.PrivateInsurance == 0)
+                    {
+                        Input.PrivateInsurance = 300m;
+                    }
+                    <label class="form-label">Arbeitnehmerbeitrag PKV</label>
+                    <input @bind="Input.PrivateInsurance" type="decimal" class="form-control" />
+                }
+                else
+                {
+                    if (Input.PrivateInsurance != 0)
+                    {
+                        Input.PrivateInsurance = 0m;
+                    }
+                }
+
                 <label class="form-label">Krankenkassenzusatzbeitrag in %</label>
-                <input @onchange="CheckCommaInsuranceAddition" placeholder="@Input.InsuranceAdditionTotal" type="decimal" class="form-control" />
+                <input @bind="Input.InsuranceAdditionTotal" type="decimal" class="form-control" />
 
                 <label class="form-label">Rentenversicherung:</label>
                 <select @bind="Input.HasFederalPension" name="Pension" class="form-control">
@@ -168,12 +189,17 @@ else
                             <td class="right">@Math.Round(Output.BillingInput.GrossIncome * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <th scope="row">Lohnsteuer</th>
+                            <td scope="row">Lohnsteuer</td>
                             <td class="right">@Output.TaxSum.ToString("N2")</td>
                             <td class="right">@Math.Round(Output.TaxSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <th scope="row">Solidaritätszuschlag</th>
+                            <td scope="row">Kirchensteuer</td>
+                            <td class="right">@Output.ChurchTaxSum.ToString("N2")</td>
+                            <td class="right">@Math.Round(Output.SolidaryTaxSum * 12, 2).ToString("N2")</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Solidaritätszuschlag</td>
                             <td class="right">@Output.SolidaryTaxSum.ToString("N2")</td>
                             <td class="right">@Math.Round(Output.SolidaryTaxSum * 12, 2).ToString("N2")</td>
                         </tr>
@@ -183,22 +209,22 @@ else
                             <td class="right">@Math.Round(Output.TotalTaxSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <th scope="row">Krankenversicherung</th>
+                            <td scope="row">Krankenversicherung</td>
                             <td class="right">@Output.InsuranceSum.ToString("N2")</td>
                             <td class="right">@Math.Round(Output.InsuranceSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <th scope="row">Pflegeversicherung</th>
+                            <td scope="row">Pflegeversicherung</td>
                             <td class="right">@Output.InsuranceCareSum.ToString("N2")</td>
                             <td class="right">@Math.Round(Output.InsuranceCareSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <th scope="row">Rentenversicherung</th>
+                            <td scope="row">Rentenversicherung</td>
                             <td class="right">@Output.PensionSum.ToString("N2")</td>
                             <td class="right">@Math.Round(Output.PensionSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <th scope="row">Arbeitslosenversicherung</th>
+                            <td scope="row">Arbeitslosenversicherung</td>
                             <td class="right">@Output.UnimploymentSum.ToString("N2")</td>
                             <td class="right">@Math.Round(Output.UnimploymentSum * 12, 2).ToString("N2")</td>
                         </tr>
@@ -208,15 +234,22 @@ else
                             <td class="right">@Math.Round(Output.InsurancesTotal * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <th scope="row">Netto / Überweisung</th>
-                            <td class="right">@Output.Transferamount.ToString("N2")</td>
-                            <td class="right">@Math.Round(Output.Transferamount * 12, 2).ToString("N2")</td>
+                            <th scope="row">Netto</th>
+                            <th scope="row" class="right">@Output.Transferamount.ToString("N2")</th>
+                            <th scope="row" class="right">@Math.Round(Output.Transferamount * 12, 2).ToString("N2")</th>
                         </tr>
                     </tbody>
                 </table>
+                <br />
+                <br />
+                <p class="justify">
+                    Erläuterungen: Bei der Berechnung der Steuer- und Sozialversicherung wurden der Grundfreibetrag nach Steuerklasse,
+                    der Arbeitnehmerfreibetrag und die Kinderfreibeträge berücksichtigt. Sind nicht alle Angaben auf der Lohnsteuerkarte
+                    eingetragen, kann der Überweisungsbetrag niedriger als das berechnete Netto ausfallen. Alle Angaben ohne Gewähr.
+                </p>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-sm red">Drucken</button>
+            <button type="submit" class="btn btn-primary btn-sm red">Drucken (Aktuell nicht verfügbar)</button>
 
         }
 
@@ -224,11 +257,5 @@ else
 
 
 }
-
-<style>
-
-  
-
-</style>
 
 

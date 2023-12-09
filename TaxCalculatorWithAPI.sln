@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorLibary", "TaxC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCrawlerForTestData", "WebCrawlerForTestData\WebCrawlerForTestData.csproj", "{8D69FCD5-1277-4100-B3FB-E3A159F1DA5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaxCalculatorAPI", "TestTaxCalculatorAPI\TestTaxCalculatorAPI.csproj", "{A880885D-5C5B-4022-B21D-052FD2C614BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTaxCalculatorAPI", "TestTaxCalculatorAPI\TestTaxCalculatorAPI.csproj", "{A880885D-5C5B-4022-B21D-052FD2C614BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -11,7 +11,7 @@ namespace TaxCalculatorBlazor.Pages
         public BillingInput? Input { get; set; }
         public BillingOutput? Output { get; set; }
         public bool ChildrenTaxCreditDisplayed { get; set; } = false;
-
+        public string ChildTaxCreditString { get; set; }
         private bool IsCurrentYear(int year)
         {
             return DateTime.Now.Year == year;
@@ -21,14 +21,6 @@ namespace TaxCalculatorBlazor.Pages
             Input.Year = year;
         }
 
-        private void CheckCommaInsuranceAddition(ChangeEventArgs e)
-        {
-            Input.InsuranceAdditionTotal = e.Value.ToString().Contains(",") ? decimal.Parse(e.Value.ToString().Replace(",", ".")) : decimal.Parse(e.Value.ToString());
-        }
-        private void CheckCommaGrossIncome(ChangeEventArgs e)
-        {
-            Input.GrossIncome = e.Value.ToString().Contains(",") ? decimal.Parse(e.Value.ToString().Replace(",", ".")) : decimal.Parse(e.Value.ToString());
-        }
         private void HandleChurchTaxChange() => Input.InChurch = Input.InChurch == true ? false : true;
         private void HandleChildrenChange()
         {
@@ -49,7 +41,7 @@ namespace TaxCalculatorBlazor.Pages
                 if (sr != null)
                 {
                     decimal socialAddition = sr.EmployeeInsuranceBonusRate + sr.EmployerInsuranceBonusRate;
-                    Input = new(DateTime.Now.Year, 3000m, true, 1, 30, false, 0, "true", 0, socialAddition, "true", "true");
+                    Input = new(DateTime.Now.Year, 3000m, true, 1, 30, false, 0.0m, "true", 0, socialAddition, "true", "true");
                 }
 
             }
@@ -61,6 +53,7 @@ namespace TaxCalculatorBlazor.Pages
             {
                 try
                 {
+                    Input.ChildTaxCredit = Convert.ToDecimal(ChildTaxCreditString);
                     if (!Input.BillingPeriodMonthly)
                     {
                         Input.GrossIncome = Input.GrossIncome / 12;
@@ -77,7 +70,7 @@ namespace TaxCalculatorBlazor.Pages
                 {
                     if (!Input.BillingPeriodMonthly)
                     {
-                        Input.GrossIncome = Input.GrossIncome * 12;
+                        Input.GrossIncome = Math.Round(Input.GrossIncome * 12,2);
                     }
                 }
             }

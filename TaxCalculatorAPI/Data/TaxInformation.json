@@ -4,157 +4,10 @@
 
     "TaxFreeBasicFlat": 10908,
     "TaxFreeEmployeeFlat": 1230,
-    "SpecialCostFlat": 36,
     "TaxFreeChildGrowingFlat": 4260,
-    "TaxFreeChildFlat": 8952,
+    "TaxFreeChildFlat": 6024,
     "MaxTaxLevel": 45.00,
     "MinLevelForSolidarityTax": 17543,
-    "SolidaryTaxRate": 5.50,
-    "ChurchTaxRate":  9.00,
-
-    "TaxLevels": [
-      {
-        "Item1": 0,
-        "Item2": 0
-      },
-      {
-        "Item1": 100,
-        "Item2": 13
-      },
-      {
-        "Item1": 200,
-        "Item2": 28
-      },
-      {
-        "Item1": 400,
-        "Item2": 57
-      },
-      {
-        "Item1": 800,
-        "Item2": 118
-      },
-      {
-        "Item1": 1500,
-        "Item2": 232
-      },
-      {
-        "Item1": 2000,
-        "Item2": 319
-      },
-      {
-        "Item1": 2500,
-        "Item2": 411
-      },
-      {
-        "Item1": 3000,
-        "Item2": 508
-      },
-      {
-        "Item1": 3500,
-        "Item2": 609
-      },
-      {
-        "Item1": 4000,
-        "Item2": 716
-      },
-      {
-        "Item1": 4500,
-        "Item2": 828
-      },
-      {
-        "Item1": 5000,
-        "Item2": 944
-      },
-      {
-        "Item1": 6000,
-        "Item2": 1186
-      },
-      {
-        "Item1": 7000,
-        "Item2": 1431
-      },
-      {
-        "Item1": 8000,
-        "Item2": 1680
-      },
-      {
-        "Item1": 9000,
-        "Item2": 1932
-      },
-      {
-        "Item1": 10000,
-        "Item2": 2189
-      },
-      {
-        "Item1": 12000,
-        "Item2": 2714
-      },
-      {
-        "Item1": 14000,
-        "Item2": 3254
-      },
-      {
-        "Item1": 16000,
-        "Item2": 3810
-      },
-      {
-        "Item1": 16000,
-        "Item2": 3810
-      },{
-        "Item1": 18000,
-        "Item2": 4381
-      },{
-        "Item1": 20000,
-        "Item2": 4968
-      },
-      {
-        "Item1": 25000,
-        "Item2": 6502
-      },
-      {
-        "Item1": 30000,
-        "Item2": 8132
-      },
-      {
-        "Item1": 35000,
-        "Item2": 9858
-      },
-      {
-        "Item1": 40000,
-        "Item2": 11681
-      },
-      {
-        "Item1": 45000,
-        "Item2": 13600
-      },
-      {
-        "Item1": 50000,
-        "Item2": 15615
-      },
-      {
-        "Item1": 60000,
-        "Item2": 19808
-      },
-      {
-        "Item1": 70000,
-        "Item2": 24774
-      },
-      {
-        "Item1": 266918,
-        "Item2": 106713
-      }
-    ]
-  },
-  {
-    "Year": 2024,
-
-    "TaxFreeBasicFlat": 11604,
-    "TaxFreeEmployeeFlat": 1230,
-    "SpecialCostFlat": 36,
-    "TaxFreeChildGrowingFlat": 4260,
-    "TaxFreeChildFlat": 9312,
-    "MaxTaxLevel": 45.00,
-    "MinLevelForSolidaryTax": 18130,
     "SolidaryTaxRate": 5.50,
     "ChurchTaxRate": 9.00,
 
@@ -281,15 +134,162 @@
       },
       {
         "Item1": 60000,
-        "Item2": 15242
+        "Item2": 19808
       },
       {
         "Item1": 70000,
-        "Item2": 19651
+        "Item2": 24774
       },
       {
-        "Item1": 266222,
-        "Item2": 112583
+        "Item1": 266918,
+        "Item2": 106713
+      }
+    ]
+  },
+  {
+    "Year": 2024,
+
+    "TaxFreeBasicFlat": 11604,
+    "TaxFreeEmployeeFlat": 1230,
+    "TaxFreeChildGrowingFlat": 4260,
+    "TaxFreeChildFlat": 6384,
+    "MaxTaxLevel": 45.00,
+    "MinLevelForSolidarityTax": 18130,
+    "SolidaryTaxRate": 5.50,
+    "ChurchTaxRate": 9.00,
+
+    "TaxLevels": [
+      {
+        "Item1": 0,
+        "Item2": 0
+      },
+      {
+        "Item1": 100,
+        "Item2": 13
+      },
+      {
+        "Item1": 200,
+        "Item2": 28
+      },
+      {
+        "Item1": 400,
+        "Item2": 57
+      },
+      {
+        "Item1": 800,
+        "Item2": 118
+      },
+      {
+        "Item1": 1500,
+        "Item2": 232
+      },
+      {
+        "Item1": 2000,
+        "Item2": 319
+      },
+      {
+        "Item1": 2500,
+        "Item2": 411
+      },
+      {
+        "Item1": 3000,
+        "Item2": 508
+      },
+      {
+        "Item1": 3500,
+        "Item2": 609
+      },
+      {
+        "Item1": 4000,
+        "Item2": 716
+      },
+      {
+        "Item1": 4500,
+        "Item2": 828
+      },
+      {
+        "Item1": 5000,
+        "Item2": 944
+      },
+      {
+        "Item1": 6000,
+        "Item2": 1186
+      },
+      {
+        "Item1": 7000,
+        "Item2": 1431
+      },
+      {
+        "Item1": 8000,
+        "Item2": 1680
+      },
+      {
+        "Item1": 9000,
+        "Item2": 1932
+      },
+      {
+        "Item1": 10000,
+        "Item2": 2189
+      },
+      {
+        "Item1": 12000,
+        "Item2": 2714
+      },
+      {
+        "Item1": 14000,
+        "Item2": 3254
+      },
+      {
+        "Item1": 16000,
+        "Item2": 3810
+      },
+      {
+        "Item1": 16000,
+        "Item2": 3810
+      },
+      {
+        "Item1": 18000,
+        "Item2": 4381
+      },
+      {
+        "Item1": 20000,
+        "Item2": 4968
+      },
+      {
+        "Item1": 25000,
+        "Item2": 6502
+      },
+      {
+        "Item1": 30000,
+        "Item2": 8132
+      },
+      {
+        "Item1": 35000,
+        "Item2": 9858
+      },
+      {
+        "Item1": 40000,
+        "Item2": 11681
+      },
+      {
+        "Item1": 45000,
+        "Item2": 13600
+      },
+      {
+        "Item1": 50000,
+        "Item2": 15615
+      },
+      {
+        "Item1": 60000,
+        "Item2": 19808
+      },
+      {
+        "Item1": 70000,
+        "Item2": 24774
+      },
+      {
+        "Item1": 266918,
+        "Item2": 106713
       }
     ]
   }

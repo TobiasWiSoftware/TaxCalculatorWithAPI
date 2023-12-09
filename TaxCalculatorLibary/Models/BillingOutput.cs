@@ -20,12 +20,12 @@ namespace TaxCalculatorLibary.Models
         public decimal Transferamount { get => BillingInput.GrossIncome - InsurancesTotal - TotalTaxSum; }
         public TaxInformation? TaxInformation { get => TaxInformation.GetDataFromYear(DateTime.Now.Year); }
         public SocialSecurityRates? SocialSecurityRates { get => SocialSecurityRates.GetDataFromYear(DateTime.Now.Year); }
-       
+
 
 
         public BillingOutput()
         {
-            
+
         }
         // Only for testing
         public BillingOutput(BillingInput bi, decimal insurancesum, decimal insurancecaresum, decimal pensionsum, decimal unimploymentsum, decimal taxsum, decimal solidarytaxsum, decimal churchtaxsum)
@@ -43,90 +43,101 @@ namespace TaxCalculatorLibary.Models
         public void Calculation(BillingInput billingInput)
         {
 
-            SocialSecurityRates? socialSecurityRatesOfYear = SocialSecurityRates.GetDataFromYear(billingInput.Year);
-            TaxInformation? taxInformationOfYear = TaxInformation.GetDataFromYear(billingInput.Year);
+            BillingInput = billingInput;
 
-            if (socialSecurityRatesOfYear != null || taxInformationOfYear != null)
+
+            decimal contributionrate = 0.00m;
+            decimal maxGross = 0;
+
+            if (BillingInput.HasFederalInsurance == "true")
             {
-                BillingInput = billingInput;
-
-                decimal contributionrate = socialSecurityRatesOfYear.EmployeeInsuranceRate + socialSecurityRatesOfYear.EmployeeInsuranceBonusRate;
-                decimal maxGross = billingInput.GrossIncome * 12 < socialSecurityRatesOfYear.InsuranceMaxGross ? billingInput.GrossIncome : socialSecurityRatesOfYear.InsuranceMaxGross / 12;
+                contributionrate = SocialSecurityRates.EmployeeInsuranceRate + this.BillingInput.InsuranceAdditionTotal / 2;
+                maxGross = this.BillingInput.GrossIncome * 12 < SocialSecurityRates.InsuranceMaxGross ? this.BillingInput.GrossIncome : SocialSecurityRates.InsuranceMaxGross / 12;
 
                 InsuranceSum = Math.Round(maxGross * contributionrate / 100, 2);
 
-                contributionrate = socialSecurityRatesOfYear.EmployeeInsuranceCareRate;
+                contributionrate = SocialSecurityRates.EmployeeInsuranceCareRate;
 
-                if (!billingInput.HasChildren)
+                if (!this.BillingInput.HasChildren)
                 {
-                    contributionrate += socialSecurityRatesOfYear.EmployeeInsuranceCareChildFreeRate;
+                    contributionrate += SocialSecurityRates.EmployeeInsuranceCareChildFreeRate;
                     InsuranceCareSum = maxGross * contributionrate / 100;
                 }
                 else
                 {
-                    int children = billingInput.ChildTaxCredit % 1 == 0 ? Convert.ToInt32(billingInput.ChildTaxCredit) : Convert.ToInt32(billingInput.ChildTaxCredit * 2);
-                    contributionrate -= children - socialSecurityRatesOfYear.EmployeeMinChildrenDiscount * socialSecurityRatesOfYear.EmployeeInsuranceCareChildDiscountRate;
+                    int children = (int)this.BillingInput.ChildTaxCredit;
+                    contributionrate = Math.Max(SocialSecurityRates.EmployeeMinChildrenDiscount, SocialSecurityRates.EmployeeInsuranceCareRate - SocialSecurityRates.EmployeeInsuranceCareChildDiscountRate * children);
                     InsuranceCareSum += maxGross * contributionrate / 100;
                 }
 
                 InsuranceCareSum = Math.Round(InsuranceCareSum, 2);
-
-                contributionrate = socialSecurityRatesOfYear.EmployeePensionRate;
-                maxGross = billingInput.GrossIncome * 12 < socialSecurityRatesOfYear.PensionAndUnimploymentMaxGross ? billingInput.GrossIncome : socialSecurityRatesOfYear.PensionAndUnimploymentMaxGross / 12;
-
-                PensionSum = Math.Round(maxGross * contributionrate / 100, 2);
-
-                contributionrate = socialSecurityRatesOfYear.EmployeeUnemploymentRate;
-
-                UnimploymentSum = Math.Round(maxGross * contributionrate / 100, 2);
-                decimal freeFromClass = 0.00m;
-
-                if (billingInput.TaxClass == 1 || billingInput.TaxClass == 4)
-                {
-                    freeFromClass += taxInformationOfYear.TaxFreeBasicFlat;
-                    freeFromClass += taxInformationOfYear.TaxFreeEmployeeFlat;
-                    freeFromClass += taxInformationOfYear.TaxFreeChildFlat * billingInput.ChildTaxCredit;
-                }
-                else if (billingInput.TaxClass == 2)
-                {
-                    freeFromClass += taxInformationOfYear.TaxFreeBasicFlat;
-                    freeFromClass += taxInformationOfYear.TaxFreeEmployeeFlat;
-                    freeFromClass += taxInformationOfYear.TaxFreeChildFlat * billingInput.ChildTaxCredit;
-                    freeFromClass += taxInformationOfYear.TaxFreeChildGrowingFlat;
-                }
-                else if (billingInput.TaxClass == 3)
-                {
-                    freeFromClass += taxInformationOfYear.TaxFreeBasicFlat * 2;
-                    freeFromClass += taxInformationOfYear.TaxFreeEmployeeFlat;
-                    freeFromClass += taxInformationOfYear.TaxFreeChildFlat * billingInput.ChildTaxCredit;
-                }
-                else if (billingInput.TaxClass == 5)
-                {
-                    freeFromClass += taxInformationOfYear.TaxFreeEmployeeFlat;
-                }
-
-                decimal forTax = billingInput.GrossIncome * 12 - InsurancesTotal * 12 - freeFromClass;
-
-
-
-                //Getting the Tuples to calculate tax
-
-                Tuple<decimal, decimal, decimal, decimal, decimal> taxSet = taxInformationOfYear.GetTaxValue(forTax, billingInput.InChurch);
-
-                if (taxSet != null)
-                {
-                    TaxSum = taxSet.Item2 / 12;
-                    SolidaryTaxSum = taxSet.Item3 / 12;
-                    ChurchTaxSum = taxSet.Item4 / 12;
-                    BorderTaxSet = taxSet.Item1;
-                }
             }
             else
             {
-                throw new Exception();
+                InsuranceSum = this.BillingInput.PrivateInsurance;
             }
 
+            if (this.BillingInput.HasFederalPension == "true")
+            {
+                contributionrate = SocialSecurityRates.EmployeePensionRate;
+                maxGross = this.BillingInput.GrossIncome * 12 < SocialSecurityRates.PensionAndUnimploymentMaxGross ? this.BillingInput.GrossIncome : SocialSecurityRates.PensionAndUnimploymentMaxGross / 12;
+
+                PensionSum = Math.Round(maxGross * contributionrate / 100, 2);
+            }
+
+            if (this.BillingInput.HasFederalUnimployment == "true")
+            {
+                maxGross = this.BillingInput.GrossIncome * 12 < SocialSecurityRates.PensionAndUnimploymentMaxGross ? this.BillingInput.GrossIncome : SocialSecurityRates.PensionAndUnimploymentMaxGross / 12;
+                contributionrate = SocialSecurityRates.EmployeeUnemploymentRate;
+
+                UnimploymentSum = Math.Round(maxGross * contributionrate / 100, 2);
+            }
+            decimal freeFromClass = 0.00m;
+
+            if (this.BillingInput.TaxClass == 1 || this.BillingInput.TaxClass == 4)
+            {
+                freeFromClass += TaxInformation.TaxFreeBasicFlat;
+                freeFromClass += TaxInformation.TaxFreeEmployeeFlat;
+                freeFromClass += TaxInformation.TaxFreeChildFlat * this.BillingInput.ChildTaxCredit;
+            }
+            else if (this.BillingInput.TaxClass == 2)
+            {
+                freeFromClass += TaxInformation.TaxFreeBasicFlat;
+                freeFromClass += TaxInformation.TaxFreeEmployeeFlat;
+                freeFromClass += TaxInformation.TaxFreeChildFlat * this.BillingInput.ChildTaxCredit;
+                freeFromClass += TaxInformation.TaxFreeChildGrowingFlat;
+            }
+            else if (this.BillingInput.TaxClass == 3)
+            {
+                freeFromClass += TaxInformation.TaxFreeBasicFlat * 2;
+                freeFromClass += TaxInformation.TaxFreeEmployeeFlat;
+                freeFromClass += TaxInformation.TaxFreeChildFlat * this.BillingInput.ChildTaxCredit;
+            }
+            else if (this.BillingInput.TaxClass == 5)
+            {
+                freeFromClass += TaxInformation.TaxFreeEmployeeFlat;
+            }
+
+            decimal forTax = this.BillingInput.GrossIncome * 12 - InsurancesTotal * 12 - freeFromClass;
+
+
+
+            //Getting the Tuples to calculate tax
+
+            Tuple<decimal, decimal, decimal, decimal, decimal> taxSet = TaxInformation.GetTaxValue(forTax, this.BillingInput.InChurch);
+
+            if (taxSet != null)
+            {
+                TaxSum = taxSet.Item2 / 12;
+                SolidaryTaxSum = taxSet.Item3 / 12;
+                ChurchTaxSum = taxSet.Item4 / 12;
+                BorderTaxSet = taxSet.Item1;
+            }
         }
+
+
+
+
 
         public Tuple<bool, string> CheckForTestingWithTolerance(BillingOutput test)
         {

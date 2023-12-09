@@ -11,13 +11,12 @@ namespace TaxCalculatorLibary.Models
         public int Year { get; set; }
         public int TaxFreeBasicFlat { get; set; } // Class 1 - 4
         public int TaxFreeEmployeeFlat { get; set; } // For class 1 - 5
-        public int SpecialCostFlat { get; set; } // For class 1 - 5
         public int TaxFreeChildGrowingFlat { get; set; } // Class 2
         public int TaxFreeChildFlat { get; set; } // 1 - 4 in 4 * 0.5
         public decimal MaxTaxLevel { get; set; }
         public decimal MinLevelForSolidarityTax { get; set; }
         public decimal SolidaryTaxRate { get; set; }
-        public decimal ChruchTaxRate { get; set; }
+        public decimal ChurchTaxRate { get; set; }
         public List<Tuple<decimal, decimal>>? TaxLevels { get; set; }
 
         public TaxInformation()
@@ -25,14 +24,13 @@ namespace TaxCalculatorLibary.Models
 
         }
 
-        public TaxInformation(int year, int taxFreeBasic, List<Tuple<decimal, decimal>> taxLevels, int taxFreeBasicFlat, int taxFreeEmployeeFlat, int specialCostFlat,
+        public TaxInformation(int year, int taxFreeBasic, List<Tuple<decimal, decimal>> taxLevels, int taxFreeBasicFlat, int taxFreeEmployeeFlat,
                                    int taxFreeChildGrowingFlat, int taxFreeChildFlat)
         {
             Year = year;
             TaxLevels = taxLevels;
             TaxFreeBasicFlat = taxFreeBasicFlat;
             TaxFreeEmployeeFlat = taxFreeEmployeeFlat;
-            SpecialCostFlat = specialCostFlat;
             TaxFreeChildGrowingFlat = taxFreeChildGrowingFlat;
             TaxFreeChildFlat = taxFreeChildFlat;
         }
@@ -103,12 +101,12 @@ namespace TaxCalculatorLibary.Models
 
             if (taxSet.Item2 > this.MinLevelForSolidarityTax)
             {
-                taxSet = new(taxSet.Item1, taxSet.Item2, taxSet.Item2 * this.SolidaryTaxRate / 100, 0, taxSet.Item5);
+                taxSet = new(taxSet.Item1, taxSet.Item2, (taxSet.Item2 - this.MinLevelForSolidarityTax) * this.SolidaryTaxRate / 100, 0, taxSet.Item5);
             }
 
             if (inChurch)
             {
-                taxSet = new(taxSet.Item1, taxSet.Item2, taxSet.Item3, taxSet.Item2 * this.ChruchTaxRate / 100, taxSet.Item5);
+                taxSet = new(taxSet.Item1, taxSet.Item2, taxSet.Item3, taxSet.Item2 * this.ChurchTaxRate / 100, taxSet.Item5);
             }
 
             return taxSet;
