@@ -31,14 +31,14 @@ internal class Program
 
         builder.Services.AddCors(options =>
         {
-            options.AddPolicy("AllowSpecificOrigin",
-                builder => builder.WithOrigins("https://localhost:44319")
-                                  .AllowAnyHeader()
-                                  .AllowAnyMethod());
+            options.AddPolicy("AllowAnyOrigin",
+                      builder => builder.AllowAnyOrigin()
+                      .AllowAnyHeader()
+                      .AllowAnyMethod());
         });
 
         var app = builder.Build();
-        app.UseCors("AllowSpecificOrigin");
+        app.UseCors("AllowAnyOrigin");
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

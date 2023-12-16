@@ -5,13 +5,15 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorAPI", "TaxCalculatorAPI\TaxCalculatorAPI.csproj", "{80B94573-73AD-4FEB-AED6-DDD281B95FBB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorBlazor", "TaxCalculatorBlazor\TaxCalculatorBlazor.csproj", "{F109770F-245D-46BA-AA13-05CD99364C92}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorLibary", "TaxCalculatorLibary\TaxCalculatorLibary.csproj", "{21C34FA7-B553-42FA-9E0D-57AA0EEA8BE3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCrawlerForTestData", "WebCrawlerForTestData\WebCrawlerForTestData.csproj", "{8D69FCD5-1277-4100-B3FB-E3A159F1DA5F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTaxCalculatorAPI", "TestTaxCalculatorAPI\TestTaxCalculatorAPI.csproj", "{A880885D-5C5B-4022-B21D-052FD2C614BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalculatorBlazorServer", "TaxCalculatorBlazorServer\TaxCalculatorBlazorServer.csproj", "{32279BF5-3AAC-408C-A2F5-58E2069F855A}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D5B5E6D2-B6B7-4135-BCF5-D1BC707D94CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +25,6 @@ Global
 		{80B94573-73AD-4FEB-AED6-DDD281B95FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80B94573-73AD-4FEB-AED6-DDD281B95FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80B94573-73AD-4FEB-AED6-DDD281B95FBB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F109770F-245D-46BA-AA13-05CD99364C92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F109770F-245D-46BA-AA13-05CD99364C92}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F109770F-245D-46BA-AA13-05CD99364C92}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F109770F-245D-46BA-AA13-05CD99364C92}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21C34FA7-B553-42FA-9E0D-57AA0EEA8BE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21C34FA7-B553-42FA-9E0D-57AA0EEA8BE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21C34FA7-B553-42FA-9E0D-57AA0EEA8BE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +37,14 @@ Global
 		{A880885D-5C5B-4022-B21D-052FD2C614BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A880885D-5C5B-4022-B21D-052FD2C614BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A880885D-5C5B-4022-B21D-052FD2C614BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32279BF5-3AAC-408C-A2F5-58E2069F855A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32279BF5-3AAC-408C-A2F5-58E2069F855A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32279BF5-3AAC-408C-A2F5-58E2069F855A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32279BF5-3AAC-408C-A2F5-58E2069F855A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5B5E6D2-B6B7-4135-BCF5-D1BC707D94CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B5E6D2-B6B7-4135-BCF5-D1BC707D94CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5B5E6D2-B6B7-4135-BCF5-D1BC707D94CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5B5E6D2-B6B7-4135-BCF5-D1BC707D94CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

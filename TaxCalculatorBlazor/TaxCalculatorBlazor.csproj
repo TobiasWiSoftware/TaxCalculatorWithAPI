@@ -7,18 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Pictures\gehalt.jpg" />
-    <Content Remove="wwwroot\Pictures\haushalt.jpg" />
-    <Content Remove="wwwroot\Pictures\logo.png" />
-    <Content Remove="wwwroot\Pictures\spartipps.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="wwwroot\Pictures\gehalt.jpg" />
-    <None Remove="wwwroot\Pictures\haushalt.jpg" />
-    <None Remove="wwwroot\Pictures\kredit.jpg" />
-    <None Remove="wwwroot\Pictures\logo.png" />
-    <None Remove="wwwroot\Pictures\spartipps.jpg" />
+    <Content Remove="wwwroot\Pictures\abfindungsrechner_angestellte_steuer.jpg" />
+    <Content Remove="wwwroot\Pictures\gehaltsrechner_arbeitnehmer.jpg" />
+    <Content Remove="wwwroot\Pictures\logo_steuerrechner_bruttonettorechner.png" />
+    <Content Remove="wwwroot\Pictures\nettorechner_selbstständige.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,21 +23,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="wwwroot\Pictures\gehalt.jpg">
+    <Resource Include="wwwroot\Pictures\gehaltsrechner_arbeitnehmer.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="wwwroot\Pictures\haushalt.jpg">
+    <Resource Include="wwwroot\Pictures\nettorechner_selbstständige.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="wwwroot\Pictures\kredit.jpg">
+    <Resource Include="wwwroot\Pictures\gehaltsrechner_beamte.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="wwwroot\Pictures\logo.png">
+    <Resource Include="wwwroot\Pictures\logo_steuerrechner_bruttonettorechner.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="wwwroot\Pictures\spartipps.jpg">
+    <Resource Include="wwwroot\Pictures\abfindungsrechner_angestellte_steuer.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\css\site.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

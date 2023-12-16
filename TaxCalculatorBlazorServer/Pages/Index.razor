@@ -1,13 +1,14 @@
 ﻿@page "/"
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@code {
+    private MarkupString additionalMetaTag = new MarkupString("<meta name=\"description\" content=\"Your page description\" />");
+}
+
+<HeadContent>
+    @additionalMetaTag
     <title>Onlinerechner Steuer Lohnsteuer Brutto Netto Rechner</title>
-    <meta name="description" content="Eine Onlineanwendung um die Steuer- und Sozialabgaben zu berechnen und als PDF auszugeben">
-</head>
+</HeadContent>
+
 <body>
     <div class="mycontainer">
         <h1 hidden>Startseite Landingpage der Onlinerechner</h1>
@@ -66,5 +67,3 @@
         </div>
     </div>
 </body>
-</html>
-```

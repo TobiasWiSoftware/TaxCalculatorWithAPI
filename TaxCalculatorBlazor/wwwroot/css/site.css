@@ -9,6 +9,11 @@
     nav{
         font-size: 1.3rem !important;
     }
+
+    h2 {
+        font-size: 4em;
+        font-weight: bold;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1000px) {
@@ -135,6 +140,23 @@ input {
     text-align: justify;
 }
 
+.mycontainer {
+    width: 90%;
+    height: 100%;
+}
+
+
+.row {
+    margin-top: 0% !important;
+    margin-bottom: 0% !important;
+}
+
+.myspace {
+    margin-top: -3em !important;
+    margin-left: 1.2em !important;
+    margin-right: -4em !important;
+}
+
 
 
 html, body {
@@ -142,9 +164,6 @@ html, body {
     font-size: 0.9em;
 }
 
-h1:focus {
-    outline: none;
-}
 
 a, .btn-link {
     color: #0071c1;
@@ -241,12 +260,11 @@ a, .btn-link {
 
 #central {
     font-family: 'Ink Free';
-    font-size: 1.5rem;
 }
 
 nav {
     text-transform: uppercase;
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: bold;
 }
 

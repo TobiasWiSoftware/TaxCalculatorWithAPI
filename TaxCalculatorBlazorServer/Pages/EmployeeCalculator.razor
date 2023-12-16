@@ -4,14 +4,16 @@
     DateTime d = DateTime.Now;
 }
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@code {
+    private MarkupString additionalMetaTag = new MarkupString("<meta name=\"description\" content=\"Seite des Rechners für Lohn Gehalt um die Sozialabgaben und Steuerabgaben zu ermitteln. Berechnung des Nettos Überweisungsbetrages. Mit Ausgabe der Lohnabrechnung als PDF\" />");
+}
+
+<HeadContent>
+    @additionalMetaTag
+
     <title>Onlinerechner Steuer Lohnsteuer Brutto Netto Rechner für Angestellte Überweisungsbetrag Auszahlung Gehalt Lohn</title>
-    <meta name="description" content="Seite des Rechners für Lohn Gehalt um die Sozialabgaben und Steuerabgaben zu ermitteln. Berechnung des Nettos Überweisungsbetrages. Mit Ausgabe der Lohnabrechnung als PDF">
-</head>
+</HeadContent>
+
 <body>
 
     @if (Input == null)
@@ -265,9 +267,7 @@
 
         </div>
 
-
     }
 </body>
-</html>
 
 
