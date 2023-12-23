@@ -1,7 +1,7 @@
 ﻿@page "/"
 
 @code {
-    private MarkupString additionalMetaTag = new MarkupString("<meta name=\"description\" content=\"Your page description\" />");
+    private MarkupString additionalMetaTag = new MarkupString("<meta name=\"description\" content=\"Landingpage für die Auswahl der verschiedenen Rechner.\" />");
 }
 
 <HeadContent>
@@ -17,8 +17,8 @@
             <!-- Gehaltsrechner Bild und Titel -->
             <div class="col-md-6 mb-0 text-center myspace">
                 <div class="card">
-                    <NavLink href="/EmployeeCalculator">
-                        <img src="Pictures/gehaltsrechner_arbeitnehmer.jpg" class="img-fluid">
+                    <NavLink href="/Angestelltenrechner">
+                        <img src="Pictures/gehaltsrechner_arbeitnehmer.jpg" class="img-fluid" alt="Angestellte" />
                         <div class="card-content">
                             <h2 class="mt-2 text-white">Angestellte</h2>
                         </div>
@@ -29,7 +29,7 @@
             <!-- Kreditrechner Bild und Titel -->
             <div class="col-md-6 mb-0 text-center myspace">
                 <div class="card">
-                    <NavLink href="/FederalCalculator">
+                    <NavLink href="/Beamtenrechner">
                         <img src="Pictures/gehaltsrechner_beamte.jpg" class="img-fluid" alt="Beamte">
                         <div class="card-content">
                             <h2 class="mt-2 text-white">Beamte</h2>
@@ -44,8 +44,8 @@
             <!-- Haushaltsrechner Bild und Titel -->
             <div class="col-md-6 mb-0 text-center myspace">
                 <div class="card">
-                    <NavLink href="/SelfemployeeCalculator">
-                        <img src="Pictures/nettorechner_selbstständige.jpg" class="img-fluid">
+                    <NavLink href="/Selbststaendigenrechner">
+                        <img src="Pictures/nettorechner_selbststaendige.jpg" class="img-fluid" alt="Selbständige">
                         <div class="card-content">
                             <h2 class="mt-2 text-white">Selbständige</h2>
                         </div>
@@ -56,7 +56,7 @@
             <!-- Spartipps Bild und Titel -->
             <div class="col-md-6 mb-0 text-center myspace">
                 <div class="card">
-                    <NavLink href="/CompensationCalculator">
+                    <NavLink href="/Abfindungsrechner">
                         <img src="Pictures/abfindungsrechner_angestellte_steuer.jpg" class="img-fluid" alt="Spartipps">
                         <div class="card-content">
                             <h2 class="mt-2 text-white">Angestellte (Abfindung)</h2>

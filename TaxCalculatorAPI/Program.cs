@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using TaxCalculatorAPI.Services;
@@ -7,19 +9,37 @@ using TaxCalculatorLibary.Models;
 
 internal class Program
 {
-    public Program(IWebHostEnvironment env)
-    {
-    }
-
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        string dataDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location.Substring(0, Assembly.GetEntryAssembly().Location.IndexOf("bin\\")));
+        var entryAssembly = Assembly.GetEntryAssembly();
+        if (entryAssembly == null)
+        {
+            throw new InvalidOperationException("Entry assembly not found.");
+        }
+
+        string entryAssemblyLocation = entryAssembly.Location;
+        int binIndex = entryAssemblyLocation.IndexOf("bin\\");
+
+        string dataDirectory;
+        if (binIndex >= 0)
+        {
+            string pathUntilBin = entryAssemblyLocation.Substring(0, binIndex);
+            dataDirectory = Path.GetDirectoryName(pathUntilBin) ?? throw new InvalidOperationException("Directory path for 'bin\\' not found.");
+        }
+        else
+        {
+            dataDirectory = Path.GetDirectoryName(entryAssemblyLocation) ?? throw new InvalidOperationException("Directory path for entry assembly not found.");
+        }
+
+       
 
         SocialSecurityRates.LoadDataFromJson(dataDirectory);
 
         TaxInformation.LoadDataFromJson(dataDirectory);
+
+        Tracking.DataPathInit(dataDirectory);
 
         // Add services to the container.
 
@@ -37,6 +57,17 @@ internal class Program
                       .AllowAnyMethod());
         });
 
+        builder.WebHost.ConfigureKestrel(serverOptions =>
+        {
+            serverOptions.ListenAnyIP(43721, listenOptions =>
+            {
+                listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                // Sie können hier auch SSL-Optionen konfigurieren, falls benötigt
+            });
+        });
+
+
+
         var app = builder.Build();
         app.UseCors("AllowAnyOrigin");
 
@@ -47,7 +78,7 @@ internal class Program
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
+        app.UseHttpsRedirection(); //dont need because api is not exposed to the internet
 
         app.UseAuthorization();
 

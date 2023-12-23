@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace TaxCalculatorBlazorServer.Pages
 {
-    public partial class CompensationCalculator : ComponentBase
+    public partial class Abfindungsrechner : ComponentBase
     {
     }
 }

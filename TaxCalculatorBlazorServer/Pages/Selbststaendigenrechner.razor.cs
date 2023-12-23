@@ -1,12 +1,10 @@
 ﻿using TaxCalculatorLibary.Models;
-using TaxCalculatorBlazorServer;
-using Microsoft.AspNetCore.Components;
 using TaxCalculatorBlazorServer.Services;
-
+using Microsoft.AspNetCore.Components;
 
 namespace TaxCalculatorBlazorServer.Pages
 {
-    public partial class FederalCalculator : ComponentBase
+    public partial class Selbststaendigenrechner : ComponentBase
     {
         [Inject]
         public IMainService? MainService { get; set; }
@@ -37,7 +35,7 @@ namespace TaxCalculatorBlazorServer.Pages
             WithPrivateInsurance = bool.Parse(e.Value.ToString());
             if (WithPrivateInsurance && Input.PrivateInsurance == 0)
             {
-                Input.PrivateInsurance = 300m;
+                Input.PrivateInsurance = 600m;
             }
             else if (!WithPrivateInsurance)
             {
@@ -95,4 +93,3 @@ namespace TaxCalculatorBlazorServer.Pages
         }
     }
 }
-

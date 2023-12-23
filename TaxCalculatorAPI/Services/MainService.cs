@@ -23,5 +23,10 @@ namespace TaxCalculatorAPI.Services
             Tuple<SocialSecurityRates, TaxInformation> tu = new Tuple<SocialSecurityRates, TaxInformation>(SocialSecurityRates.GetDataFromYear(year), TaxInformation.GetDataFromYear(year));
             return tu;
         }
+
+        public bool IncrementVisitCounter()
+        {
+            return Tracking.IncrementVisitCounter();
+        }
     }
 }

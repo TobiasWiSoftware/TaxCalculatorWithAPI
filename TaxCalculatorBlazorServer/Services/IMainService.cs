@@ -7,5 +7,7 @@ namespace TaxCalculatorBlazorServer.Services
         public Task<BillingOutput> Calculation(BillingInput billingInput);
 
         public Task<Tuple<SocialSecurityRates, TaxInformation>> FetchSocialAndTaxData(int year);
+
+        public Task<bool> IncrementVisitCounter();
     }
 }

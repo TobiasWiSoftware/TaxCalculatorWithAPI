@@ -33,5 +33,15 @@ namespace TaxCalculatorBlazorServer.Services
             throw new Exception("Fehler bei der API-Anfrage für FetchSocialAndTaxData");
         }
 
+        public async Task<bool> IncrementVisitCounter()
+        {
+            var response = await _httpClient.PostAsJsonAsync("api/Main/IncrementVisitCounter", "");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<bool>();
+            }
+            throw new Exception("Fehler bei der API-Anfrage für IncrementVisitCounter");
+        }
+
     }
 }

@@ -4,14 +4,13 @@ using Microsoft.AspNetCore.Components;
 
 namespace TaxCalculatorBlazorServer.Pages
 {
-    public partial class SelfemployeeCalculator : ComponentBase
+    public partial class Angestelltenrechner : ComponentBase
     {
         [Inject]
         public IMainService? MainService { get; set; }
         public BillingInput? Input { get; set; }
         public BillingOutput? Output { get; set; }
         public bool ChildrenTaxCreditDisplayed { get; set; } = false;
-        public bool WithPrivateInsurance { get; set; } = false;
         public string ChildTaxCreditString { get; set; }
         private bool IsCurrentYear(int year)
         {
@@ -29,21 +28,6 @@ namespace TaxCalculatorBlazorServer.Pages
 
             ChildrenTaxCreditDisplayed = Input.HasChildren ? true : false;
         }
-
-        private void HandlePrivateInsuranceChange(ChangeEventArgs e)
-        {
-            WithPrivateInsurance = bool.Parse(e.Value.ToString());
-            if (WithPrivateInsurance && Input.PrivateInsurance == 0)
-            {
-                Input.PrivateInsurance = 600m;
-            }
-            else if (!WithPrivateInsurance)
-            {
-                Input.PrivateInsurance = 0m;
-            }
-        }
-
-
         protected override async Task OnInitializedAsync()
         {
 
@@ -57,7 +41,7 @@ namespace TaxCalculatorBlazorServer.Pages
                 if (sr != null)
                 {
                     decimal socialAddition = sr.EmployeeInsuranceBonusRate + sr.EmployerInsuranceBonusRate;
-                    Input = new(DateTime.Now.Year, 3000m, true, 1, 30, false, 0.0m, "false", 0m, socialAddition, "false", "false");
+                    Input = new(DateTime.Now.Year, 3000m, true, 1, 30, false, 0.0m, "true", 0, socialAddition, "true", "true");
                 }
 
             }
@@ -86,7 +70,7 @@ namespace TaxCalculatorBlazorServer.Pages
                 {
                     if (!Input.BillingPeriodMonthly)
                     {
-                        Input.GrossIncome = Math.Round(Input.GrossIncome * 12, 2);
+                        Input.GrossIncome = Math.Round(Input.GrossIncome * 12,2);
                     }
                 }
             }

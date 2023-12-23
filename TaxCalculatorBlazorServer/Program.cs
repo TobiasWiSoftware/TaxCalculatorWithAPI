@@ -1,5 +1,4 @@
 using System.Reflection;
-using TaxCalculatorBlazorServer.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using TaxCalculatorBlazorServer.Services;
@@ -9,9 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7169") });
+
+builder.Services.AddScoped(sp => {
+    var apiUrl = builder.Configuration["API_URL"] ?? "http://localhost:43721";
+    return new HttpClient { BaseAddress = new Uri(apiUrl) };
+});
+
 builder.Services.AddScoped<IMainService, MainService>();
 
 var app = builder.Build();

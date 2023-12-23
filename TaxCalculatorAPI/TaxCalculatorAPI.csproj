@@ -10,11 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Data\TaxInformation.json" />
+    <None Remove="Data\TaxTable.csv" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Data\TaxInformation.json" />
+    <Content Include="Data\TaxTable.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

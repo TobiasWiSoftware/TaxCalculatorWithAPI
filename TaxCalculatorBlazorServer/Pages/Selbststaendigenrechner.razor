@@ -1,9 +1,14 @@
-﻿@page "/FederalCalculator"
+﻿@page "/Selbststaendigenrechner"
 
 
 @code {
-
+    private MarkupString additionalMetaTag = new MarkupString("<meta name=\"description\" content=\"Seite des Rechners für Sold um die Steuerabgaben für Selbstständige und Gewerbetreibende zu ermitteln. Berechnung des Nettos. Mit Ausgabe der Berechnung als PDF\" />");
 }
+<HeadContent>
+    @additionalMetaTag
+
+    <title>Onlinerechner Steuer Lohnsteuer Brutto Netto Rechner für Selbstständige und Gewerbetreibende</title>
+</HeadContent>
 
 @if (Input == null)
 {
@@ -11,8 +16,8 @@
 }
 else
 {
-
     <div class="center">
+        <h1 id="darkgreen-text">Onlinerechner für Selbstständige</h1>
         <div>
             <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="form-group">
                 <DataAnnotationsValidator />
@@ -33,7 +38,7 @@ else
                 <ValidationMessage For="@(() => Input.Year)" />
 
                 <!-- Firstname input -->
-                <label class="form-label">Gesamtsold</label>
+                <label class="form-label">Gewinn vor Steuer</label>
                 <input @bind="Input.GrossIncome" type="decimal" class="form-control" />
 
                 <ValidationMessage For="@(() => Input.Year)" />
@@ -135,7 +140,7 @@ else
 
                 @if (WithPrivateInsurance)
                 {
-                    <label class="form-label">Eigenbeitrag PKV</label>
+                    <label class="form-label">Beitrag PKV</label>
                     <input @bind="Input.PrivateInsurance" type="decimal" class="form-control" />
                 }
 
@@ -143,7 +148,6 @@ else
 
 
                 <!-- Submit button -->
-
 
             </EditForm>
         </div>
