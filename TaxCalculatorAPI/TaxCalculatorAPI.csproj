@@ -11,10 +11,14 @@
 
   <ItemGroup>
     <None Remove="Data\TaxTable.csv" />
+    <None Remove="Data\Tracker.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Data\TaxTable.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Tracker.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

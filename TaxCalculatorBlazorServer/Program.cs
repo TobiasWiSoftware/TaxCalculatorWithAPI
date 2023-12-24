@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.ResponseCompression;
 using TaxCalculatorBlazorServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,25 @@ builder.Services.AddScoped(sp => {
 
 builder.Services.AddScoped<IMainService, MainService>();
 
+// Add response compression services
+builder.Services.AddResponseCompression(options =>
+{
+    options.Providers.Add<GzipCompressionProvider>();
+    // Add other compression providers if needed
+    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
+    {
+        "text/plain",
+        "text/css",
+        "application/javascript",
+        "text/html",
+        "application/xml",
+        "text/xml",
+        "application/json",
+        "text/json",
+    });
+});
+
+
 var app = builder.Build();
 
 
@@ -30,6 +50,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseResponseCompression();
 
 app.UseStaticFiles();
 

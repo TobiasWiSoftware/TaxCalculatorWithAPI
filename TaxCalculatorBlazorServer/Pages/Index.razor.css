@@ -6,6 +6,7 @@
     cursor: pointer;
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Adjusted shadow for a softer effect */
+    min-height: 135px !important;
 }
 
     .card:hover {

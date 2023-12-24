@@ -9,11 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Pictures\abfindungsrechner_angestellte_steuer.jpg" />
-    <Content Remove="wwwroot\Pictures\gehaltsrechner_arbeitnehmer.jpg" />
-    <Content Remove="wwwroot\Pictures\gehaltsrechner_beamte.jpg" />
-    <Content Remove="wwwroot\Pictures\logo_steuerrechner_bruttonettorechner.png" />
-    <Content Remove="wwwroot\Pictures\nettorechner_selbststaendige.jpg" />
+    <Content Remove="wwwroot\Pictures\abfindungsrechner_angestellte_steuer.webp" />
+    <Content Remove="wwwroot\Pictures\gehaltsrechner_arbeitnehmer.webp" />
+    <Content Remove="wwwroot\Pictures\gehaltsrechner_beamte.webp" />
+    <Content Remove="wwwroot\Pictures\logo_steuerrechner_bruttonettorechner.webp" />
+    <Content Remove="wwwroot\Pictures\nettorechner_selbststaendige.webp" />
   </ItemGroup>
 
   <ItemGroup>
@@ -99,20 +99,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="wwwroot\Pictures\abfindungsrechner_angestellte_steuer.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Resource Include="wwwroot\Pictures\abfindungsrechner_angestellte_steuer.webp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="wwwroot\Pictures\gehaltsrechner_arbeitnehmer.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Resource Include="wwwroot\Pictures\gehaltsrechner_arbeitnehmer.webp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="wwwroot\Pictures\gehaltsrechner_beamte.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Resource Include="wwwroot\Pictures\gehaltsrechner_beamte.webp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="wwwroot\Pictures\logo_steuerrechner_bruttonettorechner.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Resource Include="wwwroot\Pictures\logo_steuerrechner_bruttonettorechner.webp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="wwwroot\Pictures\nettorechner_selbststaendige.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Resource Include="wwwroot\Pictures\nettorechner_selbststaendige.webp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
