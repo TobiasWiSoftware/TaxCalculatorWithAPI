@@ -2,11 +2,12 @@
     position: relative;
     overflow: hidden;
     border-radius: 12px; /* Increased border-radius for a softer look */
-    margin: 30px; /* Increased margin for better spacing */
+    margin: 0.8em; /* Increased margin for better spacing */
     cursor: pointer;
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Adjusted shadow for a softer effect */
     min-height: 135px !important;
+    font-size: 0.5em;
 }
 
     .card:hover {
@@ -34,7 +35,6 @@
 }
 
 .card h2 {
-    font-size: 1.8em; /* Increased font size for better visibility */
     margin-bottom: 12px; /* Adjusted margin for better spacing */
     text-decoration: none;
     letter-spacing: 0.2em;

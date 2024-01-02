@@ -161,51 +161,51 @@ else
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Unverb. Berechnung</th>
-                            <th scope="col" class="right">Monat</th>
-                            <th scope="col" class="right">Jahr</th>
+                            <th scope="col" class="px-1">Unverb. Berechnung</th>
+                            <th scope="col" class="right px-1">Monat</th>
+                            <th scope="col" class="right px-1">Jahr</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">Bruttogehalt</th>
-                            <td class="right">@Output.BillingInput.GrossIncome.ToString("N2")</td>
-                            <td class="right">@Math.Round(Output.BillingInput.GrossIncome * 12, 2).ToString("N2")</td>
+                            <th scope="row" class="px-1">Bruttogehalt</th>
+                            <td class="right px-1">@Output.BillingInput.GrossIncome.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.BillingInput.GrossIncome * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <td scope="row">Lohnsteuer</td>
-                            <td class="right">@Output.TaxSum.ToString("N2")</td>
-                            <td class="right">@Math.Round(Output.TaxSum * 12, 2).ToString("N2")</td>
+                            <td scope="row" class="px-1">Lohnsteuer</td>
+                            <td class="right px-1">@Output.TaxSum.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.TaxSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <td scope="row">Kirchensteuer</td>
-                            <td class="right">@Output.ChurchTaxSum.ToString("N2")</td>
-                            <td class="right">@Math.Round(Output.SolidaryTaxSum * 12, 2).ToString("N2")</td>
+                            <td scope="row" class="px-1">Kirchensteuer</td>
+                            <td class="right px-1">@Output.ChurchTaxSum.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.ChurchTaxSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <td scope="row">Solidaritätszuschlag</td>
-                            <td class="right">@Output.SolidaryTaxSum.ToString("N2")</td>
-                            <td class="right">@Math.Round(Output.SolidaryTaxSum * 12, 2).ToString("N2")</td>
+                            <td scope="row" class="px-1">Solidaritätszuschlag</td>
+                            <td class="right px-1">@Output.SolidaryTaxSum.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.SolidaryTaxSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <th scope="row">Steuern</th>
-                            <td class="right">@Output.TotalTaxSum.ToString("N2")</td>
-                            <td class="right">@Math.Round(Output.TotalTaxSum * 12, 2).ToString("N2")</td>
+                            <th scope="row" class="px-1">Steuern</th>
+                            <td class="right px-1">@Output.TotalTaxSum.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.TotalTaxSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <td scope="row">Krankenversicherung</td>
-                            <td class="right">@Output.InsuranceSum.ToString("N2")</td>
-                            <td class="right">@Math.Round(Output.InsuranceSum * 12, 2).ToString("N2")</td>
+                            <td scope="row" class="px-1">Krankenversicherung</td>
+                            <td class="right px-1">@Output.InsuranceSum.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.InsuranceSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <th scope="row">Sozialabgaben</th>
-                            <td class="right">@Output.InsurancesTotal.ToString("N2")</td>
-                            <td class="right">@Math.Round(Output.InsurancesTotal * 12, 2).ToString("N2")</td>
+                            <th scope="row" class="px-1">Sozialabgaben</th>
+                            <td class="right px-1">@Output.InsurancesTotal.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.InsurancesTotal * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <th scope="row">Netto</th>
-                            <th scope="row" class="right">@Output.Transferamount.ToString("N2")</th>
-                            <th scope="row" class="right">@Math.Round(Output.Transferamount * 12, 2).ToString("N2")</th>
+                            <th scope="row" class="px-1">Netto</th>
+                            <th scope="row" class="right px-1">@Output.Transferamount.ToString("N2")</th>
+                            <th scope="row" class="right px-1">@Math.Round(Output.Transferamount * 12, 2).ToString("N2")</th>
                         </tr>
                     </tbody>
                 </table>

@@ -18,7 +18,10 @@ namespace TaxCalculatorBlazorServer.Pages
         }
         private void HandleYearChange(int year)
         {
-            Input.Year = year;
+            if (Input != null)
+            {
+                Input.Year = year;
+            }
         }
 
         private void HandleChurchTaxChange() => Input.InChurch = Input.InChurch == true ? false : true;
@@ -33,7 +36,7 @@ namespace TaxCalculatorBlazorServer.Pages
 
             if (MainService != null)
             {
-                Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(2023);
+                Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(Input != null ? Input.Year : DateTime.Now.Year);
 
                 SocialSecurityRates? sr = tuple.Item1;
                 TaxInformation? tr = tuple.Item2;
@@ -70,7 +73,7 @@ namespace TaxCalculatorBlazorServer.Pages
                 {
                     if (!Input.BillingPeriodMonthly)
                     {
-                        Input.GrossIncome = Math.Round(Input.GrossIncome * 12,2);
+                        Input.GrossIncome = Math.Round(Input.GrossIncome * 12, 2);
                     }
                 }
             }

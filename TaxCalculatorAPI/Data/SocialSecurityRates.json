@@ -24,8 +24,8 @@
     "Year": 2024,
     "EmployeeInsuranceRate": 7.3,
     "EmployerInsuranceRate": 7.3,
-    "EmployeeInsuranceBonusRate": 0.8,
-    "EmployerInsuranceBonusRate": 0.8,
+    "EmployeeInsuranceBonusRate": 0.85,
+    "EmployerInsuranceBonusRate": 0.85,
     "EmployeeInsuranceCareRate": 1.7,
     "EmployeeInsuranceCareChildFreeRate": 0.60,
     "EmployeeInsuranceCareChildDiscountRate": 0.25,
@@ -38,6 +38,6 @@
     "EmployerUnemploymentRate": 1.3,
 
     "InsuranceMaxGross": 62100,
-    "PensionAndUnimploymentMaxGross": 89400 
+    "PensionAndUnimploymentMaxGross": 90600 
   }
 ]

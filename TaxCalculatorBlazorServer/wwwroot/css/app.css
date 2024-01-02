@@ -2,28 +2,26 @@
 
 
 @media(min-width: 1000px) {
-    div.center {
-        font-size: 2.2rem !important;
+    html {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 1.5em !important;
     }
 
     nav {
-        font-size: 1.4rem !important;
+        font-size: 1.2rem !important;
     }
 
     #central {
-        font-size: 1.6rem !important;
+        font-size: 1.4rem !important;
     }
 
-    h2 {
-        font-size: 4em;
-        font-weight: bold;
-    }
+   
 }
 
 @media (min-width: 769px) and (max-width: 1000px) {
-
-    div.center {
-        font-size: 2.0rem !important;
+    html {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 1.2em;
     }
 }
 
@@ -60,14 +58,16 @@
         height: 50px !important;
         width: 50px !important;
     }
+
 }
 
 h1 {
     margin-bottom: 2rem;
 }
 
-table {
-    margin-bottom: 0px !important;
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 button {
@@ -136,7 +136,7 @@ input {
 
 .output-container {
     display: grid;
-    padding: 0.5em;
+    padding: 0.25rem;
     background-color: #fff; /* Optional: sets the background of the entire container */
     border-radius: 8px; /* Rounded corners for the container */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
@@ -149,27 +149,26 @@ input {
 }
 
 .mycontainer {
-    width: 90%;
-    height: 100%;
+    margin-left: 3% !important;
+    margin-right: 3% !important;
 }
 
 
-.row {
+.myrow {
     margin-top: 0% !important;
     margin-bottom: 0% !important;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.myspace {
-    margin-top: -3em !important;
-    margin-left: 1.2em !important;
-    margin-right: -4em !important;
-}
-
-
-
-html, body {
+html {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 1em;
+}
+
+footer {
+    padding: 20px 0;
+    text-align: center;
 }
 
 
@@ -267,8 +266,10 @@ a, .btn-link {
 
 
 #central {
-    font-family: 'Ink Free';
-    font-size: 1.1rem;
+    font-family: 'Indie Flower';
+    font-style: italic;
+    font-size: 1.0rem;
+    margin-right: 0.2rem;
 }
 
 nav {
