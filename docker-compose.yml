@@ -41,4 +41,3 @@ services:
 
 networks:
   taxnetwork:
-    internal: true  

@@ -2,11 +2,32 @@
 
 ## 1. Installation Steps:
 
+### SSH-Connect from PS
+
+- **Command PS:**       `ssh-keygen -t rsa -b 4096 -C "IhreEmail@example.com"`
+
+- **Command Server:**   `cd .ssh`
+
+- **Command Server:**   `nano authorized_keys`
+
+- **Command PS:**       `Set-Service -Name ssh-agent -StartupType Manual`
+
+- **Command PS:**       `Start-Service ssh-agent`
+
+- **Command PS:**       `ssh-add mein_ssh_schluessel`
+
+- **Command PS:**       `ssh user@ip`
+
+- **It will find the right connection automatically by the ssh-agent**
+
 ### Transfer
-- **Command:** `scp TaxCalculatorWithAPI.zip <user>@85.215.108.141:<Directory>`
+- **Command:** `scp TaxCalculatorWithAPI.zip <user>@<ip>:<Directory>`
 
 ### Connect
-- **Command:** `ssh <user>@85.215.108.141`
+- **Command:** `ssh <user>@<ip>`
+
+### Stop last version
+- **Command:** `<user>@localhost:~/<dir>/TaxCalculatorWithAPI# docker-compose down`
 
 ### Build
 - **Command:** `<user>@localhost:~/<dir>/TaxCalculatorWithAPI# docker-compose build --no-cache`
