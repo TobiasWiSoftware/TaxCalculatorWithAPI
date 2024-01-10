@@ -7,11 +7,15 @@ services:
       context: .
       dockerfile: TaxCalculatorAPI/Dockerfile
     volumes:
-      - C:\Users\tobia\Desktop\SSL\cert.pem:/https/cert.pem
-      - C:\Users\tobia\Desktop\SSL\key.pem:/https/key.pem
+      - ./SSL/cert.pem:/https/cert.pem
+      - ./SSL/key.pem:/https/key.pem
+      # - /root/ssl/cert.cer:/https/cert.cer
+      # - /root/ssl/key.key:/https/key.key
     environment:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.pem
       - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/key.pem
+      # - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.cer
+      # - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/key.key
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:43721
     networks:
@@ -27,8 +31,8 @@ services:
       - "443:443"
       - "80:80"
     volumes:
-      - ..\SSL\cert.pem:/https/cert.pem
-      - ..\SSL\key.pem:/https/key.pem
+      - ./SSL/cert.pem:/https/cert.pem
+      - ./SSL/key.pem:/https/key.pem
       # - /root/ssl/cert.cer:/https/cert.cer
       # - /root/ssl/key.key:/https/key.key
     environment:
