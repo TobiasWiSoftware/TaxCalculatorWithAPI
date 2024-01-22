@@ -8,6 +8,6 @@ namespace TaxCalculatorBlazorServer.Services
 
         public Task<Tuple<SocialSecurityRates, TaxInformation>> FetchSocialAndTaxData(int year);
 
-        public Task<bool> IncrementVisitCounter();
+        public Task<int> IncrementVisitCounter();
     }
 }

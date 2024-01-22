@@ -14,36 +14,52 @@ namespace TaxCalculatorLibary.Models
         {
             _path = Path.Combine(s, "Data", "Tracker.txt");
         }
-        public static bool IncrementVisitCounter()
+        public static int IncrementVisitCounter()
         {
+            int i = -1;
             try
             {
-                int i = 0;
-                try
+                using (StreamReader r = new(_path))
                 {
-                    using (StreamReader r = new(_path))
+                    string? str = r.ReadLine();
+                    if (str != null)
                     {
-                        string? str = r.ReadLine();
-                        if (str != null)
-                        {
-                            i = int.Parse(str);
-                        }
+                        i = int.Parse(str);
                     }
                 }
-                catch (Exception)
-                {
-                    i = 0;
-                }
-                using (StreamWriter w = new(_path, false))
-                {
-                    w.WriteLine(++i);
-                }
-                return true;
             }
             catch (Exception)
             {
-                return false;
+                i = 0;
             }
+            using (StreamWriter w = new(_path, false))
+            {
+                w.WriteLine(++i);
+            }
+
+
+            return i;
+        }
+        public static int GetVisitCounter()
+        {
+            int i = -1;
+
+            try
+            {
+                using (StreamReader r = new(_path))
+                {
+                    string? str = r.ReadLine();
+                    if (str != null)
+                    {
+                        i = int.Parse(str);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            return i;
         }
     }
 }

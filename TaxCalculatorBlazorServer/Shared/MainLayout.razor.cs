@@ -8,15 +8,27 @@ namespace TaxCalculatorBlazorServer.Shared
     {
         [Inject]
         public IMainService? MainService { get; set; }
-        public bool IsFirstVisit { get; set; } = true;
+        public int FirstVisitCounter { get; set; } = -1;
 
         protected override async Task OnInitializedAsync()
         {
 
-            if (MainService != null && IsFirstVisit)
+            
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
             {
-                await MainService.IncrementVisitCounter();
+                if (MainService != null && FirstVisitCounter == -1)
+                {
+                    FirstVisitCounter = await MainService.IncrementVisitCounter();
+                }
+
+                // For re-rendering the component bec. the wrong value is in the visit counter
+                StateHasChanged();
             }
         }
+
     }
 }

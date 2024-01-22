@@ -7,16 +7,13 @@ services:
       context: .
       dockerfile: TaxCalculatorAPI/Dockerfile
     volumes:
-      - ./SSL/myserver.crt:/https/myserver.crt
-      - ./SSL/myserver.key:/https/myserver.key
-      # - /root/ssl/cert.cer:/https/cert.cer
-      # - /root/ssl/key.key:/https/key.key
+      - /root/ssl/cert.cer:/https/cert.cer
+      - /root/ssl/key.key:/https/key.key
+      - /root/ssl/request.csr:/https/request.csr
     environment:
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/myserver.crt
-      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/myserver.key
-      # - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.cer
-      # - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/key.key
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.cer
+      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/key.key
+      - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:43721
     networks:
         - taxnetwork
@@ -31,19 +28,16 @@ services:
       - "443:443"
       - "80:80"
     volumes:
-      - ./SSL/myserver.crt:/https/myserver.crt
-      - ./SSL/myserver.key:/https/myserver.key
-      # - /root/ssl/cert.cer:/https/cert.cer
-      # - /root/ssl/key.key:/https/key.key
+      - /root/ssl/cert.cer:/https/cert.cer
+      - /root/ssl/key.key:/https/key.key
+      - /root/ssl/request.csr:/https/request.csr
     environment:
       - ASPNETCORE_URLS=https://+443
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/myserver.crt
-      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/myserver.key
-      # - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.cer
-      # - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/key.key
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.cer
+      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/key.key
       # This line only when haveing a password protected certificate
       # - ASPNETCORE_Kestrel__Certificates__Default__Password=IHR_PASSWORT
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
       - API_URL=http://taxcalculatorapi:43721
     networks:
         - taxnetwork

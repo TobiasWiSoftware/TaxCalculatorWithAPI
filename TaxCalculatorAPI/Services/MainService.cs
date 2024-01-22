@@ -24,7 +24,7 @@ namespace TaxCalculatorAPI.Services
             return tu;
         }
 
-        public bool IncrementVisitCounter()
+        public int IncrementVisitCounter()
         {
             return Tracking.IncrementVisitCounter();
         }

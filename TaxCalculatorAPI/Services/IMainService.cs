@@ -6,6 +6,6 @@ namespace TaxCalculatorAPI.Services
     {
         BillingOutput Calculation(BillingInput billingInput);
         Tuple<SocialSecurityRates, TaxInformation> FetchSocialAndTaxData(int year);
-        bool IncrementVisitCounter();
+        int IncrementVisitCounter();
     }
 }
