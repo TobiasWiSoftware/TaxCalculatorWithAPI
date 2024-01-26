@@ -26,7 +26,7 @@ namespace TaxCalculatorBlazorServer.Services
         public async Task<Tuple<SocialSecurityRates, TaxInformation>> FetchSocialAndTaxData(int year)
         {
             var response = await _httpClient.PostAsJsonAsync<int>("api/Main/TransferInput", year);
-            if (response.IsSuccessStatusCode)
+            if (response != null && response.Content != null && response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<Tuple<SocialSecurityRates, TaxInformation>>();
             }

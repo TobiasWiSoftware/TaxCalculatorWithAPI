@@ -1,4 +1,5 @@
 ﻿@page "/Angestelltenrechner"
+@inject IJSRuntime jsRuntime
 
 
 
@@ -21,7 +22,7 @@ else
 {
     <div class="center">
         <h1 id="red-text">Onlinerechner für Angestellte</h1>
-        <div>
+        <div class="hideWhenPrint">
             <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="form-group">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
@@ -163,7 +164,8 @@ else
                 }
 
                 <label class="form-label">Krankenkassenzusatzbeitrag in %</label>
-                <input @bind="Input.InsuranceAdditionTotal" type="decimal" class="form-control" />
+                <input @bind-value="Input.InsuranceAdditionTotal" type="decimal" class="form-control" />
+
 
                 <label class="form-label">Rentenversicherung:</label>
                 <select @bind="Input.HasFederalPension" name="Pension" class="form-control">
@@ -258,7 +260,7 @@ else
                 </p>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-sm red">Drucken (Aktuell nicht verfügbar)</button>
+            <button type="submit" @onclick="Print" class="btn btn-primary btn-sm red hideWhenPrint">Drucken</button>
 
         }
 

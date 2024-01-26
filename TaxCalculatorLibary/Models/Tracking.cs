@@ -8,8 +8,10 @@ namespace TaxCalculatorLibary.Models
 {
     public class Tracking
     {
-        private static string _path = string.Empty;
+        public int Id { get; set; }
+        public int VisitCounter { get; set; }
 
+        private static string _path = string.Empty;
         public static void DataPathInit(String s)
         {
             _path = Path.Combine(s, "Data", "Tracker.txt");

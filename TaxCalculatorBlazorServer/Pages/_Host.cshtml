@@ -3,6 +3,7 @@
 @namespace TaxCalculatorBlazorServer.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -18,6 +19,15 @@
     <meta name="description" content="Eine Onlineanwendung um die Steuer- und Sozialabgaben zu berechnen und als PDF auszugeben">
     <HeadOutlet />
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        function myPrint() {
+            $(".hideWhenPrint").hide();
+            window.print();
+            $(".hideWhenPrint").show();
+        }
+    </script>
+    <script src="_framework/blazor.server.js" async></script>
 </head>
 <body>
     <component type="typeof(App)" render-mode="ServerPrerendered" />
@@ -32,7 +42,5 @@
         <a href="" class="reload">Reload</a>
         <a href="" class="dismiss">🗙</a>
     </div>
-
-    <script src="_framework/blazor.server.js" async></script>
 </body>
 </html>

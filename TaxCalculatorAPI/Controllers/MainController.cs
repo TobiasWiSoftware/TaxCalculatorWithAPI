@@ -9,16 +9,17 @@ namespace TaxCalculatorAPI.Controllers
     [ApiController]
     public class MainController : ControllerBase
     {
-        private readonly IMainService _mainService;
-        public MainController(IMainService mainService)
+        private readonly IMainControllerService _mainService;
+        public MainController(IMainControllerService mainService)
         {
             _mainService = mainService;
         }
 
         [HttpPost("TransferAmount")]
-        public ActionResult<BillingOutput> TransferAmount(BillingInput billingInput)
+        public async Task<ActionResult<BillingOutput>> TransferAmount(BillingInput billingInput)
         {
-            return Ok(_mainService.Calculation(billingInput));
+            var result = await _mainService.Calculation(billingInput);
+            return Ok(result);
         }
         [HttpPost("TransferInput")]
         public ActionResult<Tuple<SocialSecurityRates, TaxInformation>> TransferInput([FromBody]int year)

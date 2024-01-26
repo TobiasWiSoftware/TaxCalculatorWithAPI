@@ -11,6 +11,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 
+
 builder.Services.AddScoped(sp => {
     var apiUrl = builder.Configuration["API_URL"] ?? "http://localhost:43721";
     return new HttpClient { BaseAddress = new Uri(apiUrl) };

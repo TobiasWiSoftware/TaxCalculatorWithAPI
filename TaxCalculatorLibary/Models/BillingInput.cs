@@ -37,10 +37,10 @@ namespace TaxCalculatorLibary.Models
         [Required(ErrorMessage = "Eingabe ist falsch")]
         public decimal InsuranceAdditionTotal { get; set; }
         [Required(ErrorMessage = "Eingabe ist falsch")]
-        public string HasFederalPension { get; set; }
+        public string HasFederalPension { get; set; } = "false";
 
         [Required(ErrorMessage = "Eingabe ist falsch")]
-        public string HasFederalUnimployment { get; set; }
+        public string HasFederalUnimployment { get; set; } = "false";
 
         public BillingInput()
         {

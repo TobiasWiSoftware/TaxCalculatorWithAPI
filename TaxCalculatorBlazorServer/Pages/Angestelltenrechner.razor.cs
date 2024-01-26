@@ -1,6 +1,8 @@
 ﻿using TaxCalculatorLibary.Models;
 using TaxCalculatorBlazorServer.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using System.Security.Principal;
 
 namespace TaxCalculatorBlazorServer.Pages
 {
@@ -8,19 +10,22 @@ namespace TaxCalculatorBlazorServer.Pages
     {
         [Inject]
         public IMainService? MainService { get; set; }
-        public BillingInput? Input { get; set; }
+        public BillingInput Input { get; set; } = new();
         public BillingOutput? Output { get; set; }
         public bool ChildrenTaxCreditDisplayed { get; set; } = false;
-        public string ChildTaxCreditString { get; set; }
+        public string ChildTaxCreditString { get; set; } = "0";
         private bool IsCurrentYear(int year)
         {
             return DateTime.Now.Year == year;
         }
-        private void HandleYearChange(int year)
+        private async void HandleYearChange(int year)
         {
             if (Input != null)
             {
                 Input.Year = year;
+                Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(Input.Year);
+                Input.InsuranceAdditionTotal = Math.Round(tuple.Item1.EmployeeInsuranceBonusRate + tuple.Item1.EmployerInsuranceBonusRate,2);
+                StateHasChanged();
             }
         }
 
@@ -36,20 +41,24 @@ namespace TaxCalculatorBlazorServer.Pages
 
             if (MainService != null)
             {
-                Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(Input != null ? Input.Year : DateTime.Now.Year);
+                Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(DateTime.Now.Year);
 
                 SocialSecurityRates? sr = tuple.Item1;
                 TaxInformation? tr = tuple.Item2;
 
+                if (Input.Year == 0)
+                {
+                    Input.Year = DateTime.Now.Year;
+                }
+
                 if (sr != null)
                 {
-                    decimal socialAddition = sr.EmployeeInsuranceBonusRate + sr.EmployerInsuranceBonusRate;
-                    Input = new(DateTime.Now.Year, 3000m, true, 1, 30, false, 0.0m, "true", 0, socialAddition, "true", "true");
+                    decimal socialAddition = Math.Round(sr.EmployeeInsuranceBonusRate + sr.EmployerInsuranceBonusRate,2);
+                    Input = new(Input.Year, 3000m, true, 1, 30, false, 0.0m, "true", 0, socialAddition, "true", "true");
                 }
 
             }
         }
-
         public async Task CalculateTax()
         {
             if (MainService != null && Input != null)
@@ -77,6 +86,10 @@ namespace TaxCalculatorBlazorServer.Pages
                     }
                 }
             }
+        }
+        public async Task Print()
+        {
+            await jsRuntime.InvokeVoidAsync("myPrint");
         }
     }
 }

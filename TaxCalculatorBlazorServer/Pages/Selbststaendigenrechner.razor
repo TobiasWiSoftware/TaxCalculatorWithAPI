@@ -1,4 +1,5 @@
 ﻿@page "/Selbststaendigenrechner"
+@inject IJSRuntime jsRuntime
 
 
 @code {
@@ -18,7 +19,7 @@ else
 {
     <div class="center">
         <h1 id="darkgreen-text">Onlinerechner für Selbstständige</h1>
-        <div>
+        <div class="hideWhenPrint">
             <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="form-group">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
@@ -215,7 +216,7 @@ else
                 </p>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-sm red">Drucken (Aktuell nicht verfügbar)</button>
+            <button type="submit" @onclick="Print" class="btn btn-primary btn-sm red hideWhenPrint">Drucken</button>
 
         }
 

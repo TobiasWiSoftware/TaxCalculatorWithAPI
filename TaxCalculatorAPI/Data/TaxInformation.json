@@ -11,138 +11,138 @@
     "SolidaryTaxRate": 5.50,
     "ChurchTaxRate": 9.00,
 
-    "TaxLevels": [
+    "TaxInformationSteps": [
       {
-        "Item1": 0,
-        "Item2": 0
+        "StepAmount": 0,
+        "TaxAmount": 0
       },
       {
-        "Item1": 100,
-        "Item2": 13
+        "StepAmount": 100,
+        "TaxAmount": 13
       },
       {
-        "Item1": 200,
-        "Item2": 28
+        "StepAmount": 200,
+        "TaxAmount": 28
       },
       {
-        "Item1": 400,
-        "Item2": 57
+        "StepAmount": 400,
+        "TaxAmount": 57
       },
       {
-        "Item1": 800,
-        "Item2": 118
+        "StepAmount": 800,
+        "TaxAmount": 118
       },
       {
-        "Item1": 1500,
-        "Item2": 232
+        "StepAmount": 1500,
+        "TaxAmount": 232
       },
       {
-        "Item1": 2000,
-        "Item2": 319
+        "StepAmount": 2000,
+        "TaxAmount": 319
       },
       {
-        "Item1": 2500,
-        "Item2": 411
+        "StepAmount": 2500,
+        "TaxAmount": 411
       },
       {
-        "Item1": 3000,
-        "Item2": 508
+        "StepAmount": 3000,
+        "TaxAmount": 508
       },
       {
-        "Item1": 3500,
-        "Item2": 609
+        "StepAmount": 3500,
+        "TaxAmount": 609
       },
       {
-        "Item1": 4000,
-        "Item2": 716
+        "StepAmount": 4000,
+        "TaxAmount": 716
       },
       {
-        "Item1": 4500,
-        "Item2": 828
+        "StepAmount": 4500,
+        "TaxAmount": 828
       },
       {
-        "Item1": 5000,
-        "Item2": 944
+        "StepAmount": 5000,
+        "TaxAmount": 944
       },
       {
-        "Item1": 6000,
-        "Item2": 1186
+        "StepAmount": 6000,
+        "TaxAmount": 1186
       },
       {
-        "Item1": 7000,
-        "Item2": 1431
+        "StepAmount": 7000,
+        "TaxAmount": 1431
       },
       {
-        "Item1": 8000,
-        "Item2": 1680
+        "StepAmount": 8000,
+        "TaxAmount": 1680
       },
       {
-        "Item1": 9000,
-        "Item2": 1932
+        "StepAmount": 9000,
+        "TaxAmount": 1932
       },
       {
-        "Item1": 10000,
-        "Item2": 2189
+        "StepAmount": 10000,
+        "TaxAmount": 2189
       },
       {
-        "Item1": 12000,
-        "Item2": 2714
+        "StepAmount": 12000,
+        "TaxAmount": 2714
       },
       {
-        "Item1": 14000,
-        "Item2": 3254
+        "StepAmount": 14000,
+        "TaxAmount": 3254
       },
       {
-        "Item1": 16000,
-        "Item2": 3810
+        "StepAmount": 16000,
+        "TaxAmount": 3810
       },
       {
-        "Item1": 16000,
-        "Item2": 3810
+        "StepAmount": 16000,
+        "TaxAmount": 3810
       },
       {
-        "Item1": 18000,
-        "Item2": 4381
+        "StepAmount": 18000,
+        "TaxAmount": 4381
       },
       {
-        "Item1": 20000,
-        "Item2": 4968
+        "StepAmount": 20000,
+        "TaxAmount": 4968
       },
       {
-        "Item1": 25000,
-        "Item2": 6502
+        "StepAmount": 25000,
+        "TaxAmount": 6502
       },
       {
-        "Item1": 30000,
-        "Item2": 8132
+        "StepAmount": 30000,
+        "TaxAmount": 8132
       },
       {
-        "Item1": 35000,
-        "Item2": 9858
+        "StepAmount": 35000,
+        "TaxAmount": 9858
       },
       {
-        "Item1": 40000,
-        "Item2": 11942
+        "StepAmount": 40000,
+        "TaxAmount": 11942
       },
       {
-        "Item1": 45000,
-        "Item2": 13874
+        "StepAmount": 45000,
+        "TaxAmount": 13874
       },
       {
-        "Item1": 50000,
-        "Item2": 15903
+        "StepAmount": 50000,
+        "TaxAmount": 15903
       },
       {
-        "Item1": 60000,
-        "Item2": 20100
+        "StepAmount": 60000,
+        "TaxAmount": 20100
       },
       {
-        "Item1": 70000,
-        "Item2": 24300
+        "StepAmount": 70000,
+        "TaxAmount": 24300
       },
       {
-        "Item1": 266918,
-        "Item2": 106713
+        "StepAmount": 266918,
+        "TaxAmount": 106713
       }
     ]
   },
@@ -158,138 +158,138 @@
     "SolidaryTaxRate": 5.50,
     "ChurchTaxRate": 9.00,
 
-    "TaxLevels": [
+    "TaxInformationSteps": [
       {
-        "Item1": 0,
-        "Item2": 0
+        "StepAmount": 0,
+        "TaxAmount": 0
       },
       {
-        "Item1": 100,
-        "Item2": 13
+        "StepAmount": 100,
+        "TaxAmount": 13
       },
       {
-        "Item1": 200,
-        "Item2": 28
+        "StepAmount": 200,
+        "TaxAmount": 28
       },
       {
-        "Item1": 400,
-        "Item2": 57
+        "StepAmount": 400,
+        "TaxAmount": 57
       },
       {
-        "Item1": 800,
-        "Item2": 118
+        "StepAmount": 800,
+        "TaxAmount": 118
       },
       {
-        "Item1": 1500,
-        "Item2": 232
+        "StepAmount": 1500,
+        "TaxAmount": 232
       },
       {
-        "Item1": 2000,
-        "Item2": 319
+        "StepAmount": 2000,
+        "TaxAmount": 319
       },
       {
-        "Item1": 2500,
-        "Item2": 411
+        "StepAmount": 2500,
+        "TaxAmount": 411
       },
       {
-        "Item1": 3000,
-        "Item2": 508
+        "StepAmount": 3000,
+        "TaxAmount": 508
       },
       {
-        "Item1": 3500,
-        "Item2": 609
+        "StepAmount": 3500,
+        "TaxAmount": 609
       },
       {
-        "Item1": 4000,
-        "Item2": 716
+        "StepAmount": 4000,
+        "TaxAmount": 716
       },
       {
-        "Item1": 4500,
-        "Item2": 828
+        "StepAmount": 4500,
+        "TaxAmount": 828
       },
       {
-        "Item1": 5000,
-        "Item2": 944
+        "StepAmount": 5000,
+        "TaxAmount": 944
       },
       {
-        "Item1": 6000,
-        "Item2": 1186
+        "StepAmount": 6000,
+        "TaxAmount": 1186
       },
       {
-        "Item1": 7000,
-        "Item2": 1431
+        "StepAmount": 7000,
+        "TaxAmount": 1431
       },
       {
-        "Item1": 8000,
-        "Item2": 1680
+        "StepAmount": 8000,
+        "TaxAmount": 1680
       },
       {
-        "Item1": 9000,
-        "Item2": 1932
+        "StepAmount": 9000,
+        "TaxAmount": 1932
       },
       {
-        "Item1": 10000,
-        "Item2": 2189
+        "StepAmount": 10000,
+        "TaxAmount": 2189
       },
       {
-        "Item1": 12000,
-        "Item2": 2714
+        "StepAmount": 12000,
+        "TaxAmount": 2714
       },
       {
-        "Item1": 14000,
-        "Item2": 3254
+        "StepAmount": 14000,
+        "TaxAmount": 3254
       },
       {
-        "Item1": 16000,
-        "Item2": 3810
+        "StepAmount": 16000,
+        "TaxAmount": 3810
       },
       {
-        "Item1": 16000,
-        "Item2": 3810
+        "StepAmount": 16000,
+        "TaxAmount": 3810
       },
       {
-        "Item1": 18000,
-        "Item2": 4381
+        "StepAmount": 18000,
+        "TaxAmount": 4381
       },
       {
-        "Item1": 20000,
-        "Item2": 4968
+        "StepAmount": 20000,
+        "TaxAmount": 4968
       },
       {
-        "Item1": 25000,
-        "Item2": 6502
+        "StepAmount": 25000,
+        "TaxAmount": 6502
       },
       {
-        "Item1": 30000,
-        "Item2": 8132
+        "StepAmount": 30000,
+        "TaxAmount": 8132
       },
       {
-        "Item1": 35000,
-        "Item2": 9858
+        "StepAmount": 35000,
+        "TaxAmount": 9858
       },
       {
-        "Item1": 40000,
-        "Item2": 11942
+        "StepAmount": 40000,
+        "TaxAmount": 11942
       },
       {
-        "Item1": 45000,
-        "Item2": 13874
+        "StepAmount": 45000,
+        "TaxAmount": 13874
       },
       {
-        "Item1": 50000,
-        "Item2": 15903
+        "StepAmount": 50000,
+        "TaxAmount": 15903
       },
       {
-        "Item1": 60000,
-        "Item2": 20100
+        "StepAmount": 60000,
+        "TaxAmount": 20100
       },
       {
-        "Item1": 70000,
-        "Item2": 24300
+        "StepAmount": 70000,
+        "TaxAmount": 24300
       },
       {
-        "Item1": 266918,
-        "Item2": 106713
+        "StepAmount": 266918,
+        "TaxAmount": 106713
       }
     ]
   }

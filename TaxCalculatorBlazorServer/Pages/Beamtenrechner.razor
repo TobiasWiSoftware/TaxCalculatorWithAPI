@@ -1,4 +1,5 @@
 ﻿@page "/Beamtenrechner"
+@inject IJSRuntime jsRuntime
 
 @code {
     private MarkupString additionalMetaTag = new MarkupString("<meta name=\"description\" content=\"Seite des Rechners für Sold um die Steuerabgaben für Beamte zu ermitteln. Berechnung des Nettos Überweisungsbetrages. Mit Ausgabe der Lohnabrechnung als PDF\" />");
@@ -20,7 +21,7 @@ else
 
     <div class="center">
         <h1 id="orange-text">Onlinerechner für Beamte</h1>
-        <div>
+        <div class="hideWhenPrint">
             <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="form-group">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
@@ -136,8 +137,8 @@ else
 
                 <label>Krankenversicherung:</label>
                 <select name="FederalInsurance" @onchange="HandlePrivateInsuranceChange" class="form-control">
-                    <option selected value="false">nicht berücksichtigen</option>
-                    <option value="true">berücksichtigen</option>
+                    <option value="true" selected>berücksichtigen</option>
+                    <option value="false">nicht berücksichtigen</option>
                 </select>
 
                 @if (WithPrivateInsurance)
@@ -218,7 +219,7 @@ else
                 </p>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-sm red">Drucken (Aktuell nicht verfügbar)</button>
+            <button type="submit" @onclick="Print" class="btn btn-primary btn-sm red hideWhenPrint">Drucken</button>
 
         }
 

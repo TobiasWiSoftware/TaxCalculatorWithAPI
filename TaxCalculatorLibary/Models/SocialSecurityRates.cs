@@ -6,9 +6,7 @@ namespace TaxCalculatorLibary.Models
 {
     public class SocialSecurityRates
     {
-        private readonly IConfiguration _configuration;
-
-        private static List<SocialSecurityRates>? LSocialSecurityRates = null;
+        public int Id { get; set; }
         public int Year { get; set; }
         public decimal EmployeeInsuranceRate { get; set; }
         public decimal EmployerInsuranceRate { get; set; }
@@ -24,7 +22,6 @@ namespace TaxCalculatorLibary.Models
         public decimal EmployerPensionRate { get; set; }
         public decimal EmployeeUnemploymentRate { get; set; }
         public decimal EmployerUnemploymentRate { get; set; }
-
         public decimal InsuranceMaxGross { get; set; }
         public decimal PensionAndUnimploymentMaxGross { get; set; }
 
@@ -65,39 +62,26 @@ namespace TaxCalculatorLibary.Models
         }
 
 
-        public static void LoadDataFromJson(string dataDirectory)
-        {
-
-            using (StreamReader r = new(Path.Combine(dataDirectory, "Data", "SocialSecurityRates.json")))
-            {
-                string s = r.ReadToEnd();
-                List<SocialSecurityRates>? list = JsonConvert.DeserializeObject<List<SocialSecurityRates>>(s);
-
-                if (list != null)
-                {
-                    LSocialSecurityRates ??= list;
-                }
-            }
-        }
         public static void LoadDataFromJsonForTesting()
         {
-            string path = Path.Combine("../../../../", "TaxCalculatorAPI", "Data", "SocialSecurityRates.json");
+        //    string path = Path.Combine("../../../../", "TaxCalculatorAPI", "Data", "SocialSecurityRates.json");
 
-            using (StreamReader r = new(path))
-            {
-                string s = r.ReadToEnd();
-                List<SocialSecurityRates>? list = JsonConvert.DeserializeObject<List<SocialSecurityRates>>(s);
+        //    using (StreamReader r = new(path))
+        //    {
+        //        string s = r.ReadToEnd();
+        //        List<SocialSecurityRates>? list = JsonConvert.DeserializeObject<List<SocialSecurityRates>>(s);
 
-                if (list != null)
-                {
-                    LSocialSecurityRates ??= list;
-                }
-            }
+        //        if (list != null)
+        //        {
+        //            LSocialSecurityRates ??= list;
+        //        }
+         //   }
         }
 
         public static SocialSecurityRates? GetDataFromYear(int year)
         {
-            return LSocialSecurityRates != null ? LSocialSecurityRates.Find(x => x.Year == year) : null;
+        //    return LSocialSecurityRates != null ? LSocialSecurityRates.Find(x => x.Year == year) : null;
+        return null;
         }
 
 

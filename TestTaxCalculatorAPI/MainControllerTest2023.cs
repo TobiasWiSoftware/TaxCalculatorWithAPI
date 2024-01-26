@@ -12,17 +12,17 @@ namespace TaxCalculatorAPI.Tests
     public class MainControllerTest2023
     {
         private readonly MainController _controller;
-        private readonly MainService _mainService;
+        private readonly MainControllerService _mainService;
         private readonly List<TestData> _testData = TestData.GetTestCases();
 
 
 
         public MainControllerTest2023()
         {
-            _mainService = new MainService();
-            _controller = new MainController(_mainService);
-            SocialSecurityRates.LoadDataFromJsonForTesting();
-            TaxInformation.LoadDataFromJsonForTesting();
+            //_mainService = new MainControllerService();
+            //_controller = new MainController(_mainService);
+            //SocialSecurityRates.LoadDataFromJsonForTesting();
+            //TaxInformation.LoadDataFromJsonForTesting();
 
         }
 

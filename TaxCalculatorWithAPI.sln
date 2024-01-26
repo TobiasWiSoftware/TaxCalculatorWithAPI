@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCrawlerForTestData", "We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTaxCalculatorAPI", "TestTaxCalculatorAPI\TestTaxCalculatorAPI.csproj", "{A880885D-5C5B-4022-B21D-052FD2C614BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalculatorBlazorServer", "TaxCalculatorBlazorServer\TaxCalculatorBlazorServer.csproj", "{32279BF5-3AAC-408C-A2F5-58E2069F855A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorBlazorServer", "TaxCalculatorBlazorServer\TaxCalculatorBlazorServer.csproj", "{32279BF5-3AAC-408C-A2F5-58E2069F855A}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D5B5E6D2-B6B7-4135-BCF5-D1BC707D94CD}"
 EndProject

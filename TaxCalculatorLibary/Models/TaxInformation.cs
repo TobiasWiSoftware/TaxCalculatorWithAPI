@@ -7,7 +7,7 @@ namespace TaxCalculatorLibary.Models
 
     public class TaxInformation
     {
-        private static List<TaxInformation>? LTaxInformation = null;
+        public int Id { get; set; }
         public int Year { get; set; }
         public int TaxFreeBasicFlat { get; set; } // Class 1 - 4
         public int TaxFreeEmployeeFlat { get; set; } // For class 1 - 5
@@ -17,116 +17,22 @@ namespace TaxCalculatorLibary.Models
         public decimal MinLevelForSolidarityTax { get; set; }
         public decimal SolidaryTaxRate { get; set; }
         public decimal ChurchTaxRate { get; set; }
-        public List<Tuple<decimal, decimal>>? TaxLevels { get; set; }
-
+        public List<TaxInformationStep>? TaxInformationSteps { get; set; }
         public TaxInformation()
         {
-
+            
         }
 
-        public TaxInformation(int year, int taxFreeBasic, List<Tuple<decimal, decimal>> taxLevels, int taxFreeBasicFlat, int taxFreeEmployeeFlat,
+        public TaxInformation(int year, int taxFreeBasic, List<TaxInformationStep> taxInformationsSteps, int taxFreeBasicFlat, int taxFreeEmployeeFlat,
                                    int taxFreeChildGrowingFlat, int taxFreeChildFlat)
         {
             Year = year;
-            TaxLevels = taxLevels;
+            TaxInformationSteps = taxInformationsSteps;
             TaxFreeBasicFlat = taxFreeBasicFlat;
             TaxFreeEmployeeFlat = taxFreeEmployeeFlat;
             TaxFreeChildGrowingFlat = taxFreeChildGrowingFlat;
             TaxFreeChildFlat = taxFreeChildFlat;
         }
 
-        public static void LoadDataFromJson(string dataDirectory)
-        {
-            using (StreamReader r = new(Path.Combine(dataDirectory, "Data", "TaxInformation.json")))
-            {
-                string s = r.ReadToEnd();
-                List<TaxInformation>? list = JsonConvert.DeserializeObject<List<TaxInformation>>(s);
-
-                if (list != null)
-                {
-                    LTaxInformation = list;
-                }
-            }
-        }
-
-        public static void LoadDataFromJsonForTesting()
-        {
-            string path = Path.Combine("../../../../", "TaxCalculatorAPI", "Data", "TaxInformation.json");
-            using (StreamReader r = new(path))
-            {
-                string s = r.ReadToEnd();
-                List<TaxInformation>? list = JsonConvert.DeserializeObject<List<TaxInformation>>(s);
-
-                if (list != null)
-                {
-                    LTaxInformation = list;
-                }
-            }
-        }
-
-
-        public Tuple<decimal, decimal, decimal, decimal, decimal> GetTaxValue(decimal value, bool inChurch)
-        {
-            Tuple<decimal, decimal, decimal, decimal, decimal> taxSet = new Tuple<decimal, decimal, decimal, decimal, decimal>(0, 0, 0, 0, 0);
-            // Return a tuple with taxed value, taxsum, solidary tax, church tax, borderTaxSum
-            if (TaxLevels != null)
-            {
-                taxSet = new Tuple<decimal, decimal, decimal, decimal, decimal>(0, 0, 0, 0, 0);
-
-                // Find the last tax rates
-                Tuple<decimal, decimal>? taxSetBase = TaxLevels.FindAll(x => x.Item1 <= value).Max();
-
-                //Find the next tax rates 
-                Tuple<decimal, decimal>? taxSetNext = TaxLevels.FindAll(x => x.Item1 > value).Min();
-
-
-
-                if (taxSetBase != null && taxSetNext != null) // case when beetween tax table
-                {
-                    // Calculation for the last known border tax zone in sum + rest of the value in the folowing tax zone
-                    decimal taxSetBaseSum = taxSetBase.Item2;
-                    decimal taxsetRestSum = (value - taxSetBase.Item1) * (taxSetNext.Item2 - taxSetBase.Item2) / (taxSetNext.Item1 - taxSetBase.Item1);
-                    decimal borderTax = taxsetRestSum / (value - taxSetBase.Item1);
-
-                    taxSet = new Tuple<decimal, decimal, decimal, decimal, decimal>(value, taxSetBaseSum + taxsetRestSum, 0, 0, borderTax);
-                }
-                else if (taxSetBase != null && taxSetNext == null) // when value over the max in table
-                {
-                    Tuple<decimal, decimal> maxTable = taxSetBase;
-
-                    decimal borderTax = MaxTaxLevel;
-                    decimal sum = value;
-                    decimal totalTax = Math.Round(maxTable.Item2 + (value - maxTable.Item1) * borderTax / 100, 0);
-
-                    taxSet = new Tuple<decimal, decimal, decimal, decimal, decimal>(Math.Round(sum), totalTax, 0, 0, borderTax);
-                }
-
-                // Check for solidary and church
-
-                if (taxSet.Item2 > this.MinLevelForSolidarityTax)
-                {
-                    // A approximate calculation for the solidary tax sliding zone
-                    if (value < 102000)
-                    {
-                        taxSet = new(taxSet.Item1, taxSet.Item2, (taxSet.Item2 - this.MinLevelForSolidarityTax) * 0.119m, 0, taxSet.Item5);
-                    }
-                    else
-                    {
-                        taxSet = new(taxSet.Item1, taxSet.Item2, taxSet.Item2 * this.SolidaryTaxRate / 100, 0, taxSet.Item5);
-                    }
-                }
-
-                if (inChurch)
-                {
-                    taxSet = new(taxSet.Item1, taxSet.Item2, taxSet.Item3, taxSet.Item2 * this.ChurchTaxRate / 100, taxSet.Item5);
-                }
-            }
-            return taxSet;
-        }
-        public static TaxInformation? GetDataFromYear(int year)
-        {
-            return LTaxInformation != null ? LTaxInformation.Find(x => x.Year == year) : null;
-        }
     }
-
 }

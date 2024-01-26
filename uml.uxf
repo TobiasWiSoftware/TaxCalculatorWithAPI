@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>350</y>
+      <w>190</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>// Class Element
+
+database.db
+--
+/SQLite database/
+--
+# Tables
++ SocialSecurityRates
++ TaxInformation
++ TaxInformationSteps
++ Trackings
++ Users
+
+
+_umletcode=
+fg='black'
+bg='#222222'
+drawArc(5,5,26,8,0,180,true) //Parameters (x, y, width, height, start, extent, open)
+bg='bg'
+drawArc(5,5,26,8,180,180,true) //Parameters (x, y, width, height, start, extent, open)
+fg='#929292'
+bg='#222222'
+drawRectangle(5,9,26,15) //Parameters (x, y, width, height);
+fg='black';
+drawLine(5,9,5,24) //Parameters (x1, y1, x2, y2) 
+drawLine(31,9,31,24) //Parameters (x1, y1, x2, y2) 
+bg='bg'
+drawArc(5,10,26,8,180,180,true) //Parameters (x, y, width, height, start, extent, open)
+drawArc(5,15,26,8,180,180,true) //Parameters (x, y, width, height, start, extent, open)
+bg='#222222'
+drawArc(5,20,26,8,180,180,true) //Parameters (x, y, width, height, start, extent, open)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>150</y>
+      <w>190</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>// Class Element
+            SocialSecurity.json
+            TaxInformation.json
+
+--
+/Json file with the basic/
+/taxvalues per year/
+/Json file with the basic/
+/taxinformation per year/
+
+
+_umletcode=
+fg='black'
+bg='#222222'
+
+// draw book
+drawArc(10,10,20,10,0,180,true)  //Parameters (x, y, width, height, start, extent, open, drawConfig?)
+drawArc(30,10,20,10,0,180,true)  //Parameters (x, y, width, height, start, extent, open, drawConfig?)
+drawLine(30, 13, 30, 40)
+drawArc(30,37,20,10,0,180,false, {bg: 'black'})  //Parameters (x, y, width, height, start, extent, open, drawConfig?)
+drawArc(10,37,20,10,0,180,false, {bg: 'black'})  //Parameters (x, y, width, height, start, extent, open, drawConfig?)
+drawLine(10, 13, 10, 40)
+drawLine(50, 13, 50, 40)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>280</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>370</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>240</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Repository
+
+-
+
+/Basic function of reading from/
+/database and files/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>240</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Services
+
+-
+
+/Decoupling of in interface and/
+/class and processing the/
+/data for controller and/
+/calculating the data/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>240</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Controller
+
+-
+
+/Providing the data in json format/
+/with settings in program.cs and/
+/docker-compose/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>320</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>320</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>180</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>API</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>600</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Blazor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1010</x>
+      <y>420</y>
+      <w>30</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>740</y>
+      <w>200</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>650</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Services
+
+-
+
+/Calling the API - configuration/
+/is in the Program.cs/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>650</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Razor.cs code behind
+-
+
+/Managing of the object which/
+/are binded to the UI and calling/
+/api over service onload and/
+/on post/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>650</y>
+      <w>190</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Razor Pages
+-
+
+/Binding the code with Razor/
+syntax/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>730</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>310</x>
+      <y>730</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>40</y>
+      <w>200</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>TaxCalculatorWithAPI Solution</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

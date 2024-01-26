@@ -1,6 +1,7 @@
 ﻿using TaxCalculatorLibary.Models;
 using TaxCalculatorBlazorServer.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace TaxCalculatorBlazorServer.Pages
 {
@@ -8,11 +9,11 @@ namespace TaxCalculatorBlazorServer.Pages
     {
         [Inject]
         public IMainService? MainService { get; set; }
-        public BillingInput? Input { get; set; }
+        public BillingInput Input { get; set; } = new();
         public BillingOutput? Output { get; set; }
         public bool ChildrenTaxCreditDisplayed { get; set; } = false;
         public bool WithPrivateInsurance { get; set; } = false;
-        public string ChildTaxCreditString { get; set; }
+        public string ChildTaxCreditString { get; set; } = "0";
         private bool IsCurrentYear(int year)
         {
             return DateTime.Now.Year == year;
@@ -21,7 +22,6 @@ namespace TaxCalculatorBlazorServer.Pages
         {
             Input.Year = year;
         }
-
         private void HandleChurchTaxChange() => Input.InChurch = Input.InChurch == true ? false : true;
         private void HandleChildrenChange()
         {
@@ -29,21 +29,21 @@ namespace TaxCalculatorBlazorServer.Pages
 
             ChildrenTaxCreditDisplayed = Input.HasChildren ? true : false;
         }
-
         private void HandlePrivateInsuranceChange(ChangeEventArgs e)
         {
-            WithPrivateInsurance = bool.Parse(e.Value.ToString());
-            if (WithPrivateInsurance && Input.PrivateInsurance == 0)
+            if (e.Value != null)
             {
-                Input.PrivateInsurance = 600m;
-            }
-            else if (!WithPrivateInsurance)
-            {
-                Input.PrivateInsurance = 0m;
+                WithPrivateInsurance = bool.Parse(e.Value.ToString());
+                if (WithPrivateInsurance && Input.PrivateInsurance == 0)
+                {
+                    Input.PrivateInsurance = 600m;
+                }
+                else if (!WithPrivateInsurance)
+                {
+                    Input.PrivateInsurance = 0m;
+                }
             }
         }
-
-
         protected override async Task OnInitializedAsync()
         {
 
@@ -62,7 +62,6 @@ namespace TaxCalculatorBlazorServer.Pages
 
             }
         }
-
         public async Task CalculateTax()
         {
             if (MainService != null && Input != null)
@@ -90,6 +89,10 @@ namespace TaxCalculatorBlazorServer.Pages
                     }
                 }
             }
+        }
+        public async Task Print()
+        {
+            await jsRuntime.InvokeVoidAsync("myPrint");
         }
     }
 }
