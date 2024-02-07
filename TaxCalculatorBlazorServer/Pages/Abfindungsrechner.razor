@@ -1,7 +1,194 @@
 ﻿@page "/Abfindungsrechner"
+@inject IJSRuntime jsRuntime
 
-<h3>Dieser Rechner ist noch in Entwicklung</h3>
 
 @code {
+    private MarkupString additionalMetaTag = new MarkupString("<meta name=\"description\" content=\"Seite des Rechners für Sold um die Steuerabgaben für Selbstständige und Gewerbetreibende zu ermitteln. Berechnung des Nettos. Mit Ausgabe der Berechnung als PDF\" />");
+}
+<HeadContent>
+    @additionalMetaTag
+
+    <title>Onlinerechner Steuer Lohnsteuer Brutto Netto Rechner für Selbstständige und Gewerbetreibende</title>
+</HeadContent>
+
+@if (Input == null)
+{
+    <p><em>Loading</em></p>
+}
+else
+{
+    <div class="m-2 center">
+        <h1 id="darkgreen-text">Onlinerechner für Selbstständige</h1>
+        <div class="hideWhenPrint">
+            <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="form-group">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="left">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="year" @onchange="() => HandleYearChange(2023)" checked=" @IsCurrentYear(2023)" />
+                        <label class="form-check-label">2023</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="year" @onchange="() => HandleYearChange(2024)" checked="@IsCurrentYear(2024)" />
+                        <label class="form-check-label">
+                            2024
+                        </label>
+                    </div>
+                </div>
+
+                <ValidationMessage For="@(() => Input.Year)" />
+
+                <!-- Firstname input -->
+                <label class="form-label">Abfindungsbetrag brutto</label>
+                <input @bind="Input.GrossIncome" type="decimal" class="form-control" />
+
+                <ValidationMessage For="@(() => Input.Year)" />
+
+                <label class="form-label">Fünftelregelung</label>
+                <div class="left">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" @onchange="() => Fiftrule = true" name="IsFiftrule" value="true" />
+                        <label class="form-check-label">
+                            Ja
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" @onchange="() => Fiftrule = false" name="IsFiftrule" value="false" checked />
+                        <label class="form-check-label">
+                            Nein
+                        </label>
+                    </div>
+                </div>
+
+                <label class="form-label">Kirchensteuer</label>
+                <div class="left">
+                    <div class="form-check">
+                        <input name="church" class="form-check-input" type="radio" @onchange="HandleChurchTaxChange" />
+                        <label class="form-check-label">
+                            Mit Kirchensteuer
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="church" class="form-check-input" type="radio" @onchange="HandleChurchTaxChange" checked />
+                        <label class="form-check-label">
+                            Ohne Kirchensteuer
+                        </label>
+                    </div>
+                </div>
+
+                <label class="form-label">Kinder</label>
+                <div class="left">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" @onchange="HandleChildrenChange" name="HasChildren" value="true" />
+                        <label class="form-check-label">
+                            Ja
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" @onchange="HandleChildrenChange" name="HasChildren" value="false" checked />
+                        <label class="form-check-label">
+                            Nein
+                        </label>
+                    </div>
+                </div>
+
+                @if (ChildrenTaxCreditDisplayed)
+                {
+                    <label class="form-label">Kinderfreibeträge</label>
+                    <select name="ChildTaxCredit" @bind="ChildTaxCreditString" class="form-control">
+                        <option value="0">0</option>
+                        <option value="0,5">0,5</option>
+                        <option value="1">1</option>
+                        <option value="1,5">1,5</option>
+                        <option value="2">2</option>
+                        <option value="2,5">2,5</option>
+                        <option value="3">3</option>
+                        <option value="3,5">3,5</option>
+                        <option value="4">4</option>
+                        <option value="4,5">4,5</option>
+                        <option value="5">5</option>
+                        <option value="5,5">5,5</option>
+                        <option value="6">6</option>
+                        <option value="6,5">6,5</option>
+                        <option value="7">7</option>
+                        <option value="7,5">7,5</option>
+                        <option value="8">8</option>
+                        <option value="8,5">8,5</option>
+                        <option value="9">9</option>
+                        <option value="9,5">9,5</option>
+                    </select>
+                }
+                else
+                {
+                    ChildTaxCreditString = "0";
+                }
+
+                <button type="submit" class="btn btn-primary btn-sm blue">Berechnen</button>
+
+
+                <!-- Submit button -->
+
+            </EditForm>
+        </div>
+
+        @if (Output != null)
+        {
+            <div class="output-container">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="px-1">Unverb. Berechnung</th>
+                            <th scope="col" class="right px-1">Monat</th>
+                            <th scope="col" class="right px-1">Jahr</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="px-1">Abfindungsbetrag</th>
+                            <td class="right px-1">@Output.BillingInput.GrossIncome.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.BillingInput.GrossIncome * 12, 2).ToString("N2")</td>
+                        </tr>
+                        <tr>
+                            <td scope="row" class="px-1">Lohnsteuer</td>
+                            <td class="right px-1">@Output.TaxSum.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.TaxSum * 12, 2).ToString("N2")</td>
+                        </tr>
+                        <tr>
+                            <td scope="row" class="px-1">Kirchensteuer</td>
+                            <td class="right px-1">@Output.ChurchTaxSum.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.ChurchTaxSum * 12, 2).ToString("N2")</td>
+                        </tr>
+                        <tr>
+                            <td scope="row" class="px-1">Solidaritätszuschlag</td>
+                            <td class="right px-1">@Output.SolidaryTaxSum.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.SolidaryTaxSum * 12, 2).ToString("N2")</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="px-1">Steuern</th>
+                            <td class="right px-1">@Output.TotalTaxSum.ToString("N2")</td>
+                            <td class="right px-1">@Math.Round(Output.TotalTaxSum * 12, 2).ToString("N2")</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="px-1">Netto</th>
+                            <th scope="row" class="right px-1">@Output.Transferamount.ToString("N2")</th>
+                            <th scope="row" class="right px-1">@Math.Round(Output.Transferamount * 12, 2).ToString("N2")</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <br />
+                <p class="justify">
+                    Erläuterungen: Bei der Berechnung des Nettobetrages wurden der Grundfreibetrag nach Steuerklasse,
+                    der Arbeitnehmerfreibetrag, die Kinderfreibeträge @(WithPrivateInsurance ? "die Steuerminderung durch den Eigenanteil der PKV " : "") berücksichtigt. Sind nicht alle Angaben auf der Lohnsteuerkarte
+                    eingetragen, kann der Überweisungsbetrag niedriger als das berechnete Netto ausfallen. Alle Angaben ohne Gewähr.
+                </p>
+            </div>
+
+            <button type="submit" @onclick="Print" class="btn btn-primary btn-sm red hideWhenPrint">Drucken</button>
+
+        }
+
+    </div>
+
 
 }

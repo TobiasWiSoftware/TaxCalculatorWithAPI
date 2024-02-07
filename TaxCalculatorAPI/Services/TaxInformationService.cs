@@ -8,11 +8,11 @@ namespace TaxCalculatorAPI.Services
     public class TaxInformationService : ITaxInformationService
     {
         private readonly IFileRepository _fileRepository;
-        private readonly ApplicationDBContext _dbcontext;
-        public TaxInformationService(IFileRepository fileRepository, ApplicationDBContext dbcontext)
+        private readonly IDataBaseRepository _dbrepository;
+        public TaxInformationService(IFileRepository fileRepository, IDataBaseRepository dbrepository)
         {
             _fileRepository = fileRepository;
-            _dbcontext = dbcontext;
+            _dbrepository = dbrepository;
         }
         public async Task MigrateDataFromJsonToDataBase(string dataDirectory)
         {
@@ -22,31 +22,20 @@ namespace TaxCalculatorAPI.Services
             {
                 foreach (var item in list)
                 {
-                    await _dbcontext.TaxInformation.AddAsync(item);
-
-                    if (item.TaxInformationSteps != null)
-                    {
-                        foreach (var step in item.TaxInformationSteps)
-                        {
-                            await _dbcontext.TaxInformationStep.AddAsync(step);
-                        }
-                    }
+                    await _dbrepository.AddTaxInformationAsync(item);
                 }
-                await _dbcontext.SaveChangesAsync();
             }
         }
-        public async Task<Tuple<decimal, decimal, decimal, decimal, decimal>> GetTaxValue(int year, decimal value, bool inChurch)
+        public async Task<TaxSet> GetTaxValue(int year, decimal value, bool inChurch)
         {
-            Tuple<decimal, decimal, decimal, decimal, decimal> taxSet = new Tuple<decimal, decimal, decimal, decimal, decimal>(0, 0, 0, 0, 0);
-            // Return a tuple with taxed value, taxsum, solidary tax, church tax, borderTaxSum
+            TaxSet taxSet = new();
+            // Return with taxed value, taxsum, solidary tax, church tax, borderTaxSum
 
-            TaxInformation? taxInformation = await _dbcontext.TaxInformation.Include(ti => ti.TaxInformationSteps).FirstOrDefaultAsync(x => x.Year == year);
+            TaxInformation? taxInformation = await _dbrepository.GetTaxInformationAsync(year);
 
 
             if (taxInformation != null && taxInformation.TaxInformationSteps != null)
             {
-                taxSet = new Tuple<decimal, decimal, decimal, decimal, decimal>(0, 0, 0, 0, 0);
-
                 TaxInformationStep? taxSetBase = null;
                 TaxInformationStep? taxSetNext = null;
 
@@ -73,9 +62,19 @@ namespace TaxCalculatorAPI.Services
                     // Calculation for the last known border tax zone in sum + rest of the value in the folowing tax zone
                     decimal taxSetBaseSum = taxSetBase.TaxAmount;
                     decimal taxsetRestSum = (value - taxSetBase.StepAmount) * (taxSetNext.TaxAmount - taxSetBase.TaxAmount) / (taxSetNext.StepAmount - taxSetBase.StepAmount);
-                    decimal borderTax = taxsetRestSum / (value - taxSetBase.StepAmount);
 
-                    taxSet = new Tuple<decimal, decimal, decimal, decimal, decimal>(value, taxSetBaseSum + taxsetRestSum, 0, 0, borderTax);
+                    decimal borderTax = 0m;
+
+                    if (value - taxSetBase.StepAmount > 0)
+                    {
+                        borderTax = taxsetRestSum / (value - taxSetBase.StepAmount);
+                    }
+                    else
+                    {
+                        borderTax = (taxSetNext.TaxAmount - taxSetBase.TaxAmount) / (taxSetNext.StepAmount - taxSetBase.TaxAmount); 
+                    }
+
+                    taxSet = new(value, taxSetBaseSum + taxsetRestSum, 0, 0, borderTax);
                 }
                 else if (taxSetBase != null && taxSetNext == null) // when value over the max in table
                 {
@@ -85,27 +84,27 @@ namespace TaxCalculatorAPI.Services
                     decimal sum = value;
                     decimal totalTax = Math.Round(maxTable.TaxAmount + (value - maxTable.StepAmount) * borderTax / 100, 0);
 
-                    taxSet = new Tuple<decimal, decimal, decimal, decimal, decimal>(Math.Round(sum), totalTax, 0, 0, borderTax);
+                    taxSet = new(Math.Round(sum), totalTax, 0, 0, borderTax);
                 }
 
                 // Check for solidary and church
 
-                if (taxSet.Item2 > taxInformation.MinLevelForSolidarityTax)
+                if (taxSet.TaxSum > taxInformation.MinLevelForSolidarityTax)
                 {
                     // A approximate calculation for the solidary tax sliding zone
                     if (value < 102000)
                     {
-                        taxSet = new(taxSet.Item1, taxSet.Item2, (taxSet.Item2 - taxInformation.MinLevelForSolidarityTax) * 0.119m, 0, taxSet.Item5);
+                        taxSet = new(taxSet.TaxedValue, taxSet.TaxSum, (taxSet.TaxSum - taxInformation.MinLevelForSolidarityTax) * 0.119m, 0, taxSet.BorderTaxSum);
                     }
                     else
                     {
-                        taxSet = new(taxSet.Item1, taxSet.Item2, taxSet.Item2 * taxInformation.SolidaryTaxRate / 100, 0, taxSet.Item5);
+                        taxSet = new(taxSet.TaxedValue, taxSet.TaxSum, taxSet.TaxSum * taxInformation.SolidaryTaxRate / 100, 0, taxSet.BorderTaxSum);
                     }
                 }
 
                 if (inChurch)
                 {
-                    taxSet = new(taxSet.Item1, taxSet.Item2, taxSet.Item3, taxSet.Item2 * taxInformation.ChurchTaxRate / 100, taxSet.Item5);
+                    taxSet = new(taxSet.TaxedValue, taxSet.TaxSum, taxSet.SolidaryTax, taxSet.TaxSum * taxInformation.ChurchTaxRate / 100, taxSet.BorderTaxSum);
                 }
             }
             return taxSet;

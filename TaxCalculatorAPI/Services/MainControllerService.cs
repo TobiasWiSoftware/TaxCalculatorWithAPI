@@ -56,7 +56,6 @@ namespace TaxCalculatorAPI.Services
 
             TaxInformation? taxInformation = await _dbcontext.TaxInformation.FirstOrDefaultAsync(x => x.Year == billingInput.Year);
 
-
             if (taxInformation != null && socialSecurityRates != null)
             {
 
@@ -99,6 +98,11 @@ namespace TaxCalculatorAPI.Services
                 else if (billingInput.TaxClass == 5)
                 {
                     freeFromClass += taxInformation.TaxFreeEmployeeFlat;
+                    freeFromClass += taxInformation.TaxFreeChildFlat * billingInput.ChildTaxCredit;
+                }
+                else
+                {
+                    freeFromClass += taxInformation.TaxFreeChildFlat * billingInput.ChildTaxCredit;
                 }
 
                 decimal forTax = 0.00m;
@@ -114,25 +118,27 @@ namespace TaxCalculatorAPI.Services
                 }
 
 
-
-                //Getting the Tuples to calculate tax
-                Tuple<decimal, decimal, decimal, decimal, decimal> taxSet =  await _taxInformationService.GetTaxValue(billingInput.Year, forTax, billingInput.InChurch);
+                //Getting the calculate tax
+                // Return with taxed value, taxsum, solidary tax, church tax, borderTaxSum
+                TaxSet taxSet =  await _taxInformationService.GetTaxValue(billingInput.Year, forTax, billingInput.InChurch);
 
                 // This is bec of spliting the tax in half in class 3 for taxation and than double again
                 if (billingInput.TaxClass == 3)
                 {
-                    taxSet = new(taxSet.Item1 * 2, taxSet.Item2 * 2, taxSet.Item3 * 2, taxSet.Item4 * 2, taxSet.Item5);
+
+                    taxSet = new(taxSet.TaxedValue * 2, taxSet.TaxSum * 2, taxSet.SolidaryTax * 2, taxSet.ChurchTax * 2, taxSet.BorderTaxSum);
 
                 }
                 if (taxSet != null)
                 {
-                    billingOutput.TaxSum = taxSet.Item2 / 12;
-                    billingOutput.SolidaryTaxSum = taxSet.Item3 / 12;
-                    billingOutput.ChurchTaxSum = taxSet.Item4 / 12;
-                    billingOutput.BorderTaxSet = taxSet.Item1;
+                    billingOutput.TaxSum = taxSet.TaxSum / 12;
+                    billingOutput.SolidaryTaxSum = taxSet.SolidaryTax / 12;
+                    billingOutput.ChurchTaxSum = taxSet.ChurchTax / 12;
+                    billingOutput.BorderTaxSet = taxSet.BorderTaxSum;
                 }
 
             }
+
             return billingOutput;
         }
         public Tuple<SocialSecurityRates?, TaxInformation?> FetchSocialAndTaxData(int year)

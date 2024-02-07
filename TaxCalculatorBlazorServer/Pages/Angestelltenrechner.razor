@@ -20,7 +20,7 @@
 }
 else
 {
-    <div class="center">
+    <div class="m-2 center ">
         <h1 id="red-text">Onlinerechner für Angestellte</h1>
         <div class="hideWhenPrint">
             <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="form-group">
@@ -185,10 +185,10 @@ else
         @if (Output != null)
         {
             <div class="output-container">
-                <table class="table table-hover" id="mytable">
+                <table class="table table-hover table-responsive">
                     <thead>
                         <tr>
-                            <th scope="col" class="px-1">Unverb. Berechnung</th>
+                            <th scope="col" class="px-1">Unv. Berechnung</th>
                             <th scope="col" class="right px-1">Monat</th>
                             <th scope="col" class="right px-1">Jahr</th>
                         </tr>
@@ -210,7 +210,7 @@ else
                             <td class="right px-1">@Math.Round(Output.ChurchTaxSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <td scope="row" class="px-1">Solidaritätszuschlag</td>
+                            <td scope="row" class="px-1">Solidaritätszusch.</td>
                             <td class="right px-1">@Output.SolidaryTaxSum.ToString("N2")</td>
                             <td class="right px-1">@Math.Round(Output.SolidaryTaxSum * 12, 2).ToString("N2")</td>
                         </tr>
@@ -220,22 +220,22 @@ else
                             <td class="right px-1">@Math.Round(Output.TotalTaxSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <td scope="row" class="px-1">Krankenversicherung</td>
+                            <td scope="row" class="px-1">Krankenvers.</td>
                             <td class="right px-1">@Output.InsuranceSum.ToString("N2")</td>
                             <td class="right px-1">@Math.Round(Output.InsuranceSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <td scope="row" class="px-1">Pflegeversicherung</td>
+                            <td scope="row" class="px-1">Pflegevers.</td>
                             <td class="right px-1">@Output.InsuranceCareSum.ToString("N2")</td>
                             <td class="right px-1">@Math.Round(Output.InsuranceCareSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <td scope="row" class="px-1">Rentenversicherung</td>
+                            <td scope="row" class="px-1">Rentenvers.</td>
                             <td class="right px-1">@Output.PensionSum.ToString("N2")</td>
                             <td class="right px-1">@Math.Round(Output.PensionSum * 12, 2).ToString("N2")</td>
                         </tr>
                         <tr>
-                            <td scope="row" class="px-1">Arbeitslosenversicherung</td>
+                            <td scope="row" class="px-1">Arbeitslosenvers.</td>
                             <td class="right px-1">@Output.UnimploymentSum.ToString("N2")</td>
                             <td class="right px-1">@Math.Round(Output.UnimploymentSum * 12, 2).ToString("N2")</td>
                         </tr>

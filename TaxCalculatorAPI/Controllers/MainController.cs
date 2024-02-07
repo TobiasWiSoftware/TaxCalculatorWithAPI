@@ -33,5 +33,7 @@ namespace TaxCalculatorAPI.Controllers
         {
             return Ok(_mainService.IncrementVisitCounter());
         }
+
+
     }
 }

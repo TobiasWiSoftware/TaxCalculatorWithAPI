@@ -4,33 +4,43 @@
 @media(min-width: 1000px) {
     html {
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 1.5em !important;
+        font-size: 1.2em !important;
     }
 
     nav {
-        font-size: 1.2rem !important;
+        font-size: 1.5rem !important;
     }
 
     #central {
-        font-size: 1.4rem !important;
+        font-size: 1.9rem !important;
     }
 
    
 }
 
-@media (min-width: 769px) and (max-width: 1000px) {
+@media (min-width: 590px) and (max-width: 1000px) {
     html {
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         font-size: 1.2em;
     }
+
+    nav {
+        font-size: 1.5rem !important;
+    }
+
+
+    #central {
+        font-size: 1.9rem !important;
+    }
+
 }
 
-@media(min-width: 768px) {
+@media(min-width: 590px) {
     div.center {
         display: block;
-        padding-left: 17%;
-        padding-right: 17%;
+        max-width: 1100px;
         justify-content: space-between;
+        min-width:55%;
     }
 
     .mycontainer {
@@ -51,8 +61,9 @@
     }
 
     #central {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
+
 
     img.custom {
         height: 50px !important;
@@ -149,9 +160,11 @@ input {
 }
 
 .mycontainer {
-    margin-left: 3% !important;
-    margin-right: 3% !important;
+    margin-left: 3%;
+    margin-right: 3%;
+    max-width: 1500px;
 }
+
 
 
 .myrow {
@@ -268,31 +281,34 @@ a, .btn-link {
 #central {
     font-family: 'Indie Flower';
     font-style: italic;
-    font-size: 1.0rem;
-    margin-right: 0.2rem;
+    font-size: 1.1rem;
 }
 
 nav {
     text-transform: uppercase;
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
 
 #red-text {
     color: #F4023F !important;
+    opacity: 0.8;
 }
 
 #orange-text {
     color: #F4780F !important;
+    opacity: 0.8;
 }
 
 #darkgreen-text {
     color: #26D727 !important;
+    opacity: 0.8;
 }
 
 #lightgreen-text {
     color: aquamarine !important;
+    opacity:0.8;
 }
 
 #darkyellow-text {

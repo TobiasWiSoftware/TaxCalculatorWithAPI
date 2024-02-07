@@ -1,6 +1,6 @@
 # Tax Calculator With API - Installation Guide
 
-## 1. Used Features
+## 1. Used features
 
 ### Framework: BlazorServer, Web Assembly API, Entity Framework
 
@@ -15,7 +15,7 @@
 ![](Pictures4ReadMe/UML1.png)
 
 
-## 3. Installation Steps:
+## 3. Installation steps:
 
 ### Manuel migration of database
 
@@ -78,5 +78,13 @@ b0f82e6c6cf6   taxcalculatorapi             "dotnet TaxCalculator"   43 seconds 
 ### Check Internal Network
 - **Command:** `<user>@localhost:~/<dir>/TaxCalculatorWithAPI# docker network inspect taxnetwork`
 
+### Setup Docker-Compose for Docker Desktop
+- **Use 8080:80 binding for Docker Desktop and use comments to hide the ASPNETCORE ssl configuration - a specific # comment tag on the start of the line could be necessary to avoid utf-8 encoding error**
+
+### Setup Dockerfile for Docker Desktop
+- **Expose port 80**
+
+### Run on Docker Desktop
+- **Use playbutton on VS. If it has a browser connection error try the normal docker commands in powershell to run on Docker Desktop**
 
 

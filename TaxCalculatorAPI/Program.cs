@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Reflection;
@@ -38,6 +40,18 @@ internal class Program
         builder.Services.AddScoped<IFileRepository, FileRepository>();
         builder.Services.AddScoped<ISocialSecurityService, SocialSecurityService>();
         builder.Services.AddScoped<ITaxInformationService, TaxInformationService>();
+        builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+        builder.Services.AddScoped<IAccountService, AccountService>();
+        builder.Services.AddIdentity<User, IdentityRole>(options =>
+        {
+            options.Password.RequireDigit = true;
+            options.Password.RequiredLength = 5;
+            options.Password.RequireNonAlphanumeric = false; // Set to false to exclude special characters
+            options.Password.RequireUppercase = true;
+            options.Password.RequireLowercase = true;
+        }
+        ).AddEntityFrameworkStores<ApplicationDBContext>().AddDefaultTokenProviders();
+        builder.Services.AddAuthentication();
 
         builder.Services.AddCors(options =>
         {
@@ -74,7 +88,6 @@ internal class Program
 
         app.MapControllers();
 
-        app.ApplyMigrations();
 
         string entryAssemblyLocation = entryAssembly.Location;
         int binIndex = entryAssemblyLocation.IndexOf("bin\\");
@@ -90,13 +103,14 @@ internal class Program
             dataDirectory = Path.GetDirectoryName(entryAssemblyLocation) ?? throw new InvalidOperationException("Directory path for entry assembly not found.");
         }
 
-        //if (File.Exists(Path.Combine(dataDirectory, "Data", "database.db")))
-        //{
-        //    File.Delete(Path.Combine(dataDirectory, "Data", "database.db"));
-        //}
+        if (File.Exists(Path.Combine(dataDirectory, "Data", "database.db")))
+        {
+            File.Delete(Path.Combine(dataDirectory, "Data", "database.db"));
+        }
 
-        SocialSecurityService socialSecurityService = new(new FileRepository(), new ApplicationDBContext());
-        TaxInformationService taxInformationService = new(new FileRepository(), new ApplicationDBContext());
+        SocialSecurityService socialSecurityService = new(new FileRepository(), new DataBaseRespository(new ApplicationDBContext()));
+        TaxInformationService taxInformationService = new(new FileRepository(), new DataBaseRespository(new()));
+        app.ApplyMigrations();
 
         socialSecurityService.MigrateDataFromJsonToDataBase(dataDirectory).Wait();
         taxInformationService.MigrateDataFromJsonToDataBase(dataDirectory).Wait();

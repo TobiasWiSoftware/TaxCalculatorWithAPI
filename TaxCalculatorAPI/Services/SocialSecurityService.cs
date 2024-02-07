@@ -9,11 +9,11 @@ namespace TaxCalculatorAPI.Services
     public class SocialSecurityService : ISocialSecurityService
     {
         private readonly IFileRepository _fileRepository;
-        private readonly ApplicationDBContext _dbcontext;
-        public SocialSecurityService(IFileRepository fileRepository, ApplicationDBContext dbcontext)
+        private readonly IDataBaseRepository _dbrepository;
+        public SocialSecurityService(IFileRepository fileRepository, IDataBaseRepository dbrepository)
         {
             _fileRepository = fileRepository;
-            _dbcontext = dbcontext;
+            _dbrepository = dbrepository;
         }
         public async Task MigrateDataFromJsonToDataBase(string dataDirectory)
         {
@@ -22,9 +22,8 @@ namespace TaxCalculatorAPI.Services
             {
                 foreach (var item in socialSecurityRates)
                 {
-                    await _dbcontext.SocialSecurityRates.AddAsync(item);
+                    await _dbrepository.AddSocialSecurityRatesAsync(item);
                 }
-                await _dbcontext.SaveChangesAsync();
             }
 
         }
