@@ -23,8 +23,13 @@ namespace TaxCalculatorBlazorServer.Pages
             if (Input != null)
             {
                 Input.Year = year;
-                Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(Input.Year);
-                Input.InsuranceAdditionTotal = Math.Round(tuple.Item1.EmployeeInsuranceBonusRate + tuple.Item1.EmployerInsuranceBonusRate,2);
+                SocialSecurityRates? sc = null;
+
+                if (MainService != null)
+                    sc = await MainService.FetchSocialSecurityRates(Input.Year);
+
+                if (sc != null)
+                    Input.InsuranceAdditionTotal = Math.Round(sc.EmployeeInsuranceBonusRate + sc.EmployerInsuranceBonusRate, 2);
                 StateHasChanged();
             }
         }
@@ -41,19 +46,17 @@ namespace TaxCalculatorBlazorServer.Pages
 
             if (MainService != null)
             {
-                Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(DateTime.Now.Year);
-
-                SocialSecurityRates? sr = tuple.Item1;
-                TaxInformation? tr = tuple.Item2;
-
                 if (Input.Year == 0)
                 {
                     Input.Year = DateTime.Now.Year;
                 }
 
+                SocialSecurityRates? sr = await MainService.FetchSocialSecurityRates(Input.Year);
+                TaxInformation? tr = await MainService.FetchTaxInformation(Input.Year);
+
                 if (sr != null)
                 {
-                    decimal socialAddition = Math.Round(sr.EmployeeInsuranceBonusRate + sr.EmployerInsuranceBonusRate,2);
+                    decimal socialAddition = Math.Round(sr.EmployeeInsuranceBonusRate + sr.EmployerInsuranceBonusRate, 2);
                     Input = new(Input.Year, 3000m, true, 1, 30, false, 0.0m, "true", 0, socialAddition, "true", "true");
                 }
 

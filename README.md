@@ -25,7 +25,7 @@
 
 ### SSH-Connect from PS
 
-- **Command PS:**               `ssh-keygen -t rsa -b 4096 -C "IhreEmail@example.com"`
+- **Command PS:**               `ssh-keygen -t rsa -b 4096 -C "Email@example.com"`
 
 - **Command Server:**           `cd .ssh`
 
@@ -79,7 +79,7 @@ b0f82e6c6cf6   taxcalculatorapi             "dotnet TaxCalculator"   43 seconds 
 - **Command:** `<user>@localhost:~/<dir>/TaxCalculatorWithAPI# docker network inspect taxnetwork`
 
 ### Setup Docker-Compose for Docker Desktop
-- **Use 8080:80 binding for Docker Desktop and use comments to hide the ASPNETCORE ssl configuration - a specific # comment tag on the start of the line could be necessary to avoid utf-8 encoding error**
+- **Use 80:8080 binding for Docker Desktop and use comments to hide the ASPNETCORE ssl configuration - a specific # comment tag on the start of the line could be necessary to avoid utf-8 encoding error**
 
 ### Setup Dockerfile for Docker Desktop
 - **Expose port 80**

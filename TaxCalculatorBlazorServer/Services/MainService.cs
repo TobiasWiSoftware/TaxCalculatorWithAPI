@@ -23,15 +23,26 @@ namespace TaxCalculatorBlazorServer.Services
             throw new Exception("Fehler bei der API-Anfrage für Calculation");
         }
 
-        public async Task<Tuple<SocialSecurityRates, TaxInformation>> FetchSocialAndTaxData(int year)
+        public async Task<SocialSecurityRates?> FetchSocialSecurityRates(int year)
         {
-            var response = await _httpClient.PostAsJsonAsync<int>("api/Main/TransferInput", year);
+            var response = await _httpClient.PostAsJsonAsync<int>("api/Main/TransferSocialSecurityRates", year);
             if (response != null && response.Content != null && response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadFromJsonAsync<Tuple<SocialSecurityRates, TaxInformation>>();
+                return await response.Content.ReadFromJsonAsync<SocialSecurityRates>();
             }
             throw new Exception("Fehler bei der API-Anfrage für FetchSocialAndTaxData");
         }
+
+        public async Task<TaxInformation?> FetchTaxInformation(int year)
+        {
+            var response = await _httpClient.PostAsJsonAsync<int>("api/Main/TransferTaxInformation", year);
+            if (response != null && response.Content != null && response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<TaxInformation>();
+            }
+            throw new Exception("Fehler bei der API-Anfrage für FetchSocialAndTaxData");
+        }
+
 
         public async Task<int> IncrementVisitCounter()
         {

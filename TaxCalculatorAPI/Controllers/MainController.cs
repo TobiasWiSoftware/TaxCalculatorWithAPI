@@ -21,11 +21,18 @@ namespace TaxCalculatorAPI.Controllers
             var result = await _mainService.Calculation(billingInput);
             return Ok(result);
         }
-        [HttpPost("TransferInput")]
-        public ActionResult<Tuple<SocialSecurityRates, TaxInformation>> TransferInput([FromBody]int year)
+        [HttpPost("TransferSocialSecurityRates")]
+        public ActionResult<SocialSecurityRates> TransferSocialSecurityRates([FromBody]int year)
         {
             
-            return Ok(_mainService.FetchSocialAndTaxData(year));
+            return Ok(_mainService.FetchSocialSecurityRates(year));
+        }
+
+        [HttpPost("TransferTaxInformation")]
+        public ActionResult<TaxInformation> TransferTaxInformation([FromBody] int year)
+        {
+
+            return Ok(_mainService.FetchTaxInformation(year));
         }
 
         [HttpPost("IncrementVisitCounter")]

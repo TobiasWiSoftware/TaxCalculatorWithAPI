@@ -8,7 +8,7 @@
 <HeadContent>
     @additionalMetaTag
 
-    <title>Onlinerechner Steuer Lohnsteuer Brutto Netto Rechner für Selbstständige und Gewerbetreibende</title>
+    <title>Onlinerechner Steuer Lohnsteuer Brutto Netto Rechner für Abfindungen</title>
 </HeadContent>
 
 @if (Input == null)
@@ -17,8 +17,8 @@
 }
 else
 {
-    <div class="m-2 center">
-        <h1 id="darkgreen-text">Onlinerechner für Selbstständige</h1>
+    <div class="m-2 center position-relative">
+        <h1 id="darkyellow-text">Abfindungsrechner</h1>
         <div class="hideWhenPrint">
             <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="form-group">
                 <DataAnnotationsValidator />
@@ -125,14 +125,13 @@ else
 
                 <button type="submit" class="btn btn-primary btn-sm blue">Berechnen</button>
 
-
                 <!-- Submit button -->
-
             </EditForm>
         </div>
 
         @if (Output != null)
         {
+
             <div class="output-container">
                 <table class="table table-hover">
                     <thead>
@@ -182,11 +181,12 @@ else
                     der Arbeitnehmerfreibetrag, die Kinderfreibeträge @(WithPrivateInsurance ? "die Steuerminderung durch den Eigenanteil der PKV " : "") berücksichtigt. Sind nicht alle Angaben auf der Lohnsteuerkarte
                     eingetragen, kann der Überweisungsbetrag niedriger als das berechnete Netto ausfallen. Alle Angaben ohne Gewähr.
                 </p>
+                <button type="submit" @onclick="Print" class="btn btn-primary btn-sm red hideWhenPrint">Drucken</button>
+
             </div>
 
-            <button type="submit" @onclick="Print" class="btn btn-primary btn-sm red hideWhenPrint">Drucken</button>
-
         }
+
 
     </div>
 

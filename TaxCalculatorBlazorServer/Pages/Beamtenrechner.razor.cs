@@ -20,9 +20,20 @@ namespace TaxCalculatorBlazorServer.Pages
         {
             return DateTime.Now.Year == year;
         }
-        private void HandleYearChange(int year)
+        private async void HandleYearChange(int year)
         {
-            Input.Year = year;
+            if (Input != null)
+            {
+                Input.Year = year;
+                SocialSecurityRates? sc = null;
+
+                if (MainService != null)
+                    sc = await MainService.FetchSocialSecurityRates(Input.Year);
+
+                if (sc != null)
+                    Input.InsuranceAdditionTotal = Math.Round(sc.EmployeeInsuranceBonusRate + sc.EmployerInsuranceBonusRate, 2);
+                StateHasChanged();
+            }
         }
         private void HandleChurchTaxChange() => Input.InChurch = Input.InChurch == true ? false : true;
         private void HandleChildrenChange()
@@ -51,10 +62,13 @@ namespace TaxCalculatorBlazorServer.Pages
 
             if (MainService != null)
             {
-                Tuple<SocialSecurityRates, TaxInformation>? tuple = await MainService.FetchSocialAndTaxData(2023);
+                if (Input.Year == 0)
+                {
+                    Input.Year = DateTime.Now.Year;
+                }
 
-                SocialSecurityRates? sr = tuple.Item1;
-                TaxInformation? tr = tuple.Item2;
+                SocialSecurityRates? sr = await MainService.FetchSocialSecurityRates(Input.Year);
+                TaxInformation? tr = await MainService.FetchTaxInformation(Input.Year);
 
                 if (sr != null)
                 {

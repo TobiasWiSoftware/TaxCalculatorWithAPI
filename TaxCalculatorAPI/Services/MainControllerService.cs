@@ -141,10 +141,15 @@ namespace TaxCalculatorAPI.Services
 
             return billingOutput;
         }
-        public Tuple<SocialSecurityRates?, TaxInformation?> FetchSocialAndTaxData(int year)
+        public SocialSecurityRates? FetchSocialSecurityRates(int year)
         {
-            Tuple<SocialSecurityRates?, TaxInformation?> tu = new Tuple<SocialSecurityRates?, TaxInformation?>(_dbcontext.SocialSecurityRates.FirstOrDefault(x => x.Year == year), _dbcontext.TaxInformation.FirstOrDefault(x => x.Year == year));
-            return tu;
+            SocialSecurityRates? rates = _dbcontext.SocialSecurityRates.FirstOrDefault(x => x.Year == year);
+            return rates;
+        }
+        public TaxInformation? FetchTaxInformation(int year)
+        {
+            TaxInformation? taxes = _dbcontext.TaxInformation.FirstOrDefault(x => x.Year == year);
+            return taxes;
         }
         public int IncrementVisitCounter()
         {
