@@ -11,6 +11,11 @@
         font-size: 1.5rem !important;
     }
 
+    .nav-link:hover {
+        transform: scale(1.1); /* Ändert die Größe auf 105% */
+        transition: transform 0.2s ease-in-out; /* Weicher Übergang für die Transformation */
+    }
+
     #central {
         font-size: 1.9rem !important;
     }
@@ -38,9 +43,9 @@
 @media(min-width: 590px) {
     div.center {
         display: block;
-        max-width: 1100px;
+        max-width: 700px;
         justify-content: space-between;
-        min-width:55%;
+        min-width:65%;
     }
 
     .mycontainer {
@@ -146,7 +151,6 @@ input {
 }
 
 .output-container {
-    display: grid;
     padding: 0.25rem;
     background-color: #fff; /* Optional: sets the background of the entire container */
     border-radius: 8px; /* Rounded corners for the container */
@@ -290,6 +294,10 @@ nav {
     font-weight: bold;
 }
 
+header {
+    background-color: rgba(191,245,230,0.7);
+}
+
 
 #red-text {
     color: #F4023F !important;
@@ -298,21 +306,22 @@ nav {
 
 #orange-text {
     color: #F4780F !important;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 #darkgreen-text {
     color: #26D727 !important;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 #lightgreen-text {
     color: aquamarine !important;
-    opacity:0.8;
+    opacity:0.9;
 }
 
 #darkyellow-text {
     color: gold !important;
+    opacity: 0.9;
 }
 
 #lightblue-text {
