@@ -29,7 +29,7 @@
 
 - **Command Server:**           `cd .ssh`
 
-- **Command Server:**           `nano authorized_keys`
+- **Command Server:**           `nano authorized_keys - add key.pub`
 
 - **Command PS:**               `Set-Service -Name ssh-agent -StartupType Manual`
 

@@ -2,6 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.FileProviders;
 using TaxCalculatorBlazorServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -55,6 +56,15 @@ app.UseHttpsRedirection();
 app.UseResponseCompression();
 
 app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Seo")),
+    RequestPath = "",
+    DefaultContentType = "text/plain", // Festlegen des Standard-Content-Typs auf text/plain
+    ServeUnknownFileTypes = false
+}); ;
 
 app.UseRouting();
 

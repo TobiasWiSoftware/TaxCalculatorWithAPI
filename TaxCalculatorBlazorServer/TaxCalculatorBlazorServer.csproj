@@ -116,4 +116,8 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Seo\" />
+  </ItemGroup>
+
 </Project>
