@@ -1,5 +1,7 @@
 version: '3.4'
 
+# For Docker Desktop set switch to release
+
 services:
   taxcalculatorapi:
     image: ${DOCKER_REGISTRY-}taxcalculatorapi
@@ -7,16 +9,17 @@ services:
       context: .
       dockerfile: TaxCalculatorAPI/Dockerfile
     volumes:
+      - ./ssl/cert.cer:/https/cert.cer
+      - ./ssl/key.key:/https/key.key
+
+      # Overriding when runing on server
       - /root/ssl/cert.cer:/https/cert.cer
       - /root/ssl/key.key:/https/key.key
-      - /root/ssl/request.csr:/https/request.csr
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     environment:
-      #- ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.cer # outcomment for using Docker Desktop
-      #- ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/key.key # outcomment for using Docker Desktop
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:43721
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.cer 
+      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/key.key
     networks:
         - taxnetwork
 
@@ -27,21 +30,24 @@ services:
       context: .
       dockerfile: TaxCalculatorBlazorServer/Dockerfile
     ports:
+      - "80:80" 
       - "443:443"
-      - "80:8080" # For using in Docker Desktop
-      #- "80:80" # For using in Cloud Server
     volumes:
+      - ./ssl/cert.cer:/https/cert.cer
+      - ./ssl/key.key:/https/key.key
+
+      # Overriding when runing on server
       - /root/ssl/cert.cer:/https/cert.cer
       - /root/ssl/key.key:/https/key.key
-      - /root/ssl/request.csr:/https/request.csr
     environment:
-      #- ASPNETCORE_URLS=http://+80;https://+443 # outcomment for using Docker Desktop
-      #- ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.cer # outcomment for using Docker Desktop
-      #- ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/key.key # outcomment for using Docker Desktop
-      # This line only when haveing a password protected certificate
-      # - ASPNETCORE_Kestrel__Certificates__Default__Password=IHR_PASSWORT
       - ASPNETCORE_ENVIRONMENT=Production
       - API_URL=http://taxcalculatorapi:43721
+      - ASPNETCORE_URLS=http://+80;https://+443
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.cer
+      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/key.key
+      
+      # This line only when haveing a password protected certificate
+      # - ASPNETCORE_Kestrel__Certificates__Default__Password=IHR_PASSWORT
     networks:
         - taxnetwork
 

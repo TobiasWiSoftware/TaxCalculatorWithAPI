@@ -24,3 +24,9 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 COPY ["TaxCalculatorBlazorServer/wwwroot", "wwwroot"]
 ENTRYPOINT ["dotnet", "TaxCalculatorBlazorServer.dll"]
+
+ENV \
+    # For docker desktop because it switches to port 8080 by default !
+    ASPNETCORE_URLS=http://+:80;https://+443 \
+    # Enable detection of running in a container
+    DOTNET_RUNNING_IN_CONTAINER=true
