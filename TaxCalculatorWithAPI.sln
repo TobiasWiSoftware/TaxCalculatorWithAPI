@@ -15,6 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalculatorBlazorServer",
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D5B5E6D2-B6B7-4135-BCF5-D1BC707D94CD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{839024A8-F060-4AD7-8981-2DD9EDF4A196}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

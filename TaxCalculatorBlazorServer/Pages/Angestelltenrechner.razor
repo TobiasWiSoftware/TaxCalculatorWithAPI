@@ -20,9 +20,7 @@
 }
 else
 {
-    <div>
-
-        <div class="m-2 center ">
+        <div class="m-2">
             <h1 id="red-text">Onlinerechner für Angestellte</h1>
             <div class="hideWhenPrint">
                 <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="form-group">
@@ -187,7 +185,7 @@ else
 
         @if (Output != null)
         {
-            <div class="m-2 center">
+            <div class="m-2">
                 <div class="output-container position-relative">
                     <table class="table table-hover table-responsive">
                         <thead>
@@ -264,7 +262,6 @@ else
                 </div>
             </div>
         }
-    </div>
 }
 
 

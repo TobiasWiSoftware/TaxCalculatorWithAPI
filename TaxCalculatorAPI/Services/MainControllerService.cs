@@ -4,17 +4,102 @@ using System;
 using TaxCalculatorLibary.Models;
 using Microsoft.EntityFrameworkCore;
 using TaxCalculatorAPI.Data;
+using TaxCalculatorAPI.Repository;
 
 namespace TaxCalculatorAPI.Services
 {
     public class MainControllerService : IMainControllerService
     {
-        private readonly ApplicationDBContext _dbcontext;
+        private readonly IDataBaseRepository _dataBaseRepository;
         private readonly ITaxInformationService _taxInformationService;
-        public MainControllerService(ApplicationDBContext dbcontext, ITaxInformationService taxInformationService)
+        public MainControllerService(IDataBaseRepository dataBaseRepository, ITaxInformationService taxInformationService)
         {
-            _dbcontext = dbcontext;
+            _dataBaseRepository = dataBaseRepository;
             _taxInformationService = taxInformationService;
+        }
+
+        public async Task<TaxSet> GetTaxValue(int year, decimal value, bool inChurch)
+        {
+            TaxSet taxSet = new();
+            // Return with taxed value, taxsum, solidary tax, church tax, borderTaxSum
+
+            TaxInformation? taxInformation = await _dataBaseRepository.GetTaxInformationAsync(year);
+
+
+            if (taxInformation != null && taxInformation.TaxInformationSteps != null)
+            {
+                TaxInformationStep? taxSetBase = null;
+                TaxInformationStep? taxSetNext = null;
+
+
+                try
+                {
+                    // Find the last tax rates
+                    taxSetBase = taxInformation.TaxInformationSteps.FindAll(x => x.StepAmount <= value).MaxBy(t => t.StepAmount);
+
+                    //Find the next tax rates 
+                    taxSetNext = taxInformation.TaxInformationSteps.FindAll(x => x.StepAmount > value).MinBy(t => t.StepAmount);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+
+
+                if (taxSetBase != null && taxSetNext != null) // case when beetween tax table
+                {
+                    // Calculation for the last known border tax zone in sum + rest of the value in the folowing tax zone
+                    decimal taxSetBaseSum = taxSetBase.TaxAmount;
+                    decimal taxsetRestSum = (value - taxSetBase.StepAmount) * (taxSetNext.TaxAmount - taxSetBase.TaxAmount) / (taxSetNext.StepAmount - taxSetBase.StepAmount);
+
+                    decimal borderTax = 0m;
+
+                    if (value - taxSetBase.StepAmount > 0)
+                    {
+                        borderTax = taxsetRestSum / (value - taxSetBase.StepAmount);
+                    }
+                    else
+                    {
+                        borderTax = (taxSetNext.TaxAmount - taxSetBase.TaxAmount) / (taxSetNext.StepAmount - taxSetBase.TaxAmount);
+                    }
+
+                    taxSet = new(value, taxSetBaseSum + taxsetRestSum, 0, 0, borderTax);
+                }
+                else if (taxSetBase != null && taxSetNext == null) // when value over the max in table
+                {
+                    TaxInformationStep maxTable = taxSetBase;
+
+                    decimal borderTax = taxInformation.MaxTaxLevel;
+                    decimal sum = value;
+                    decimal totalTax = Math.Round(maxTable.TaxAmount + (value - maxTable.StepAmount) * borderTax / 100, 0);
+
+                    taxSet = new(Math.Round(sum), totalTax, 0, 0, borderTax);
+                }
+
+                // Check for solidary and church
+
+                if (taxSet.TaxSum > taxInformation.MinLevelForSolidarityTax)
+                {
+                    // A approximate calculation for the solidary tax sliding zone
+                    if (value < 102000)
+                    {
+                        taxSet = new(taxSet.TaxedValue, taxSet.TaxSum, (taxSet.TaxSum - taxInformation.MinLevelForSolidarityTax) * 0.119m, 0, taxSet.BorderTaxSum);
+                    }
+                    else
+                    {
+                        taxSet = new(taxSet.TaxedValue, taxSet.TaxSum, taxSet.TaxSum * taxInformation.SolidaryTaxRate / 100, 0, taxSet.BorderTaxSum);
+                    }
+                }
+
+                if (inChurch)
+                {
+                    taxSet = new(taxSet.TaxedValue, taxSet.TaxSum, taxSet.SolidaryTax, taxSet.TaxSum * taxInformation.ChurchTaxRate / 100, taxSet.BorderTaxSum);
+                }
+            }
+            return taxSet;
         }
         public async Task<BillingOutput> Calculation(BillingInput billingInput)
         {
@@ -23,7 +108,7 @@ namespace TaxCalculatorAPI.Services
 
             decimal contributionrate = 0.00m;
             decimal maxGross = 0;
-            SocialSecurityRates? socialSecurityRates = await _dbcontext.SocialSecurityRates.FirstOrDefaultAsync(x => x.Year == billingInput.Year);
+            SocialSecurityRates? socialSecurityRates = await _dataBaseRepository.GetSocialSecurityRatesAsync(billingInput.Year);
             
 
             if (billingInput.HasFederalInsurance == "true" && socialSecurityRates != null)
@@ -54,7 +139,7 @@ namespace TaxCalculatorAPI.Services
                 billingOutput.InsuranceSum = billingInput.PrivateInsurance;
             }
 
-            TaxInformation? taxInformation = await _dbcontext.TaxInformation.FirstOrDefaultAsync(x => x.Year == billingInput.Year);
+            TaxInformation? taxInformation = await _dataBaseRepository.GetTaxInformationAsync(billingInput.Year);
 
             if (taxInformation != null && socialSecurityRates != null)
             {
@@ -120,7 +205,7 @@ namespace TaxCalculatorAPI.Services
 
                 //Getting the calculate tax
                 // Return with taxed value, taxsum, solidary tax, church tax, borderTaxSum
-                TaxSet taxSet =  await _taxInformationService.GetTaxValue(billingInput.Year, forTax, billingInput.InChurch);
+                TaxSet taxSet =  await GetTaxValue(billingInput.Year, forTax, billingInput.InChurch);
 
                 // This is bec of spliting the tax in half in class 3 for taxation and than double again
                 if (billingInput.TaxClass == 3)
@@ -141,19 +226,15 @@ namespace TaxCalculatorAPI.Services
 
             return billingOutput;
         }
-        public SocialSecurityRates? FetchSocialSecurityRates(int year)
+        public async Task<SocialSecurityRates?> FetchSocialSecurityRates(int year)
         {
-            SocialSecurityRates? rates = _dbcontext.SocialSecurityRates.FirstOrDefault(x => x.Year == year);
+            SocialSecurityRates? rates = await _dataBaseRepository.GetSocialSecurityRatesAsync(year);
             return rates;
         }
-        public TaxInformation? FetchTaxInformation(int year)
+        public async Task<TaxInformation?> FetchTaxInformation(int year)
         {
-            TaxInformation? taxes = _dbcontext.TaxInformation.FirstOrDefault(x => x.Year == year);
+            TaxInformation? taxes = await _dataBaseRepository.GetTaxInformationAsync(year);
             return taxes;
-        }
-        public int IncrementVisitCounter()
-        {
-            return Tracking.IncrementVisitCounter();
         }
     }
 }

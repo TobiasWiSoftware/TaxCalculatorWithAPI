@@ -2,7 +2,7 @@
 
 ## 1. Used features
 
-### Framework: BlazorServer, Web Assembly API, Entity Framework
+### Framework: BlazorServer, ASP.Net Core Web Api, Entity Framework, Identity Framework
 
 ### Persitence: SQLite, JSON-File, JSON.net, Migration Extention
 
@@ -86,5 +86,4 @@ b0f82e6c6cf6   taxcalculatorapi             "dotnet TaxCalculator"   43 seconds 
 
 ### Run on Docker Desktop
 - **Use playbutton on VS. If it has a browser connection error try the normal docker commands in powershell to run on Docker Desktop**
-
 

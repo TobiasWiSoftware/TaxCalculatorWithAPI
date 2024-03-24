@@ -19,10 +19,15 @@ namespace TaxCalculatorLibary.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm Password")]
-        public string ConfirmPassword { get; set; }
+        public RegisterModel()
+        {
+
+        }
+   
+        public RegisterModel(string userName, string password)
+        {
+            UserName = userName;
+            Password = password;
+        }
     }
 }

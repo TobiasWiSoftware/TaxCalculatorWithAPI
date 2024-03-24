@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TaxCalculatorAPI.Data;
 using TaxCalculatorAPI.Repository;
 using TaxCalculatorLibary.Models;

@@ -19,7 +19,7 @@ namespace TaxCalculatorAPI.Repository
 
         public async Task AddTaxInformationAsync(TaxInformation taxinformation)
         {
-            _dbcontext.TaxInformation.Add(taxinformation);
+            _dbcontext.TaxInformations.Add(taxinformation);
             await _dbcontext.SaveChangesAsync();
         }
 
@@ -30,7 +30,24 @@ namespace TaxCalculatorAPI.Repository
 
         public async Task<TaxInformation?> GetTaxInformationAsync(int year)
         {
-            return await _dbcontext.TaxInformation.Include(ti => ti.TaxInformationSteps).FirstOrDefaultAsync(x => x.Year == year);
+            return await _dbcontext.TaxInformations.Include(ti => ti.TaxInformationSteps).FirstOrDefaultAsync(x => x.Year == year);
+        }
+
+        public async Task<int> GetVisitCounter()
+        {
+            return await _dbcontext.Trackings.CountAsync();
+        }
+
+        public async Task IncrementVisitCounter()
+        {
+            await _dbcontext.Trackings.AddAsync(new Tracking());
+            await _dbcontext.SaveChangesAsync();
+        }
+
+        public async Task DeleteVisitCounter()
+        {
+            _dbcontext.Trackings.RemoveRange(_dbcontext.Trackings);
+            await _dbcontext.SaveChangesAsync();
         }
     }
 }

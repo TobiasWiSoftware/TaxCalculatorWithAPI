@@ -44,14 +44,36 @@ namespace TaxCalculatorBlazorServer.Services
         }
 
 
-        public async Task<int> IncrementVisitCounter()
+        public async Task IncrementVisitCounter()
         {
-            var response = await _httpClient.PostAsJsonAsync("api/Main/IncrementVisitCounter", "");
+            var response = await _httpClient.PostAsync("api/Tracking/IncrementVisitorCounter",null);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Fehler bei der API-Anfrage für IncrementVisitorCounter");
+            }
+        }
+
+        public async Task<int> GetVisitCounter()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "api/Tracking/GetVisitorCounter");
+
+            var response = await _httpClient.SendAsync(request);
+
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<int>();
             }
-            throw new Exception("Fehler bei der API-Anfrage für IncrementVisitCounter");
+            throw new Exception("Fehler bei der API-Anfrage für GetVisitCounter");
+        }
+
+        public async Task DeleteVisitCounter()
+        {
+            var response = await _httpClient.PostAsJsonAsync("api/Tracking/DeleteVisitorCounter", "");
+            if (response.IsSuccessStatusCode)
+            {
+                await response.Content.ReadFromJsonAsync<int>();
+            }
+            throw new Exception("Fehler bei der API-Anfrage für DeleteVisitCounter");
         }
 
     }

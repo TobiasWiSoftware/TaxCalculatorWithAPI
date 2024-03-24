@@ -11,8 +11,8 @@ using TaxCalculatorAPI.Data;
 namespace TaxCalculatorAPI.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240126145948_First")]
-    partial class First
+    [Migration("20240323204544_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -245,7 +245,7 @@ namespace TaxCalculatorAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TaxInformation");
+                    b.ToTable("TaxInformations");
                 });
 
             modelBuilder.Entity("TaxCalculatorLibary.Models.TaxInformationStep", b =>
@@ -267,16 +267,13 @@ namespace TaxCalculatorAPI.Migrations
 
                     b.HasIndex("TaxInformationId");
 
-                    b.ToTable("TaxInformationStep");
+                    b.ToTable("TaxInformationSteps");
                 });
 
             modelBuilder.Entity("TaxCalculatorLibary.Models.Tracking", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("VisitCounter")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -401,13 +398,11 @@ namespace TaxCalculatorAPI.Migrations
 
             modelBuilder.Entity("TaxCalculatorLibary.Models.TaxInformationStep", b =>
                 {
-                    b.HasOne("TaxCalculatorLibary.Models.TaxInformation", "TaxInformation")
+                    b.HasOne("TaxCalculatorLibary.Models.TaxInformation", null)
                         .WithMany("TaxInformationSteps")
                         .HasForeignKey("TaxInformationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("TaxInformation");
                 });
 
             modelBuilder.Entity("TaxCalculatorLibary.Models.TaxInformation", b =>

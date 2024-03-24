@@ -1,19 +1,21 @@
 ﻿@page "/Admin"
 
-<div class="center">
-    <form>
+<br />
+<div>
+    <EditForm Model="@AccountService" OnValidSubmit="@LoginAsync" class="form-group">
+        <DataAnnotationsValidator />
         <div class="form-group">
             <label for="exampleInputEmail1">Benutzer</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input @bind="LoginModel.UserName" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Passwort</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input @bind="LoginModel.Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
         <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Login merken</label>
         </div>
         <button type="submit" class="btn btn-primary btn-sm blue">Login</button>
-    </form>
+    </EditForm>
 </div>

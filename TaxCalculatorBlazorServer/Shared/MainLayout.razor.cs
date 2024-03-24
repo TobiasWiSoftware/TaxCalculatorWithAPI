@@ -22,7 +22,8 @@ namespace TaxCalculatorBlazorServer.Shared
             {
                 if (MainService != null && FirstVisitCounter == -1)
                 {
-                    FirstVisitCounter = await MainService.IncrementVisitCounter();
+                    await MainService.IncrementVisitCounter();
+                    FirstVisitCounter = await MainService.GetVisitCounter();
                 }
 
                 // For re-rendering the component bec. the wrong value is in the visit counter

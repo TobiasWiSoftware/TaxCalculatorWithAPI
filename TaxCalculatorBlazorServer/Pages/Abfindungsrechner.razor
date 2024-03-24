@@ -17,9 +17,7 @@
 }
 else
 {
-    <div>
-
-        <div class="m-2 center">
+        <div class="m-2">
             <h1 id="darkyellow-text">Onlinerechner für Abfindungen</h1>
             <div class="hideWhenPrint">
                 <EditForm Model="@Input" OnValidSubmit="@CalculateTax" class="form-group">
@@ -134,7 +132,7 @@ else
 
         @if (Output != null)
         {
-            <div class="m-2 center">
+            <div class="m-2">
                 <div class="output-container">
                     <table class="table table-hover">
                         <thead>
@@ -186,5 +184,4 @@ else
                 </div>
             </div>
         }
-    </div>
 }

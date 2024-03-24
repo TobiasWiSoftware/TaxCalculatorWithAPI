@@ -16,8 +16,8 @@ namespace TaxCalculatorAPI.Data
 
         public DbSet<Tracking> Trackings { get; set; }
         public DbSet<SocialSecurityRates> SocialSecurityRates { get; set; }
-        public DbSet<TaxInformation> TaxInformation { get; set; }
-        public DbSet<TaxInformationStep> TaxInformationStep { get; set; }
+        public DbSet<TaxInformation> TaxInformations { get; set; }
+        public DbSet<TaxInformationStep> TaxInformationSteps { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

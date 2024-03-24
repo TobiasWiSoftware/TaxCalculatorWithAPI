@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TaxCalculatorAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class First : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,7 +80,7 @@ namespace TaxCalculatorAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TaxInformation",
+                name: "TaxInformations",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -97,7 +97,7 @@ namespace TaxCalculatorAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TaxInformation", x => x.Id);
+                    table.PrimaryKey("PK_TaxInformations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -105,8 +105,7 @@ namespace TaxCalculatorAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    VisitCounter = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true)
                 },
                 constraints: table =>
                 {
@@ -220,7 +219,7 @@ namespace TaxCalculatorAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TaxInformationStep",
+                name: "TaxInformationSteps",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -231,11 +230,11 @@ namespace TaxCalculatorAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TaxInformationStep", x => x.Id);
+                    table.PrimaryKey("PK_TaxInformationSteps", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TaxInformationStep_TaxInformation_TaxInformationId",
+                        name: "FK_TaxInformationSteps_TaxInformations_TaxInformationId",
                         column: x => x.TaxInformationId,
-                        principalTable: "TaxInformation",
+                        principalTable: "TaxInformations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -278,8 +277,8 @@ namespace TaxCalculatorAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TaxInformationStep_TaxInformationId",
-                table: "TaxInformationStep",
+                name: "IX_TaxInformationSteps_TaxInformationId",
+                table: "TaxInformationSteps",
                 column: "TaxInformationId");
         }
 
@@ -305,7 +304,7 @@ namespace TaxCalculatorAPI.Migrations
                 name: "SocialSecurityRates");
 
             migrationBuilder.DropTable(
-                name: "TaxInformationStep");
+                name: "TaxInformationSteps");
 
             migrationBuilder.DropTable(
                 name: "Trackings");
@@ -317,7 +316,7 @@ namespace TaxCalculatorAPI.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "TaxInformation");
+                name: "TaxInformations");
         }
     }
 }

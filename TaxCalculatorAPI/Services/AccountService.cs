@@ -13,15 +13,11 @@ namespace TaxCalculatorAPI.Services
         }
         public Task<SignInResult> LoginAsync(LoginModel model)
         {
-            throw new NotImplementedException();
+            return _accountRepository.LoginAsync(model);
         }
 
         public async Task<IdentityResult> RegisterAsync(RegisterModel model)
         {
-            if(model.Password != model.ConfirmPassword)
-            {
-                return IdentityResult.Failed(new IdentityError { Description = "Passwords do not match" });
-            }
             return await _accountRepository.RegisterAsync(model); // With automatic saving in db
         }
     }

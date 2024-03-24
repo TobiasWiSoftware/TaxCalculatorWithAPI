@@ -10,6 +10,10 @@ namespace TaxCalculatorBlazorServer.Services
 
         public Task<TaxInformation> FetchTaxInformation(int year);
 
-        public Task<int> IncrementVisitCounter();
+        public Task IncrementVisitCounter();
+
+        public Task<int> GetVisitCounter();
+
+        public Task DeleteVisitCounter();
     }
 }

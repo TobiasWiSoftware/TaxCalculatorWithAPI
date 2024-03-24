@@ -4,9 +4,10 @@ namespace TaxCalculatorAPI.Services
 {
     public interface IMainControllerService
     {
+        Task<TaxSet> GetTaxValue(int year, decimal value, bool inChurch);
         Task<BillingOutput> Calculation(BillingInput billingInput);
-        SocialSecurityRates? FetchSocialSecurityRates(int year);
-        TaxInformation? FetchTaxInformation(int year);
-        int IncrementVisitCounter();
+        Task<SocialSecurityRates?> FetchSocialSecurityRates(int year);
+        Task<TaxInformation?> FetchTaxInformation(int year);
+ 
     }
 }

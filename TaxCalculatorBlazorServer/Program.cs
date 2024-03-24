@@ -20,6 +20,7 @@ builder.Services.AddScoped(sp => {
 });
 
 builder.Services.AddScoped<IMainService, MainService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 // Add response compression services
 builder.Services.AddResponseCompression(options =>

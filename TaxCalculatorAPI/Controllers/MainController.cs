@@ -35,12 +35,5 @@ namespace TaxCalculatorAPI.Controllers
             return Ok(_mainService.FetchTaxInformation(year));
         }
 
-        [HttpPost("IncrementVisitCounter")]
-        public ActionResult<bool> IncrementVisitCounter()
-        {
-            return Ok(_mainService.IncrementVisitCounter());
-        }
-
-
     }
 }

@@ -10,7 +10,6 @@ namespace TaxCalculatorLibary.Models
     {
         public int Id { get; set; }
         public int TaxInformationId { get; set; }
-        public TaxInformation TaxInformation { get; set; }
         public decimal StepAmount { get; set; }
         public decimal TaxAmount { get; set; }
         public TaxInformationStep()

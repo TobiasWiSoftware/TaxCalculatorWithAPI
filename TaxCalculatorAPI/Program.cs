@@ -36,12 +36,14 @@ internal class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddScoped<IMainControllerService, MainControllerService>();
-        builder.Services.AddScoped<IDataBaseRepository, DataBaseRespository>();
-        builder.Services.AddScoped<IFileRepository, FileRepository>();
+        builder.Services.AddScoped<ITrackingService, TrackingService>();
+        builder.Services.AddScoped<IAccountService, AccountService>();
         builder.Services.AddScoped<ISocialSecurityService, SocialSecurityService>();
         builder.Services.AddScoped<ITaxInformationService, TaxInformationService>();
+        builder.Services.AddScoped<IDataBaseRepository, DataBaseRespository>();
+        builder.Services.AddScoped<IFileRepository, FileRepository>();
         builder.Services.AddScoped<IAccountRepository, AccountRepository>();
-        builder.Services.AddScoped<IAccountService, AccountService>();
+
         builder.Services.AddIdentity<User, IdentityRole>(options =>
         {
             options.Password.RequireDigit = true;
@@ -103,9 +105,16 @@ internal class Program
             dataDirectory = Path.GetDirectoryName(entryAssemblyLocation) ?? throw new InvalidOperationException("Directory path for entry assembly not found.");
         }
 
-        if (File.Exists(Path.Combine(dataDirectory, "Data", "database.db")))
+        try
         {
-            File.Delete(Path.Combine(dataDirectory, "Data", "database.db"));
+            if (File.Exists(Path.Combine(dataDirectory, "Data", "database.db")))
+            {
+                File.Delete(Path.Combine(dataDirectory, "Data", "database.db"));
+            }
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("Database in Program.cs not deleted");
         }
 
         SocialSecurityService socialSecurityService = new(new FileRepository(), new DataBaseRespository(new ApplicationDBContext()));
@@ -116,9 +125,6 @@ internal class Program
         taxInformationService.MigrateDataFromJsonToDataBase(dataDirectory).Wait();
 
 
-        Tracking.DataPathInit(dataDirectory);
-
         app.Run();
-
     }
 }
