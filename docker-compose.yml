@@ -5,6 +5,7 @@ version: '3.4'
 services:
   taxcalculatorapi:
     image: ${DOCKER_REGISTRY-}taxcalculatorapi
+    restart: unless-stopped
     build:
       context: .
       dockerfile: TaxCalculatorAPI/Dockerfile
@@ -26,6 +27,7 @@ services:
 
   taxcalculatorblazorserver:
     image: ${DOCKER_REGISTRY-}taxcalculatorblazorserver
+    restart: unless-stopped
     build:
       context: .
       dockerfile: TaxCalculatorBlazorServer/Dockerfile
